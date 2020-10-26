@@ -1,0 +1,6 @@
+//
+// Protocol buffers definition for dgs server
+//
+syntax = "proto3";
+package pt.tecnico.staysafe.dgs.grpc;
+
