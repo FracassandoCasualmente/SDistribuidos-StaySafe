@@ -6,7 +6,7 @@ Distributed Systems 2020-2021, 1st semester project
 ## Authors
 
 *(fill-in line below with group identifier e.g. G31; and then delete this line)*  
-**Group GXX**
+**Group G15**
 
 ### Code identification
 
@@ -15,14 +15,13 @@ The group identifier is composed of a G and the gropu number - always with two d
 This change is important for code dependency management, to make sure that your code runs using the correct components and not someone else's.
 
 ### Team members
-
-*(fill-in table below with team members; and then delete this line)*  
+ 
 
 | Number | Name              | User                             | Email                               |
 | -------|-------------------|----------------------------------| ------------------------------------|
-| 11111  | Alice Distributed | <https://github.com/AliceUser>   | <mailto:alice@tecnico.ulisboa.pt>   |
-| 22222  | Bob Systems       | <https://github.com/BobUser>     | <mailto:bob@tecnico.ulisboa.pt>     |
-<!--| 33333  | Charlie Rules     | <https://github.com/CharlieUser> | <mailto:charlie@tecnico.ulisboa.pt> |-->
+| 93601  | Miguel Santos     | <https://github.com/FracassandoCasualmente>   | <mailto:miguel.conrado.santos@tecnico.ulisboa.pt>   |
+| 22222  | João Rodrigues       | <https://github.com/joaorodrigues-ist>     | <mailto:joao.pedro.freixo.rodrigues@tecnico.ulisboa.pt>     |
+
 
 ### Task leaders
 
