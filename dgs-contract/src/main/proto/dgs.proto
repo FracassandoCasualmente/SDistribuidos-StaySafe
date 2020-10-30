@@ -1,6 +1,135 @@
 //
 // Protocol buffers definition for dgs server
 //
+
 syntax = "proto3";
 package pt.tecnico.staysafe.dgs.grpc;
+option java_multiple_files = true;
+import "google/protobuf/timestamp.proto";
+
+//person type
+enum PersonType
+{
+	NOT_INFECTED = 0;
+	INFECTED = 1;
+};
+
+
+//sniffer_join 
+message SnifferJoinRequest
+{
+	string name = 1;
+	string address = 2;
+}
+
+message SnifferJoinResponse
+{
+	string result = 1;
+}
+
+
+//sniffer_info
+message SnifferInfoRequest
+{
+	string name = 1;
+}
+
+message SnifferInfoResponse
+{
+	string address = 1;
+}
+
+
+//report
+message ReportRequest
+{
+	string snifferName = 1;
+	google.protobuf.Timestamp insertionTime = 2;
+	PersonType type = 3;
+	uint64 citizenId = 4;
+	google.protobuf.Timestamp enterTime = 5;
+	google.protobuf.Timestamp leaveTime = 6;
+}
+
+message ReportResponse
+{
+
+
+}
+
+
+//individual_infection_probability
+message IndividualInfectionProbabilityRequest
+{
+	uint64 citizedId = 1;
+}
+
+message IndividualInfectionProbabilityResponse
+{
+	float probability = 1;
+}
+
+
+//aggregate_infection_probability
+message AggregateInfectionProbabilityRequest
+{
+	string statistic = 1;
+}
+
+message AggregateInfectionProbabilityResponse
+{
+	string result = 1;
+}
+
+
+//CONTROL OPERATIONS
+
+//ctrl_ping
+message PingRequest
+{
+	
+}
+
+message PingResponse
+{
+	string result = 1;
+}
+
+
+//ctrl_clear
+message ClearRequest
+{
+
+}
+
+message ClearResponse
+{
+	string result = 1;
+}
+
+
+//ctrl_init
+message InitRequest
+{
+
+}
+
+message InitResponse
+{
+
+}
+
+
+//SERVICE
+service DgsService
+{
+	rpc sniffer_join(SnifferJoinRequest) returns (SnifferJoinResponse);
+	rpc sniffer_info(SnifferInfoRequest) returns (SnifferInfoResponse);
+	rpc report(ReportRequest) returns (ReportResponse);
+	rpc individual_infection_probability(IndividualInfectionProbabilityRequest) returns (IndividualInfectionProbabilityResponse);
+	rpc aggregate_infection_probability(AggregateInfectionProbabilityRequest) returns (AggregateInfectionProbabilityResponse);
+	rpc ctrl_ping(PingRequest) returns (PingResponse);
+	rpc ctrl_clear(ClearRequest) returns (ClearResponse);
+	rpc ctrl_init(InitRequest) returns (InitResponse);
+}
 
