@@ -28,9 +28,9 @@ This change is important for code dependency management, to make sure that your 
 
 | Task set | To-Do                         | Leader              |
 | ---------|-------------------------------| --------------------|
-| core     | protocol buffers, silo-client | _(whole team)_      |
-| T1       | cam_join, cam_info, eye       | _Alice Distributed_ |
-| T2       | report, spotter               | _Bob Systems_       |
+| core     | protocol buffers, dgs-client, sniffer | _(whole team)_      |
+| T1       | sniffer_join, sniffer_info, individual_infection_probability, researcher       | _Miguel Santos_ |
+| T2       | report, aggregate_infection_probability, journalist               | _João Rodrigues_       |
 <!--| T3       | track, trackMatch, trace      | _Charlie Rules_     |-->
 | T3       | test T1                       | _Bob Systems_     |
 | T4       | test T2                       | _Alice Distributed_ |
