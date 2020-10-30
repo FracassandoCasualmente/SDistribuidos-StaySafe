@@ -3,14 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- Please replace 'GXX' below with your group number with two digits. Then delete this comment. -->
-	<groupId>pt.tecnico.staysafe.GXX</groupId>
+	<groupId>pt.tecnico.staysafe.G15</groupId>
 	<artifactId>StaySafe</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<group.id>GXX</group.id>
+		<group.id>G15</group.id>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
