@@ -132,4 +132,3 @@ service DgsService
 	rpc ctrl_clear(ClearRequest) returns (ClearResponse);
 	rpc ctrl_init(InitRequest) returns (InitResponse);
 }
-
