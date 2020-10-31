@@ -153,8 +153,8 @@ class Observation {
 	public String toString()
 	{
 		String obs = "";
-		obs += _snifferName + ", " + _insertionTime + ", " + _personType + ", " + _citizenId + ", " +
-		_enterTime + ", " + _leaveTime + "\n";
+		obs += _snifferName + ", " + _insertionTime.toString() + ", " + _personType.toString() + 
+				", " + _citizenId + ", " + _enterTime.toString() + ", " + _leaveTime.toString() + "\n";
 		
 		return obs;
 	}
