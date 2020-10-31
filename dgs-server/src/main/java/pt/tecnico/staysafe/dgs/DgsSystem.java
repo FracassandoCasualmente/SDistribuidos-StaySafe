@@ -1,6 +1,5 @@
 package pt.tecnico.staysafe.dgs;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import pt.tecnico.staysafe.dgs.grpc.PersonType;
