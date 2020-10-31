@@ -97,8 +97,8 @@ public class DgsSystem
 		for (Observation obs : _obs ) {
 			if ( obs.getCitizenId() == citizenId ) {
 				// convert citizen timestamp to seconds
-				long mainET = obs.getLeaveTime().getTime()/1000;
-				long mainLT = obs.getLeaveTime().getTime()/1000;
+				long mainET = obs.getLeaveTime().getSeconds()/1000;
+				long mainLT = obs.getLeaveTime().getSeconds()/1000;
 				// find all infected citizens that were with him
 				for (Observation otherObs : _obs ) {
 					if ( otherObs.getCitizenId() != citizenId &&
@@ -106,8 +106,8 @@ public class DgsSystem
 
 						// this person was at the same place
 						// lets check how much time they were together
-						long otherET = otherObs.getLeaveTime().getTime()/1000;
-						long otherEL = otherObs.getLeaveTime().getTime()/1000;
+						long otherET = otherObs.getLeaveTime().getSeconds()/1000;
+						long otherEL = otherObs.getLeaveTime().getSeconds()/1000;
 						// *********** NEEDS TO BE COMPLETED *****
 
 					  }
@@ -124,30 +124,30 @@ public class DgsSystem
 class Observation {
 
 	private final String _snifferName;
-	private final Timestamp _insertionTime;
+	private final com.google.protobuf.Timestamp _insertionTime;
 	private final PersonType _personType;
 	private final long _citizenId;
-	private final Timestamp _enterTime;
-	private final Timestamp _leaveTime;
+	private final com.google.protobuf.Timestamp _enterTime;
+	private final com.google.protobuf.Timestamp _leaveTime;
 	
-	public Observation(String name, Timestamp insertionTime, PersonType pt,
-		long citizenId, Timestamp enterTime, Timestamp leaveTime) {
+	public Observation(String name, com.google.protobuf.Timestamp timestamp, PersonType pt,
+		long citizenId, com.google.protobuf.Timestamp timestamp2, com.google.protobuf.Timestamp timestamp3) {
 		
 		_snifferName = name;
-		_insertionTime = insertionTime;
+		_insertionTime = timestamp;
 		_personType = pt;
 		_citizenId = citizenId;
-		_enterTime = enterTime;
-		_leaveTime = leaveTime;
+		_enterTime = timestamp2;
+		_leaveTime = timestamp3;
 
 	}
 	
 	public String getSnifferName() { return _snifferName; }
-	public Timestamp getInsertionTime() { return _insertionTime; }
+	public com.google.protobuf.Timestamp getInsertionTime() { return _insertionTime; }
 	public PersonType getPersonType() { return _personType; }
 	public long getCitizenId() { return _citizenId; }
-	public Timestamp getEnterTime() { return _enterTime; }
-	public Timestamp getLeaveTime() { return _leaveTime; }
+	public com.google.protobuf.Timestamp getEnterTime() { return _enterTime; }
+	public com.google.protobuf.Timestamp getLeaveTime() { return _leaveTime; }
 	
 	//Returns the observation in a string format
 	public String toString()
