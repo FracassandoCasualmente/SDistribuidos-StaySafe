@@ -127,4 +127,14 @@ class Observation {
 	public Timestamp getEnterTime() { return _enterTime; }
 	public Timestamp getLeaveTime() { return _leaveTime; }
 	
+	//Returns the observation in a string format
+	public String toString()
+	{
+		String obs = "";
+		obs += _snifferName + ", " + _insertionTime + ", " + _personType + ", " + _citizenId + ", " +
+		_enterTime + ", " + _leaveTime;
+		
+		return obs;
+	}
+	
 }
