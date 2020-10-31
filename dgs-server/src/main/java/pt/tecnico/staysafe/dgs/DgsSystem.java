@@ -22,21 +22,43 @@ public class DgsSystem
 		_sniffers = new HashMap<String,String>();
 		_obs = new ArrayList<Observation>();
 	}
+	
+	/**  
+	* @param None
+	* @return String with all the observations in the system
+	*/
+	public String observationsToString()
+	{
+		String obsString = "";
+		
+		if(_obs.isEmpty())
+			return "Empty\n";
+			
+		for(Observation obs: _obs)
+		{
+			obsString += obs.toString();
+		}
+		
+		return obsString;
+	}
 
 	// --- Sniffer related stuff ---
 	/**  
 	* @param Name of the sniffer
 	* @return Address of sniffer, null if it doesnt exist
 	*/
+	
 	public String getSnifferAddress(String name) {
 
 		return _sniffers.getOrDefault(name, null);
 	}
+	
 	/**  
 	* @param Name of the new sniffer
 	* @return true if success (the name does not exist with different address),
 	 false otherwise
 	*/
+	
 	public Boolean joinSniffer(String newName, String newAddr) {
 		// points to address of the sniffer with same name
 		String conflictingSnifferAddr = _sniffers.get(newName);
@@ -132,7 +154,7 @@ class Observation {
 	{
 		String obs = "";
 		obs += _snifferName + ", " + _insertionTime + ", " + _personType + ", " + _citizenId + ", " +
-		_enterTime + ", " + _leaveTime;
+		_enterTime + ", " + _leaveTime + "\n";
 		
 		return obs;
 	}
