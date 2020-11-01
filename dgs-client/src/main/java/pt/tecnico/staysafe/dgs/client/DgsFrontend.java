@@ -19,7 +19,16 @@ public class DgsFrontend implements AutoCloseable{
 	public PingResponse ctrlPing(PingRequest request) {
 		return stub.ctrlPing(request);
 	}
-
+	
+	public SnifferJoinResponse snifferJoin( SnifferJoinRequest request ) {
+		return stub.snifferJoin( request );
+	}
+	
+	public ReportResponse report(ReportRequest request)
+	{
+		return stub.report(request);
+	}
+	
 	@Override
 	public final void close() {
 		channel.shutdown();
