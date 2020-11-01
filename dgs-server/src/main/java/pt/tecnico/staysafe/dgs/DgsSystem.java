@@ -116,6 +116,14 @@ public class DgsSystem
 		return -1; // CHANGE IT! THIS IS JUST TO COMPILE
 	}
 
+	public String getSniffers() {
+		String res = "";
+		for (String sniff : _sniffers.values() ) {
+			res += sniff + "\n";
+		}
+		return res;
+	}
+
 
 }
 
