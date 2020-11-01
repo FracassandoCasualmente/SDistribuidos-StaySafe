@@ -31,6 +31,8 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setResult(result).build();
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
+		System.out.println("My response: " + result); // TESTE
+		System.out.println("Actual sniffers: \n"+dgsSystem.getSniffers()+"\n"); // TESTE
 	}
 
 }
