@@ -7,7 +7,9 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	
 	private DgsSystem dgsSystem = new DgsSystem();
 
-	@Override
+	//Control Operations
+	
+	//ctrl_ping 
 	public void ctrlPing(PingRequest request, StreamObserver<PingResponse> responseObserver)
 	{
 		String output = "Dgs server state\n" + dgsSystem.observationsToString();
@@ -15,7 +17,10 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
 	}
-
+	
+	
+	//Dgs Operations
+	
 	// sends "OK" if success, Error message otherwise
 	@Override
 	public void snifferJoin(SnifferJoinRequest request, StreamObserver<SnifferJoinResponse> responseObserver) {
@@ -31,8 +36,18 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setResult(result).build();
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
-		System.out.println("My response: " + result); // TESTE
-		System.out.println("Actual sniffers: \n"+dgsSystem.getSniffers()+"\n"); // TESTE
 	}
-
+	
+	//report operation
+	public void report(ReportRequest request, StreamObserver<ReportResponse> responseObserver)
+	{
+		Observation newObs = new Observation(request.getSnifferName(),request.getInsertionTime(),
+				request.getType(),request.getCitizenId(),request.getEnterTime(),request.getLeaveTime());
+		
+		dgsSystem.addReport(newObs);
+		ReportResponse response = ReportResponse.getDefaultInstance();
+		responseObserver.onNext(response);
+		responseObserver.onCompleted();
+				
+	}
 }
