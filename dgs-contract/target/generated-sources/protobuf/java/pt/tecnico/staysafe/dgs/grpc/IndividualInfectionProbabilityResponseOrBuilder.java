@@ -8,8 +8,8 @@ public interface IndividualInfectionProbabilityResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>float probability = 1;</code>
+   * <code>double probability = 1;</code>
    * @return The probability.
    */
-  float getProbability();
+  double getProbability();
 }

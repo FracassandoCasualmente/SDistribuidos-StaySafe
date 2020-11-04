@@ -22,10 +22,16 @@ public class DgsClientApp {
 		DgsFrontend frontend = new DgsFrontend(host, port);
 
 		//Ping operation
-	    PingRequest request = PingRequest.getDefaultInstance();
-	    PingResponse response = frontend.ctrlPing(request);
-	    System.out.println(response.getResult());
-	    
+		System.out.println("Pinging");
+	    PingRequest pingRequest = PingRequest.getDefaultInstance();
+	    PingResponse pingResponse = frontend.ctrlPing(pingRequest);
+		System.out.println(pingResponse.getResult());
+		
+		//Individual infection prob operation
+	    System.out.println("Individual inf. prob. of 2225");
+	    IndividualInfectionProbabilityRequest iipRequest = IndividualInfectionProbabilityRequest.newBuilder().setCitizenId(2225).build();
+	    IndividualInfectionProbabilityResponse iipResponse = frontend.individualInfectionProbability(iipRequest);
+		System.out.println(iipResponse.getProbability());
 	}
 	
 }

@@ -54,7 +54,7 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            citizedId_ = input.readUInt64();
+            citizenId_ = input.readUInt64();
             break;
           }
           default: {
@@ -89,14 +89,14 @@ private static final long serialVersionUID = 0L;
             pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityRequest.class, pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityRequest.Builder.class);
   }
 
-  public static final int CITIZEDID_FIELD_NUMBER = 1;
-  private long citizedId_;
+  public static final int CITIZENID_FIELD_NUMBER = 1;
+  private long citizenId_;
   /**
-   * <code>uint64 citizedId = 1;</code>
-   * @return The citizedId.
+   * <code>uint64 citizenId = 1;</code>
+   * @return The citizenId.
    */
-  public long getCitizedId() {
-    return citizedId_;
+  public long getCitizenId() {
+    return citizenId_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -113,8 +113,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (citizedId_ != 0L) {
-      output.writeUInt64(1, citizedId_);
+    if (citizenId_ != 0L) {
+      output.writeUInt64(1, citizenId_);
     }
     unknownFields.writeTo(output);
   }
@@ -125,9 +125,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (citizedId_ != 0L) {
+    if (citizenId_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt64Size(1, citizedId_);
+        .computeUInt64Size(1, citizenId_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -144,8 +144,8 @@ private static final long serialVersionUID = 0L;
     }
     pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityRequest other = (pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityRequest) obj;
 
-    if (getCitizedId()
-        != other.getCitizedId()) return false;
+    if (getCitizenId()
+        != other.getCitizenId()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -157,9 +157,9 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + CITIZEDID_FIELD_NUMBER;
+    hash = (37 * hash) + CITIZENID_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getCitizedId());
+        getCitizenId());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -297,7 +297,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      citizedId_ = 0L;
+      citizenId_ = 0L;
 
       return this;
     }
@@ -325,7 +325,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityRequest buildPartial() {
       pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityRequest result = new pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityRequest(this);
-      result.citizedId_ = citizedId_;
+      result.citizenId_ = citizenId_;
       onBuilt();
       return result;
     }
@@ -374,8 +374,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityRequest other) {
       if (other == pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityRequest.getDefaultInstance()) return this;
-      if (other.getCitizedId() != 0L) {
-        setCitizedId(other.getCitizedId());
+      if (other.getCitizenId() != 0L) {
+        setCitizenId(other.getCitizenId());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -406,32 +406,32 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private long citizedId_ ;
+    private long citizenId_ ;
     /**
-     * <code>uint64 citizedId = 1;</code>
-     * @return The citizedId.
+     * <code>uint64 citizenId = 1;</code>
+     * @return The citizenId.
      */
-    public long getCitizedId() {
-      return citizedId_;
+    public long getCitizenId() {
+      return citizenId_;
     }
     /**
-     * <code>uint64 citizedId = 1;</code>
-     * @param value The citizedId to set.
+     * <code>uint64 citizenId = 1;</code>
+     * @param value The citizenId to set.
      * @return This builder for chaining.
      */
-    public Builder setCitizedId(long value) {
+    public Builder setCitizenId(long value) {
       
-      citizedId_ = value;
+      citizenId_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>uint64 citizedId = 1;</code>
+     * <code>uint64 citizenId = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearCitizedId() {
+    public Builder clearCitizenId() {
       
-      citizedId_ = 0L;
+      citizenId_ = 0L;
       onChanged();
       return this;
     }

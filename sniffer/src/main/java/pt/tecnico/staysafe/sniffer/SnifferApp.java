@@ -60,14 +60,17 @@ public class SnifferApp {
 		final int port = Integer.parseInt(args[1]);
  
 		// sniffer parameters
-		final String name = args[3];
+		final String name = args[2];
 		// build address
 		String snifferAux = "";
-		for ( int i = 4; i < args.length; i++) {
-			snifferAux+= args[i];
+		for ( int i = 3; i < args.length; i++) {
+
+			snifferAux+= " "+args[i];
 		}
-		final String address = snifferAux;
+		final String address = snifferAux.substring(1, snifferAux.length());
  
+		System.out.println("My name: "+name+"\n"+
+							"My address: "+address); // DEBUG TESTE
 
 		DgsFrontend frontend = new DgsFrontend(host, port);
  
@@ -127,7 +130,7 @@ public class SnifferApp {
 			} // end of main cycle
    
 		} // close try
- // EOF found, send what we have and close
+ 		// EOF found, send what we have and close
 		catch ( NoSuchElementException nsee ) {
 			ReportRequest obs;
 			ReportResponse response;
@@ -138,7 +141,7 @@ public class SnifferApp {
 		    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
    
 			for ( String[] observation : buffer ) {
-				// build google (weird) Timestamp
+				// build google Timestamp
 				try {
 					
 			        // create Date objects

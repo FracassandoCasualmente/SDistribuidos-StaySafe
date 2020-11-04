@@ -9,7 +9,8 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 
 	//Control Operations
 	
-	//ctrl_ping 
+	//ctrl_ping
+	@Override
 	public void ctrlPing(PingRequest request, StreamObserver<PingResponse> responseObserver)
 	{
 		String output = "Dgs server state\n" + dgsSystem.observationsToString();
@@ -39,6 +40,7 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	}
 	
 	//report operation
+	@Override
 	public void report(ReportRequest request, StreamObserver<ReportResponse> responseObserver)
 	{
 		Observation newObs = new Observation(request.getSnifferName(),request.getInsertionTime(),
@@ -50,4 +52,27 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		responseObserver.onCompleted();
 				
 	}
+
+	// individual infection probability operation
+	@Override
+	public void individualInfectionProbability(
+	 IndividualInfectionProbabilityRequest request,
+	 StreamObserver<IndividualInfectionProbabilityResponse> 
+	 responseObserver) {
+		
+		// calculate probability
+		Double probability = dgsSystem.individualInfectionProbability(
+			request.getCitizenId() );
+			
+
+		// build response object
+		IndividualInfectionProbabilityResponse response = 
+		 IndividualInfectionProbabilityResponse.newBuilder().
+		 setProbability( probability ).build();
+
+		responseObserver.onNext(response);
+		responseObserver.onCompleted();
+
+	}
+
 }

@@ -61,12 +61,12 @@ message ReportResponse
 //individual_infection_probability
 message IndividualInfectionProbabilityRequest
 {
-	uint64 citizedId = 1;
+	uint64 citizenId = 1;
 }
 
 message IndividualInfectionProbabilityResponse
 {
-	float probability = 1;
+	double probability = 1;
 }
 
 
