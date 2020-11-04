@@ -8,8 +8,8 @@ public interface IndividualInfectionProbabilityRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>uint64 citizedId = 1;</code>
-   * @return The citizedId.
+   * <code>uint64 citizenId = 1;</code>
+   * @return The citizenId.
    */
-  long getCitizedId();
+  long getCitizenId();
 }

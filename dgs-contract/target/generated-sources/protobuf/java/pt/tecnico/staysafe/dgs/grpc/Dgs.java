@@ -117,9 +117,9 @@ public final class Dgs {
       "obuf.Timestamp\022-\n\tleaveTime\030\006 \001(\0132\032.goog" +
       "le.protobuf.Timestamp\"\020\n\016ReportResponse\"" +
       ":\n%IndividualInfectionProbabilityRequest" +
-      "\022\021\n\tcitizedId\030\001 \001(\004\"=\n&IndividualInfecti" +
+      "\022\021\n\tcitizenId\030\001 \001(\004\"=\n&IndividualInfecti" +
       "onProbabilityResponse\022\023\n\013probability\030\001 \001" +
-      "(\002\"9\n$AggregateInfectionProbabilityReque" +
+      "(\001\"9\n$AggregateInfectionProbabilityReque" +
       "st\022\021\n\tstatistic\030\001 \001(\t\"7\n%AggregateInfect" +
       "ionProbabilityResponse\022\016\n\006result\030\001 \001(\t\"\r" +
       "\n\013PingRequest\"\036\n\014PingResponse\022\016\n\006result\030" +
@@ -199,7 +199,7 @@ public final class Dgs {
     internal_static_pt_tecnico_staysafe_dgs_grpc_IndividualInfectionProbabilityRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pt_tecnico_staysafe_dgs_grpc_IndividualInfectionProbabilityRequest_descriptor,
-        new java.lang.String[] { "CitizedId", });
+        new java.lang.String[] { "CitizenId", });
     internal_static_pt_tecnico_staysafe_dgs_grpc_IndividualInfectionProbabilityResponse_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_pt_tecnico_staysafe_dgs_grpc_IndividualInfectionProbabilityResponse_fieldAccessorTable = new

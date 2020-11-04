@@ -48,9 +48,9 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 13: {
+          case 9: {
 
-            probability_ = input.readFloat();
+            probability_ = input.readDouble();
             break;
           }
           default: {
@@ -86,12 +86,12 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int PROBABILITY_FIELD_NUMBER = 1;
-  private float probability_;
+  private double probability_;
   /**
-   * <code>float probability = 1;</code>
+   * <code>double probability = 1;</code>
    * @return The probability.
    */
-  public float getProbability() {
+  public double getProbability() {
     return probability_;
   }
 
@@ -109,8 +109,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (probability_ != 0F) {
-      output.writeFloat(1, probability_);
+    if (probability_ != 0D) {
+      output.writeDouble(1, probability_);
     }
     unknownFields.writeTo(output);
   }
@@ -121,9 +121,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (probability_ != 0F) {
+    if (probability_ != 0D) {
       size += com.google.protobuf.CodedOutputStream
-        .computeFloatSize(1, probability_);
+        .computeDoubleSize(1, probability_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -140,8 +140,8 @@ private static final long serialVersionUID = 0L;
     }
     pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityResponse other = (pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityResponse) obj;
 
-    if (java.lang.Float.floatToIntBits(getProbability())
-        != java.lang.Float.floatToIntBits(
+    if (java.lang.Double.doubleToLongBits(getProbability())
+        != java.lang.Double.doubleToLongBits(
             other.getProbability())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
@@ -155,8 +155,8 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + PROBABILITY_FIELD_NUMBER;
-    hash = (53 * hash) + java.lang.Float.floatToIntBits(
-        getProbability());
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getProbability()));
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -290,7 +290,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      probability_ = 0F;
+      probability_ = 0D;
 
       return this;
     }
@@ -367,7 +367,7 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityResponse other) {
       if (other == pt.tecnico.staysafe.dgs.grpc.IndividualInfectionProbabilityResponse.getDefaultInstance()) return this;
-      if (other.getProbability() != 0F) {
+      if (other.getProbability() != 0D) {
         setProbability(other.getProbability());
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -399,32 +399,32 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private float probability_ ;
+    private double probability_ ;
     /**
-     * <code>float probability = 1;</code>
+     * <code>double probability = 1;</code>
      * @return The probability.
      */
-    public float getProbability() {
+    public double getProbability() {
       return probability_;
     }
     /**
-     * <code>float probability = 1;</code>
+     * <code>double probability = 1;</code>
      * @param value The probability to set.
      * @return This builder for chaining.
      */
-    public Builder setProbability(float value) {
+    public Builder setProbability(double value) {
       
       probability_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>float probability = 1;</code>
+     * <code>double probability = 1;</code>
      * @return This builder for chaining.
      */
     public Builder clearProbability() {
       
-      probability_ = 0F;
+      probability_ = 0D;
       onChanged();
       return this;
     }

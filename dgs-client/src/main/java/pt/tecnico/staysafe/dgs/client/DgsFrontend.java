@@ -28,6 +28,12 @@ public class DgsFrontend implements AutoCloseable{
 	{
 		return stub.report(request);
 	}
+
+	public IndividualInfectionProbabilityResponse individualInfectionProbability( 
+		IndividualInfectionProbabilityRequest request) {
+	
+		return stub.individualInfectionProbability(request);
+	}
 	
 	@Override
 	public final void close() {
