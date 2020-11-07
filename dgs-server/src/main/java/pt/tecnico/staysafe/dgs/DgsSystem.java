@@ -5,8 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.HashMap;
 import java.lang.Math;
+
 import pt.tecnico.staysafe.dgs.grpc.PersonType;
 import pt.tecnico.staysafe.dgs.grpc.Statistic;
+
+import com.google.protobuf.Timestamp;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 
 public class DgsSystem
@@ -96,21 +101,25 @@ public class DgsSystem
 		// the sniffer exists, lets add his observation
 		_obs.add(newObs);
     
-    /* ADD observation to maps */
-    List auxList = _snifferSearch.get( newObs.getSnifferName() ); // list with the observations of that sniffer
-    auxList.add( newObs ); // Add new observation to the list of that sniffer
+    	/* ADD observation to maps */
+    	List auxList = _snifferSearch.get( newObs.getSnifferName() ); // list with the observations of that sniffer
+    	auxList.add( newObs ); // Add new observation to the list of that sniffer
     
-    // verify if citizen is already registered
-    if ( _citizenSearch.get( newObs.getCitizenId() ) == null ) {
-    	// he's not registered, lets regist him
-    	_citizenSearch.put( newObs.getCitizenId(), new ArrayList<>() );
-    }
+    	// verify if citizen is already registered
+    	if ( _citizenSearch.get( newObs.getCitizenId() ) == null ) {
+    		// he's not registered, lets regist him
+    		_citizenSearch.put( newObs.getCitizenId(), new ArrayList<>() );
+    	}
     
-    // add observation to citizenId map
+    	// add observation to citizenId map
     
-    auxList = _citizenSearch.get( newObs.getCitizenId() ); // list with observations that contain this guy's name
-    auxList.add( newObs );
-
+    	auxList = _citizenSearch.get( newObs.getCitizenId() ); // list with observations that contain this guy's name
+		auxList.add( newObs );
+		
+		/* TESTE */
+		if ( newObs == null) {
+			System.out.println("addReport: É NULL!!! ");
+		}
 		return true;
 	}
 	/**  
@@ -268,6 +277,23 @@ public class DgsSystem
 	  }
 	}
 
+	// TESTE debug the observations
+	public void debugObservations() {
+		System.out.println("Let's debug the List");
+		for ( Observation obs : _obs ) {
+			obs.debugFields();
+		}
+		System.out.println("Let's debug the citizenSearch");
+		for ( List<Observation> obsList : _citizenSearch.values() ) {
+			System.out.println("Debuging a new citizen list...");
+			for ( Observation obs : obsList ) {
+				obs.debugFields();
+			}
+		}
+		
+		
+	}
+
 
 }
 
@@ -303,13 +329,21 @@ class Observation {
 	//Returns the observation in a string format
 	public String toString()
 	{
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String obs = "";
 		
-		obs += _snifferName + ", " + _insertionTime.toString().replace("\n", "") + ", " + _personType.toString() + 
-				", " + _citizenId + ", " + _enterTime.toString().replace("\n", "") + ", " + 
-				_leaveTime.toString().replace("\n","");
+		obs += _snifferName + ", " + format.format(new Date(_insertionTime.getSeconds()*1000L)) + ", " + _personType.toString() + 
+				", " + _citizenId + ", " + format.format(new Date(_enterTime.getSeconds()*1000L)) + ", " + 
+				format.format(new Date(_leaveTime.getSeconds()*1000L));
 		
 		return obs;
 	}
 	
+	// TESTE run a debug to detect corrupted input
+	// returns a debug message
+	public String debugFields() {
+		System.out.println("snifferName = "+"\""+_snifferName+"\"");
+		System.out.println("citizenId = "+"\""+_citizenId+"\"");
+		return "";
+	}
 }

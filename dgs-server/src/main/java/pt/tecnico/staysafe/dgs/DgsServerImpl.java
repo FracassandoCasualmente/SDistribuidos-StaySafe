@@ -3,6 +3,10 @@ package pt.tecnico.staysafe.dgs;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import io.grpc.stub.StreamObserver;
 
+import com.google.protobuf.Timestamp;
+import java.util.Date;
+
+
 public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	
 	private DgsSystem dgsSystem = new DgsSystem();
@@ -15,6 +19,7 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	{
 		String output = "Dgs server state\n" + dgsSystem.observationsToString();
 		PingResponse response = PingResponse.newBuilder().setResult(output).build();
+		dgsSystem.debugObservations(); // TESTE
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
 	}
@@ -43,10 +48,23 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	@Override
 	public void report(ReportRequest request, StreamObserver<ReportResponse> responseObserver)
 	{
-		Observation newObs = new Observation(request.getSnifferName(),request.getInsertionTime(),
+		// build insertionTime
+		Date insertionDate = java.util.Calendar.getInstance().getTime();
+		Timestamp insertionTimestamp = Timestamp.newBuilder().
+		setSeconds( insertionDate.getTime() ).
+		buildPartial();
+		// build new Observation instance
+		Observation newObs = new Observation(request.getSnifferName(),insertionTimestamp,
 				request.getType(),request.getCitizenId(),request.getEnterTime(),request.getLeaveTime());
 		
-		dgsSystem.addReport(newObs);
+		if ( !dgsSystem.addReport(newObs) ) {
+			// TODO return error
+			System.out.println("Error adding report! Sniffer not found!");
+		}
+		else {
+			System.out.println("report added with success");
+		}
+			
 		ReportResponse response = ReportResponse.getDefaultInstance();
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
