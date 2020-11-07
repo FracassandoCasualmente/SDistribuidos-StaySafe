@@ -72,19 +72,27 @@ public class SnifferApp {
 		System.out.println("My name: "+name+"\n"+
 							"My address: "+address); // DEBUG TESTE
 
+		System.out.println("vou criar um frontend"); // TESTE
 		DgsFrontend frontend = new DgsFrontend(host, port);
- 
+		
+		System.out.println("ja criei um frontend"); // TESTE
 		try{
 			frontend.snifferJoin(SnifferJoinRequest.newBuilder().setName(name).setAddress(address).build());
 		} catch(Exception e)
 		{
-			//Handle the future exceptions
+			// TODO Handle the future exceptions
+			System.out.println("Fiquei preso na exception a iniciar"); // TESTE
 		}
 		
 		// buffer of messages to send
 		ArrayList<String[]> buffer = new ArrayList<>();
+
+		System.out.println("Vou entrar no ciclo principal"); // TESTE
  
-		try ( Scanner scanner = new Scanner(System.in) ) {
+		try  { 
+			// TESTE
+			Scanner scanner = new Scanner(System.in); // voltar a por isto dentro do try?
+			System.out.println("passei no scanner"); // TESTE
 			// main cycle
 			for ( String input = scanner.nextLine() ; !input.equals(""); input = scanner.nextLine() ) {
 				
@@ -125,13 +133,23 @@ public class SnifferApp {
 				}
      
 				//if everything is ok
+				System.out.println("prestes a ser adicionado ao buffer"); // TESTE
 				buffer.add(words);
+				System.out.println("Adicionado ao buffer"); // TESTE
              
 			} // end of main cycle
    
 		} // close try
- 		// EOF found, send what we have and close
+		// EOF found, send what we have and close
 		catch ( NoSuchElementException nsee ) {
+			System.out.println("found EOF! end of cycle");
+		}
+		catch ( Exception e) { // TESTE
+			System.out.println("aconteceu uma exception esquisita: "+e.getMessage());
+		}
+ 		
+		/*catch ( NoSuchElementException nsee ) {*/
+			System.out.println("entrei no CATCH"); // TESTE
 			ReportRequest obs;
 			ReportResponse response;
 			Timestamp entryTimestamp;
@@ -139,11 +157,11 @@ public class SnifferApp {
 		    Date entryDate;
 		    Date leaveDate;
 		    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-   
+			Integer counter = 0;
 			for ( String[] observation : buffer ) {
 				// build google Timestamp
 				try {
-					
+					System.out.println("entrei no try"); // TESTE
 			        // create Date objects
 		        	entryDate = format.parse( observation[2] );
 		        	leaveDate = format.parse( observation[3] );
@@ -157,17 +175,18 @@ public class SnifferApp {
 							setCitizenId( Integer.parseInt(observation[1]) ).setEnterTime( entryTimestamp  ).setLeaveTime( leaveTimestamp ).
 							build();
 					
+					// send report
+					System.out.println("Sending observation ("+(counter++).toString()+")...");
 					response = frontend.report(obs);
+					System.out.println("Done!");
 				}
 				catch (Exception exp) {
-					System.out.println("Error while building dates");
+					System.out.println("Error while building dates in observation ("
+					+ counter.toString() + ")");
 					System.out.println(exp.getMessage());
 					System.exit(-1);
 				}
 			}
-		}
-   
-		
 	}
 	
 }
