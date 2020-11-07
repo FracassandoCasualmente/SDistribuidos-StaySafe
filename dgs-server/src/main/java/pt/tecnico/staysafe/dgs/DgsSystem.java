@@ -1,10 +1,12 @@
 package pt.tecnico.staysafe.dgs;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.HashMap;
 import java.lang.Math;
 import pt.tecnico.staysafe.dgs.grpc.PersonType;
+import pt.tecnico.staysafe.dgs.grpc.Statistic;
 
 
 public class DgsSystem
@@ -118,6 +120,10 @@ public class DgsSystem
 	public Double individualInfectionProbability(long citizenId) {
 		
 		Long maxTimeTogether = 0L;
+		
+		//TODO has to throw exception if the citizen doesn't exist
+		if(_citizenSearch.get(citizenId) == null )
+			return 0.0;
     	// find all places where citizen was
 		for (Observation obs : _citizenSearch.get( citizenId ) ) {
 			// convert citizen timestamp to seconds
@@ -177,20 +183,20 @@ public class DgsSystem
 	{
 	  int mean = 0;
 	  int count = 0;
-	  int dev = 0;
-	  int percentil50 = 0;
-	  int percentil25 = 0;
-	  int percentil75 = 0;
+	  double dev = 0;
+	  double percentil50 = 0;
+	  double percentil25 = 0;
+	  double percentil75 = 0;
 	  int index = 0;
 	  int size = 0;
-	  int gt = 0;
-	  int gte = 0;
-	  int wa = 0;
+	  double gt = 0;
+	  double gte = 0;
+	  double wa = 0;
 	  
-	  if(stat == MEAN_DEV)
+	  if(stat == Statistic.MEAN_DEV)
 	  {
 		//calculate the mean probability of group infection
-		for(long citizen_id: _citizenSearch)
+		for(long citizen_id: _citizenSearch.keySet())
 		{
 			mean += individualInfectionProbability(citizen_id);
 			count++;
@@ -199,7 +205,7 @@ public class DgsSystem
 		mean = (count == 0) ? mean : mean / count;
 		
 		//calculate the dev of group infection
-		for(long citizen_id: _citizenSearch)
+		for(long citizen_id: _citizenSearch.keySet())
 		{
 			//(xi - mean)^2
 			dev += Math.pow(individualInfectionProbability(citizen_id)-mean,2);
@@ -216,11 +222,11 @@ public class DgsSystem
 	  //stat == PERCENTILES
 	  else
 	  {
-		ArrayList<int> prob = new ArrayList<int>();
+		ArrayList<Double> prob = new ArrayList<Double>();
 		
-		for(long citizen_id: _citizenSearch)
+		for(long citizen_id: _citizenSearch.keySet())
 		{
-			prob.add(individualProbabilityInfection(citizen_id));
+			prob.add(individualInfectionProbability(citizen_id));
 		}
 		//sort the probabilities
 		Collections.sort(prob);
@@ -233,7 +239,7 @@ public class DgsSystem
 		  return "0,0,0";
 		
 		//percentil-50
-		index = Math.round(0.50 * size);
+		index = (int) Math.round(0.50 * size);
 		index++;
 		gt = prob.get(index);
 		gte =  (prob.get(--index) + gt) / 2;
@@ -241,7 +247,7 @@ public class DgsSystem
 		percentil50 = wa;
 		
 		//percentil-25
-		index = Math.round(0.25 * size);
+		index = (int) Math.round(0.25 * size);
 		index++;
 		gt = prob.get(index);
 		gte =  (prob.get(--index) + gt) / 2;
@@ -249,7 +255,7 @@ public class DgsSystem
 		percentil25 = wa;
 		
 		//percentil-75
-		index = Math.round(0.75 * size);
+		index = (int) Math.round(0.75 * size);
 		index++;
 		gt = prob.get(index);
 		gte =  (prob.get(--index) + gt) / 2;
