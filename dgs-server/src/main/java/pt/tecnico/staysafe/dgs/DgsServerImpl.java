@@ -74,5 +74,21 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		responseObserver.onCompleted();
 
 	}
+	
+	//aggregate infection probability operation
+	@Override
+	public void aggregateInfectionProbability(AggregateInfectionProbabilityRequest request,
+			StreamObserver<AggregateInfectionProbabilityResponse> responseObserver)
+	{
+		//calculate probability
+		String probability = dgsSystem.aggregateInfectionProbability(request.getStatistic());
+		
+		//build response
+		AggregateInfectionProbabilityResponse response = AggregateInfectionProbabilityResponse.
+				newBuilder().setResult(probability).build();
+		
+		responseObserver.onNext(response);
+		responseObserver.onCompleted();
+	}
 
 }

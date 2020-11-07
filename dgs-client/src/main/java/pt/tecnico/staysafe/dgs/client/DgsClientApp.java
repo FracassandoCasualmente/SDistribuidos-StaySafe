@@ -32,6 +32,12 @@ public class DgsClientApp {
 	    IndividualInfectionProbabilityRequest iipRequest = IndividualInfectionProbabilityRequest.newBuilder().setCitizenId(2225).build();
 	    IndividualInfectionProbabilityResponse iipResponse = frontend.individualInfectionProbability(iipRequest);
 		System.out.println(iipResponse.getProbability());
+		
+		//Aggregate infection prob operation
+		System.out.println("AggregateInfectionProbability");
+		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.MEAN_DEV).build();
+		AggregateInfectionProbabilityResponse aipResponse = frontend.aggregateInfectionProbability(aipRequest);
+		System.out.println(aipResponse.getResult());
 	}
 	
 }

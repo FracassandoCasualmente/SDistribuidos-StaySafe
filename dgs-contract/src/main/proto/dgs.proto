@@ -14,6 +14,12 @@ enum PersonType
 	INFECTED = 1;
 };
 
+//statistic type
+enum Statistic
+{
+	MEAN_DEV = 0;
+	PERCENTILES = 1;
+};
 
 //sniffer_join 
 message SnifferJoinRequest
@@ -73,7 +79,7 @@ message IndividualInfectionProbabilityResponse
 //aggregate_infection_probability
 message AggregateInfectionProbabilityRequest
 {
-	string statistic = 1;
+	Statistic statistic = 1;
 }
 
 message AggregateInfectionProbabilityResponse
