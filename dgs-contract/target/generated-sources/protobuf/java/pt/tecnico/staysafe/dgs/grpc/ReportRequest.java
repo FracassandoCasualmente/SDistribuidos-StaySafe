@@ -60,31 +60,18 @@ private static final long serialVersionUID = 0L;
             snifferName_ = s;
             break;
           }
-          case 18: {
-            com.google.protobuf.Timestamp.Builder subBuilder = null;
-            if (insertionTime_ != null) {
-              subBuilder = insertionTime_.toBuilder();
-            }
-            insertionTime_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
-            if (subBuilder != null) {
-              subBuilder.mergeFrom(insertionTime_);
-              insertionTime_ = subBuilder.buildPartial();
-            }
-
-            break;
-          }
-          case 24: {
+          case 16: {
             int rawValue = input.readEnum();
 
             type_ = rawValue;
             break;
           }
-          case 32: {
+          case 24: {
 
             citizenId_ = input.readUInt64();
             break;
           }
-          case 42: {
+          case 34: {
             com.google.protobuf.Timestamp.Builder subBuilder = null;
             if (enterTime_ != null) {
               subBuilder = enterTime_.toBuilder();
@@ -97,7 +84,7 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
-          case 50: {
+          case 42: {
             com.google.protobuf.Timestamp.Builder subBuilder = null;
             if (leaveTime_ != null) {
               subBuilder = leaveTime_.toBuilder();
@@ -178,40 +165,17 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int INSERTIONTIME_FIELD_NUMBER = 2;
-  private com.google.protobuf.Timestamp insertionTime_;
-  /**
-   * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-   * @return Whether the insertionTime field is set.
-   */
-  public boolean hasInsertionTime() {
-    return insertionTime_ != null;
-  }
-  /**
-   * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-   * @return The insertionTime.
-   */
-  public com.google.protobuf.Timestamp getInsertionTime() {
-    return insertionTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : insertionTime_;
-  }
-  /**
-   * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-   */
-  public com.google.protobuf.TimestampOrBuilder getInsertionTimeOrBuilder() {
-    return getInsertionTime();
-  }
-
-  public static final int TYPE_FIELD_NUMBER = 3;
+  public static final int TYPE_FIELD_NUMBER = 2;
   private int type_;
   /**
-   * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 3;</code>
+   * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 2;</code>
    * @return The enum numeric value on the wire for type.
    */
   public int getTypeValue() {
     return type_;
   }
   /**
-   * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 3;</code>
+   * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 2;</code>
    * @return The type.
    */
   public pt.tecnico.staysafe.dgs.grpc.PersonType getType() {
@@ -220,57 +184,57 @@ private static final long serialVersionUID = 0L;
     return result == null ? pt.tecnico.staysafe.dgs.grpc.PersonType.UNRECOGNIZED : result;
   }
 
-  public static final int CITIZENID_FIELD_NUMBER = 4;
+  public static final int CITIZENID_FIELD_NUMBER = 3;
   private long citizenId_;
   /**
-   * <code>uint64 citizenId = 4;</code>
+   * <code>uint64 citizenId = 3;</code>
    * @return The citizenId.
    */
   public long getCitizenId() {
     return citizenId_;
   }
 
-  public static final int ENTERTIME_FIELD_NUMBER = 5;
+  public static final int ENTERTIME_FIELD_NUMBER = 4;
   private com.google.protobuf.Timestamp enterTime_;
   /**
-   * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+   * <code>.google.protobuf.Timestamp enterTime = 4;</code>
    * @return Whether the enterTime field is set.
    */
   public boolean hasEnterTime() {
     return enterTime_ != null;
   }
   /**
-   * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+   * <code>.google.protobuf.Timestamp enterTime = 4;</code>
    * @return The enterTime.
    */
   public com.google.protobuf.Timestamp getEnterTime() {
     return enterTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : enterTime_;
   }
   /**
-   * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+   * <code>.google.protobuf.Timestamp enterTime = 4;</code>
    */
   public com.google.protobuf.TimestampOrBuilder getEnterTimeOrBuilder() {
     return getEnterTime();
   }
 
-  public static final int LEAVETIME_FIELD_NUMBER = 6;
+  public static final int LEAVETIME_FIELD_NUMBER = 5;
   private com.google.protobuf.Timestamp leaveTime_;
   /**
-   * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+   * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
    * @return Whether the leaveTime field is set.
    */
   public boolean hasLeaveTime() {
     return leaveTime_ != null;
   }
   /**
-   * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+   * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
    * @return The leaveTime.
    */
   public com.google.protobuf.Timestamp getLeaveTime() {
     return leaveTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : leaveTime_;
   }
   /**
-   * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+   * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
    */
   public com.google.protobuf.TimestampOrBuilder getLeaveTimeOrBuilder() {
     return getLeaveTime();
@@ -293,20 +257,17 @@ private static final long serialVersionUID = 0L;
     if (!getSnifferNameBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, snifferName_);
     }
-    if (insertionTime_ != null) {
-      output.writeMessage(2, getInsertionTime());
-    }
     if (type_ != pt.tecnico.staysafe.dgs.grpc.PersonType.NOT_INFECTED.getNumber()) {
-      output.writeEnum(3, type_);
+      output.writeEnum(2, type_);
     }
     if (citizenId_ != 0L) {
-      output.writeUInt64(4, citizenId_);
+      output.writeUInt64(3, citizenId_);
     }
     if (enterTime_ != null) {
-      output.writeMessage(5, getEnterTime());
+      output.writeMessage(4, getEnterTime());
     }
     if (leaveTime_ != null) {
-      output.writeMessage(6, getLeaveTime());
+      output.writeMessage(5, getLeaveTime());
     }
     unknownFields.writeTo(output);
   }
@@ -320,25 +281,21 @@ private static final long serialVersionUID = 0L;
     if (!getSnifferNameBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, snifferName_);
     }
-    if (insertionTime_ != null) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, getInsertionTime());
-    }
     if (type_ != pt.tecnico.staysafe.dgs.grpc.PersonType.NOT_INFECTED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(3, type_);
+        .computeEnumSize(2, type_);
     }
     if (citizenId_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt64Size(4, citizenId_);
+        .computeUInt64Size(3, citizenId_);
     }
     if (enterTime_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, getEnterTime());
+        .computeMessageSize(4, getEnterTime());
     }
     if (leaveTime_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, getLeaveTime());
+        .computeMessageSize(5, getLeaveTime());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -357,11 +314,6 @@ private static final long serialVersionUID = 0L;
 
     if (!getSnifferName()
         .equals(other.getSnifferName())) return false;
-    if (hasInsertionTime() != other.hasInsertionTime()) return false;
-    if (hasInsertionTime()) {
-      if (!getInsertionTime()
-          .equals(other.getInsertionTime())) return false;
-    }
     if (type_ != other.type_) return false;
     if (getCitizenId()
         != other.getCitizenId()) return false;
@@ -388,10 +340,6 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + SNIFFERNAME_FIELD_NUMBER;
     hash = (53 * hash) + getSnifferName().hashCode();
-    if (hasInsertionTime()) {
-      hash = (37 * hash) + INSERTIONTIME_FIELD_NUMBER;
-      hash = (53 * hash) + getInsertionTime().hashCode();
-    }
     hash = (37 * hash) + TYPE_FIELD_NUMBER;
     hash = (53 * hash) + type_;
     hash = (37 * hash) + CITIZENID_FIELD_NUMBER;
@@ -544,12 +492,6 @@ private static final long serialVersionUID = 0L;
       super.clear();
       snifferName_ = "";
 
-      if (insertionTimeBuilder_ == null) {
-        insertionTime_ = null;
-      } else {
-        insertionTime_ = null;
-        insertionTimeBuilder_ = null;
-      }
       type_ = 0;
 
       citizenId_ = 0L;
@@ -593,11 +535,6 @@ private static final long serialVersionUID = 0L;
     public pt.tecnico.staysafe.dgs.grpc.ReportRequest buildPartial() {
       pt.tecnico.staysafe.dgs.grpc.ReportRequest result = new pt.tecnico.staysafe.dgs.grpc.ReportRequest(this);
       result.snifferName_ = snifferName_;
-      if (insertionTimeBuilder_ == null) {
-        result.insertionTime_ = insertionTime_;
-      } else {
-        result.insertionTime_ = insertionTimeBuilder_.build();
-      }
       result.type_ = type_;
       result.citizenId_ = citizenId_;
       if (enterTimeBuilder_ == null) {
@@ -661,9 +598,6 @@ private static final long serialVersionUID = 0L;
       if (!other.getSnifferName().isEmpty()) {
         snifferName_ = other.snifferName_;
         onChanged();
-      }
-      if (other.hasInsertionTime()) {
-        mergeInsertionTime(other.getInsertionTime());
       }
       if (other.type_ != 0) {
         setTypeValue(other.getTypeValue());
@@ -782,135 +716,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private com.google.protobuf.Timestamp insertionTime_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> insertionTimeBuilder_;
-    /**
-     * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-     * @return Whether the insertionTime field is set.
-     */
-    public boolean hasInsertionTime() {
-      return insertionTimeBuilder_ != null || insertionTime_ != null;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-     * @return The insertionTime.
-     */
-    public com.google.protobuf.Timestamp getInsertionTime() {
-      if (insertionTimeBuilder_ == null) {
-        return insertionTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : insertionTime_;
-      } else {
-        return insertionTimeBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-     */
-    public Builder setInsertionTime(com.google.protobuf.Timestamp value) {
-      if (insertionTimeBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        insertionTime_ = value;
-        onChanged();
-      } else {
-        insertionTimeBuilder_.setMessage(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-     */
-    public Builder setInsertionTime(
-        com.google.protobuf.Timestamp.Builder builderForValue) {
-      if (insertionTimeBuilder_ == null) {
-        insertionTime_ = builderForValue.build();
-        onChanged();
-      } else {
-        insertionTimeBuilder_.setMessage(builderForValue.build());
-      }
-
-      return this;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-     */
-    public Builder mergeInsertionTime(com.google.protobuf.Timestamp value) {
-      if (insertionTimeBuilder_ == null) {
-        if (insertionTime_ != null) {
-          insertionTime_ =
-            com.google.protobuf.Timestamp.newBuilder(insertionTime_).mergeFrom(value).buildPartial();
-        } else {
-          insertionTime_ = value;
-        }
-        onChanged();
-      } else {
-        insertionTimeBuilder_.mergeFrom(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-     */
-    public Builder clearInsertionTime() {
-      if (insertionTimeBuilder_ == null) {
-        insertionTime_ = null;
-        onChanged();
-      } else {
-        insertionTime_ = null;
-        insertionTimeBuilder_ = null;
-      }
-
-      return this;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-     */
-    public com.google.protobuf.Timestamp.Builder getInsertionTimeBuilder() {
-      
-      onChanged();
-      return getInsertionTimeFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-     */
-    public com.google.protobuf.TimestampOrBuilder getInsertionTimeOrBuilder() {
-      if (insertionTimeBuilder_ != null) {
-        return insertionTimeBuilder_.getMessageOrBuilder();
-      } else {
-        return insertionTime_ == null ?
-            com.google.protobuf.Timestamp.getDefaultInstance() : insertionTime_;
-      }
-    }
-    /**
-     * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-        getInsertionTimeFieldBuilder() {
-      if (insertionTimeBuilder_ == null) {
-        insertionTimeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                getInsertionTime(),
-                getParentForChildren(),
-                isClean());
-        insertionTime_ = null;
-      }
-      return insertionTimeBuilder_;
-    }
-
     private int type_ = 0;
     /**
-     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 3;</code>
+     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 2;</code>
      * @return The enum numeric value on the wire for type.
      */
     public int getTypeValue() {
       return type_;
     }
     /**
-     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 3;</code>
+     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 2;</code>
      * @param value The enum numeric value on the wire for type to set.
      * @return This builder for chaining.
      */
@@ -920,7 +735,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 3;</code>
+     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 2;</code>
      * @return The type.
      */
     public pt.tecnico.staysafe.dgs.grpc.PersonType getType() {
@@ -929,7 +744,7 @@ private static final long serialVersionUID = 0L;
       return result == null ? pt.tecnico.staysafe.dgs.grpc.PersonType.UNRECOGNIZED : result;
     }
     /**
-     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 3;</code>
+     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 2;</code>
      * @param value The type to set.
      * @return This builder for chaining.
      */
@@ -943,7 +758,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 3;</code>
+     * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearType() {
@@ -955,14 +770,14 @@ private static final long serialVersionUID = 0L;
 
     private long citizenId_ ;
     /**
-     * <code>uint64 citizenId = 4;</code>
+     * <code>uint64 citizenId = 3;</code>
      * @return The citizenId.
      */
     public long getCitizenId() {
       return citizenId_;
     }
     /**
-     * <code>uint64 citizenId = 4;</code>
+     * <code>uint64 citizenId = 3;</code>
      * @param value The citizenId to set.
      * @return This builder for chaining.
      */
@@ -973,7 +788,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>uint64 citizenId = 4;</code>
+     * <code>uint64 citizenId = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearCitizenId() {
@@ -987,14 +802,14 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> enterTimeBuilder_;
     /**
-     * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+     * <code>.google.protobuf.Timestamp enterTime = 4;</code>
      * @return Whether the enterTime field is set.
      */
     public boolean hasEnterTime() {
       return enterTimeBuilder_ != null || enterTime_ != null;
     }
     /**
-     * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+     * <code>.google.protobuf.Timestamp enterTime = 4;</code>
      * @return The enterTime.
      */
     public com.google.protobuf.Timestamp getEnterTime() {
@@ -1005,7 +820,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+     * <code>.google.protobuf.Timestamp enterTime = 4;</code>
      */
     public Builder setEnterTime(com.google.protobuf.Timestamp value) {
       if (enterTimeBuilder_ == null) {
@@ -1021,7 +836,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+     * <code>.google.protobuf.Timestamp enterTime = 4;</code>
      */
     public Builder setEnterTime(
         com.google.protobuf.Timestamp.Builder builderForValue) {
@@ -1035,7 +850,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+     * <code>.google.protobuf.Timestamp enterTime = 4;</code>
      */
     public Builder mergeEnterTime(com.google.protobuf.Timestamp value) {
       if (enterTimeBuilder_ == null) {
@@ -1053,7 +868,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+     * <code>.google.protobuf.Timestamp enterTime = 4;</code>
      */
     public Builder clearEnterTime() {
       if (enterTimeBuilder_ == null) {
@@ -1067,7 +882,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+     * <code>.google.protobuf.Timestamp enterTime = 4;</code>
      */
     public com.google.protobuf.Timestamp.Builder getEnterTimeBuilder() {
       
@@ -1075,7 +890,7 @@ private static final long serialVersionUID = 0L;
       return getEnterTimeFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+     * <code>.google.protobuf.Timestamp enterTime = 4;</code>
      */
     public com.google.protobuf.TimestampOrBuilder getEnterTimeOrBuilder() {
       if (enterTimeBuilder_ != null) {
@@ -1086,7 +901,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+     * <code>.google.protobuf.Timestamp enterTime = 4;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
@@ -1106,14 +921,14 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> leaveTimeBuilder_;
     /**
-     * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+     * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
      * @return Whether the leaveTime field is set.
      */
     public boolean hasLeaveTime() {
       return leaveTimeBuilder_ != null || leaveTime_ != null;
     }
     /**
-     * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+     * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
      * @return The leaveTime.
      */
     public com.google.protobuf.Timestamp getLeaveTime() {
@@ -1124,7 +939,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+     * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
      */
     public Builder setLeaveTime(com.google.protobuf.Timestamp value) {
       if (leaveTimeBuilder_ == null) {
@@ -1140,7 +955,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+     * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
      */
     public Builder setLeaveTime(
         com.google.protobuf.Timestamp.Builder builderForValue) {
@@ -1154,7 +969,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+     * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
      */
     public Builder mergeLeaveTime(com.google.protobuf.Timestamp value) {
       if (leaveTimeBuilder_ == null) {
@@ -1172,7 +987,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+     * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
      */
     public Builder clearLeaveTime() {
       if (leaveTimeBuilder_ == null) {
@@ -1186,7 +1001,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+     * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
      */
     public com.google.protobuf.Timestamp.Builder getLeaveTimeBuilder() {
       
@@ -1194,7 +1009,7 @@ private static final long serialVersionUID = 0L;
       return getLeaveTimeFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+     * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
      */
     public com.google.protobuf.TimestampOrBuilder getLeaveTimeOrBuilder() {
       if (leaveTimeBuilder_ != null) {
@@ -1205,7 +1020,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+     * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 

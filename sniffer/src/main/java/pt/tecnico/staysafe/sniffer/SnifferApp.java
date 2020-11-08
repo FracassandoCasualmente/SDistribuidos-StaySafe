@@ -165,13 +165,13 @@ public class SnifferApp {
 			        // create Date objects
 		        	entryDate = format.parse( observation[2] );
 		        	leaveDate = format.parse( observation[3] );
-		          
+					
 		        	// adapt to Timestamp objects
-		        	entryTimestamp = Timestamp.newBuilder().setSeconds( entryDate.getTime() ).buildPartial();
-		          	leaveTimestamp = Timestamp.newBuilder().setSeconds( leaveDate.getTime() ).buildPartial();
+		        	entryTimestamp = Timestamp.newBuilder().setSeconds( entryDate.getTime()*1000L ).buildPartial();
+		          	leaveTimestamp = Timestamp.newBuilder().setSeconds( leaveDate.getTime()*1000L ).buildPartial();
 		        	
 					// build observation object
-					obs = ReportRequest.newBuilder().setSnifferName(name).setType(observation[0].equals("infetado") ? PersonType.INFECTED : PersonType.NOT_INFECTED).
+					obs = ReportRequest.newBuilder().setSnifferName(name).setType( observation[0].equals("infetado") ? PersonType.INFECTED : PersonType.NOT_INFECTED).
 							setCitizenId( Integer.parseInt(observation[1]) ).setEnterTime( entryTimestamp  ).setLeaveTime( leaveTimestamp ).
 							build();
 					

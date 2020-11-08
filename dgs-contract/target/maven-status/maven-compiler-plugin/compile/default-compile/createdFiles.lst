@@ -1,3 +1,4 @@
+pt/tecnico/staysafe/dgs/grpc/Statistic$1.class
 pt/tecnico/staysafe/dgs/grpc/ReportResponse.class
 pt/tecnico/staysafe/dgs/grpc/DgsServiceGrpc$DgsServiceBaseDescriptorSupplier.class
 pt/tecnico/staysafe/dgs/grpc/SnifferJoinResponseOrBuilder.class
@@ -62,6 +63,7 @@ pt/tecnico/staysafe/dgs/grpc/DgsServiceGrpc$DgsServiceBlockingStub.class
 pt/tecnico/staysafe/dgs/grpc/AggregateInfectionProbabilityResponse$Builder.class
 pt/tecnico/staysafe/dgs/grpc/InitRequest.class
 pt/tecnico/staysafe/dgs/grpc/IndividualInfectionProbabilityResponse$Builder.class
+pt/tecnico/staysafe/dgs/grpc/Statistic.class
 pt/tecnico/staysafe/dgs/grpc/ReportRequest.class
 pt/tecnico/staysafe/dgs/grpc/ClearRequest$1.class
 pt/tecnico/staysafe/dgs/grpc/SnifferJoinResponse$Builder.class

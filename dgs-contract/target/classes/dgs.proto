@@ -14,6 +14,12 @@ enum PersonType
 	INFECTED = 1;
 };
 
+//statistic type
+enum Statistic
+{
+	MEAN_DEV = 0;
+	PERCENTILES = 1;
+};
 
 //sniffer_join 
 message SnifferJoinRequest
@@ -44,11 +50,10 @@ message SnifferInfoResponse
 message ReportRequest
 {
 	string snifferName = 1;
-	google.protobuf.Timestamp insertionTime = 2;
-	PersonType type = 3;
-	uint64 citizenId = 4;
-	google.protobuf.Timestamp enterTime = 5;
-	google.protobuf.Timestamp leaveTime = 6;
+	PersonType type = 2;
+	uint64 citizenId = 3;
+	google.protobuf.Timestamp enterTime = 4;
+	google.protobuf.Timestamp leaveTime = 5;
 }
 
 message ReportResponse
@@ -73,7 +78,7 @@ message IndividualInfectionProbabilityResponse
 //aggregate_infection_probability
 message AggregateInfectionProbabilityRequest
 {
-	string statistic = 1;
+	Statistic statistic = 1;
 }
 
 message AggregateInfectionProbabilityResponse

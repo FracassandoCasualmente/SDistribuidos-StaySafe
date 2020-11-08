@@ -20,64 +20,49 @@ public interface ReportRequestOrBuilder extends
       getSnifferNameBytes();
 
   /**
-   * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-   * @return Whether the insertionTime field is set.
-   */
-  boolean hasInsertionTime();
-  /**
-   * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-   * @return The insertionTime.
-   */
-  com.google.protobuf.Timestamp getInsertionTime();
-  /**
-   * <code>.google.protobuf.Timestamp insertionTime = 2;</code>
-   */
-  com.google.protobuf.TimestampOrBuilder getInsertionTimeOrBuilder();
-
-  /**
-   * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 3;</code>
+   * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 2;</code>
    * @return The enum numeric value on the wire for type.
    */
   int getTypeValue();
   /**
-   * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 3;</code>
+   * <code>.pt.tecnico.staysafe.dgs.grpc.PersonType type = 2;</code>
    * @return The type.
    */
   pt.tecnico.staysafe.dgs.grpc.PersonType getType();
 
   /**
-   * <code>uint64 citizenId = 4;</code>
+   * <code>uint64 citizenId = 3;</code>
    * @return The citizenId.
    */
   long getCitizenId();
 
   /**
-   * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+   * <code>.google.protobuf.Timestamp enterTime = 4;</code>
    * @return Whether the enterTime field is set.
    */
   boolean hasEnterTime();
   /**
-   * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+   * <code>.google.protobuf.Timestamp enterTime = 4;</code>
    * @return The enterTime.
    */
   com.google.protobuf.Timestamp getEnterTime();
   /**
-   * <code>.google.protobuf.Timestamp enterTime = 5;</code>
+   * <code>.google.protobuf.Timestamp enterTime = 4;</code>
    */
   com.google.protobuf.TimestampOrBuilder getEnterTimeOrBuilder();
 
   /**
-   * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+   * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
    * @return Whether the leaveTime field is set.
    */
   boolean hasLeaveTime();
   /**
-   * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+   * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
    * @return The leaveTime.
    */
   com.google.protobuf.Timestamp getLeaveTime();
   /**
-   * <code>.google.protobuf.Timestamp leaveTime = 6;</code>
+   * <code>.google.protobuf.Timestamp leaveTime = 5;</code>
    */
   com.google.protobuf.TimestampOrBuilder getLeaveTimeOrBuilder();
 }
