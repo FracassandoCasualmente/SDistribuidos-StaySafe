@@ -133,10 +133,17 @@ public class DgsSystem
 		//TODO has to throw exception if the citizen doesn't exist
 		if(_citizenSearch.get(citizenId) == null )
 			return 0.0;
+		
     	// find all places where citizen was
 		for (Observation obs : _citizenSearch.get( citizenId ) ) {
+			
+			
+			//if citizen is infected, return 1
+			if(obs.getPersonType() == PersonType.INFECTED)
+				return 1.0;
+				
 			// convert citizen timestamp to seconds
-			long mainET = obs.getLeaveTime().getSeconds();
+			long mainET = obs.getEnterTime().getSeconds();
 			long mainLT = obs.getLeaveTime().getSeconds();
       
 			String currentSniffer = obs.getSnifferName();
@@ -146,16 +153,16 @@ public class DgsSystem
 				
 				// this person was at the same sniffer
     
-    		    // is this person infected? If so, skip
-        		if ( otherObs.getPersonType() == PersonType.INFECTED ) {
+    		    // is this person not infected? If so, skip
+        		if ( otherObs.getPersonType() == PersonType.NOT_INFECTED ) {
           		continue;
         		}
         
 				// get this person timestamps
-				long otherET = otherObs.getLeaveTime().getSeconds();
+				long otherET = otherObs.getEnterTime().getSeconds();
 				long otherLT = otherObs.getLeaveTime().getSeconds();
 				
-        		// were they even togeter?
+        		// were they even together?
         		if ( mainET >= otherLT || otherET >= mainLT ) {
           			// yes, check next
           			continue;
@@ -190,7 +197,7 @@ public class DgsSystem
 	*/
 	public String aggregateInfectionProbability(Statistic stat)
 	{
-	  int mean = 0;
+	  double mean = 0;
 	  int count = 0;
 	  double dev = 0;
 	  double percentil50 = 0;
@@ -229,7 +236,7 @@ public class DgsSystem
 	  }
 	  
 	  //stat == PERCENTILES
-	  else
+	  else if(stat == Statistic.PERCENTILES)
 	  {
 		ArrayList<Double> prob = new ArrayList<Double>();
 		
@@ -250,30 +257,36 @@ public class DgsSystem
 		//percentil-50
 		index = (int) Math.round(0.50 * size);
 		index++;
-		gt = prob.get(index);
-		gte =  (prob.get(--index) + gt) / 2;
+		gt = prob.get(index-1);
+		gte =  (prob.get(index-2) + gt) / 2;
 		wa = (gt + gte) / 2;  
 		percentil50 = wa;
 		
 		//percentil-25
 		index = (int) Math.round(0.25 * size);
 		index++;
-		gt = prob.get(index);
-		gte =  (prob.get(--index) + gt) / 2;
+		gt = prob.get(index-1);
+		gte =  (prob.get(index-2) + gt) / 2;
 		wa = (gt + gte) / 2;  
 		percentil25 = wa;
 		
 		//percentil-75
 		index = (int) Math.round(0.75 * size);
 		index++;
-		gt = prob.get(index);
-		gte =  (prob.get(--index) + gt) / 2;
+		gt = prob.get(index-1);
+		gte =  (prob.get(index-2) + gt) / 2;
 		wa = (gt + gte) / 2;  
 		percentil75 = wa;
 		
 		return percentil50 + "," + percentil25 + "," + percentil75;
 		
 	  
+	  }
+	  
+	  //TODO exception
+	  else
+	  {
+		  return "Incorrect Statistic";
 	  }
 	}
 
@@ -334,7 +347,7 @@ class Observation {
 		
 		obs += _snifferName + ", " + format.format(new Date(_insertionTime.getSeconds()*1000L)) + ", " + _personType.toString() + 
 				", " + _citizenId + ", " + format.format(new Date(_enterTime.getSeconds()*1000L)) + ", " + 
-				format.format(new Date(_leaveTime.getSeconds()*1000L));
+				format.format(new Date(_leaveTime.getSeconds()*1000L)) + "\n";
 		
 		return obs;
 	}
