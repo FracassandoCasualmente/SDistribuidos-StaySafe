@@ -1,2 +1,5 @@
-pt/tecnico/staysafe/dgs/client/DgsFrontend.class
+pt/tecnico/staysafe/dgs/client/Command.class
 pt/tecnico/staysafe/dgs/client/DgsClientApp.class
+pt/tecnico/staysafe/dgs/client/HelpCommand.class
+pt/tecnico/staysafe/dgs/client/SingleProbCommand.class
+pt/tecnico/staysafe/dgs/client/DgsFrontend.class
