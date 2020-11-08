@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.lang.Math;
 
+import pt.tecnico.staysafe.dgs.exception.SnifferAlreadyRegisteredException;
 import pt.tecnico.staysafe.dgs.grpc.PersonType;
 import pt.tecnico.staysafe.dgs.grpc.Statistic;
 
@@ -69,24 +70,24 @@ public class DgsSystem
 	
 	/**  
 	* @param Name of the new sniffer
-	* @return true if success (the name does not exist with different address),
-	 false otherwise
+	* @return nothing
 	*/
 	
-	public Boolean joinSniffer(String newName, String newAddr) {
+	public synchronized void joinSniffer(String newName, String newAddr) throws SnifferAlreadyRegisteredException {
 		// points to address of the sniffer with same name
 		String conflictingSnifferAddr = _sniffers.get(newName);
-		
+				
 		if ( conflictingSnifferAddr != null ) {
 			// if conflictingSniffer has different address
 			if ( !conflictingSnifferAddr.equals(newAddr) ) {
-				return false;
+				System.out.print("Sniffer already exists! The address is " + conflictingSnifferAddr);
+
+				throw new SnifferAlreadyRegisteredException();
 			}
 		}
 		// no problems -> add sniffer to collections
 		_sniffers.put(newName, newAddr);
 		_snifferSearch.put(newName, new ArrayList<>() );
-		return true;
 	}
 	/**  
 	* @param pretended Observation

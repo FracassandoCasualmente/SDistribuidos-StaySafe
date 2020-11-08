@@ -1,8 +1,9 @@
 package pt.tecnico.staysafe.dgs;
 
+import pt.tecnico.staysafe.dgs.exception.SnifferAlreadyRegisteredException;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import io.grpc.stub.StreamObserver;
-
+import static io.grpc.Status.INVALID_ARGUMENT;
 import com.google.protobuf.Timestamp;
 import java.util.Date;
 
@@ -30,18 +31,19 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	// sends "OK" if success, Error message otherwise
 	@Override
 	public void snifferJoin(SnifferJoinRequest request, StreamObserver<SnifferJoinResponse> responseObserver) {
-		// tries to join sniffer, gets false if a sniffer with same name and different
-		// address exists
-		Boolean success = dgsSystem.joinSniffer(request.getName(), request.getAddress());
-		// build message sent to client
-		String result = ( (success)? "OK" : "Error: A sniffer with the same name and different address already exists.\n"+
-			"Name: "+request.getName()+"\n"+
-			"Address: "+request.getAddress()+"\n" );
-
-		//builds and sends response
-		SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setResult(result).build();
-		responseObserver.onNext(response);
-		responseObserver.onCompleted();
+		
+		try {
+			dgsSystem.joinSniffer(request.getName(), request.getAddress());
+			//builds and sends response
+			String result = "OK";
+			SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setResult(result).build();
+			responseObserver.onNext(response);
+			responseObserver.onCompleted();
+		}
+		catch(SnifferAlreadyRegisteredException sare)
+		{
+			responseObserver.onError(INVALID_ARGUMENT.withDescription(sare.getMessage()).asRuntimeException());
+		}
 	}
 	
 	//report operation
