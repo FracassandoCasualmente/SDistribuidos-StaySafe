@@ -142,10 +142,11 @@ public class SnifferApp {
 		} // close try
 		// EOF found, send what we have and close
 		catch ( NoSuchElementException nsee ) {
-			System.out.println("found EOF! end of cycle");
+			// found EOF! end of cycle
 		}
-		catch ( Exception e) { // TESTE
-			System.out.println("aconteceu uma exception esquisita: "+e.getMessage());
+		catch ( Exception e) {
+			System.out.println("Unexpected exception occurred: "+e.getMessage());
+			System.exit(-1);
 		}
  		
 		/*catch ( NoSuchElementException nsee ) {*/

@@ -51,7 +51,7 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		// build insertionTime
 		Date insertionDate = java.util.Calendar.getInstance().getTime();
 		Timestamp insertionTimestamp = Timestamp.newBuilder().
-		setSeconds( insertionDate.getTime() ).
+		setSeconds( insertionDate.getTime()/1000L ).
 		buildPartial();
 		// build new Observation instance
 		Observation newObs = new Observation(request.getSnifferName(),insertionTimestamp,
