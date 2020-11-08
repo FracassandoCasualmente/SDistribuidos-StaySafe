@@ -23,8 +23,6 @@ public abstract class DgsAbstractClient {
 	protected Boolean _debug = false; // true if wants to print debugs
 	protected ArrayList<Command> _commands;
 
-	protected abstract void execute(String[] words); // executes a command
-
 	// read input until blank line or EOF and execute accordingly
 	public final void run() {
 		Scanner scanner = new Scanner(System.in);
@@ -69,7 +67,7 @@ public abstract class DgsAbstractClient {
 				//parse and execute input args
 				String result;
 				try {
-					result = cmdCalled.execute(words);
+					result = cmdCalled.execute(words[1].split(","));
 				} catch (IOException e) {
 					System.out.println("Invalid Input arguments!\n"+e.getMessage());
 					continue;
@@ -137,9 +135,9 @@ class HelpCommand extends Command{
 
 	@Override
 	public String getHelp() {
-		String res = "";
+		String res = "--Available Commands--";
 		for ( Command cmd : _availableCmds ) {
-			res += cmd.getHelp()+"\n";
+			res += "\n"+cmd.getName();
 		}
 		return res;
 	}
@@ -150,14 +148,14 @@ class HelpCommand extends Command{
 		Boolean cmdExists = false;
 		Command foundCmd = null;
 		for (Command cmd : _availableCmds) {
-			if ( cmd.getName().equals(args[1]) ) {
+			if ( cmd.getName().equals(args[0]) ) {
 				cmdExists = true;
 				foundCmd = cmd;
 				break;
 			}
 		}
 		if (!cmdExists) {
-			throw new IOException("Command \""+args[1]+"\" does not exist");
+			throw new IOException("Command \""+args[0]+"\" does not exist");
 		}
 		return foundCmd.getHelp();
 	}
