@@ -20,7 +20,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private AggregateInfectionProbabilityRequest() {
-    statistic_ = "";
+    statistic_ = 0;
   }
 
   @java.lang.Override
@@ -53,10 +53,10 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
+            int rawValue = input.readEnum();
 
-            statistic_ = s;
+            statistic_ = rawValue;
             break;
           }
           default: {
@@ -92,39 +92,22 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int STATISTIC_FIELD_NUMBER = 1;
-  private volatile java.lang.Object statistic_;
+  private int statistic_;
   /**
-   * <code>string statistic = 1;</code>
-   * @return The statistic.
+   * <code>.pt.tecnico.staysafe.dgs.grpc.Statistic statistic = 1;</code>
+   * @return The enum numeric value on the wire for statistic.
    */
-  public java.lang.String getStatistic() {
-    java.lang.Object ref = statistic_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      statistic_ = s;
-      return s;
-    }
+  public int getStatisticValue() {
+    return statistic_;
   }
   /**
-   * <code>string statistic = 1;</code>
-   * @return The bytes for statistic.
+   * <code>.pt.tecnico.staysafe.dgs.grpc.Statistic statistic = 1;</code>
+   * @return The statistic.
    */
-  public com.google.protobuf.ByteString
-      getStatisticBytes() {
-    java.lang.Object ref = statistic_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      statistic_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public pt.tecnico.staysafe.dgs.grpc.Statistic getStatistic() {
+    @SuppressWarnings("deprecation")
+    pt.tecnico.staysafe.dgs.grpc.Statistic result = pt.tecnico.staysafe.dgs.grpc.Statistic.valueOf(statistic_);
+    return result == null ? pt.tecnico.staysafe.dgs.grpc.Statistic.UNRECOGNIZED : result;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -141,8 +124,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getStatisticBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, statistic_);
+    if (statistic_ != pt.tecnico.staysafe.dgs.grpc.Statistic.MEAN_DEV.getNumber()) {
+      output.writeEnum(1, statistic_);
     }
     unknownFields.writeTo(output);
   }
@@ -153,8 +136,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getStatisticBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, statistic_);
+    if (statistic_ != pt.tecnico.staysafe.dgs.grpc.Statistic.MEAN_DEV.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(1, statistic_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -171,8 +155,7 @@ private static final long serialVersionUID = 0L;
     }
     pt.tecnico.staysafe.dgs.grpc.AggregateInfectionProbabilityRequest other = (pt.tecnico.staysafe.dgs.grpc.AggregateInfectionProbabilityRequest) obj;
 
-    if (!getStatistic()
-        .equals(other.getStatistic())) return false;
+    if (statistic_ != other.statistic_) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -185,7 +168,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + STATISTIC_FIELD_NUMBER;
-    hash = (53 * hash) + getStatistic().hashCode();
+    hash = (53 * hash) + statistic_;
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -323,7 +306,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      statistic_ = "";
+      statistic_ = 0;
 
       return this;
     }
@@ -400,9 +383,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(pt.tecnico.staysafe.dgs.grpc.AggregateInfectionProbabilityRequest other) {
       if (other == pt.tecnico.staysafe.dgs.grpc.AggregateInfectionProbabilityRequest.getDefaultInstance()) return this;
-      if (!other.getStatistic().isEmpty()) {
-        statistic_ = other.statistic_;
-        onChanged();
+      if (other.statistic_ != 0) {
+        setStatisticValue(other.getStatisticValue());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -433,78 +415,54 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object statistic_ = "";
+    private int statistic_ = 0;
     /**
-     * <code>string statistic = 1;</code>
-     * @return The statistic.
+     * <code>.pt.tecnico.staysafe.dgs.grpc.Statistic statistic = 1;</code>
+     * @return The enum numeric value on the wire for statistic.
      */
-    public java.lang.String getStatistic() {
-      java.lang.Object ref = statistic_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        statistic_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public int getStatisticValue() {
+      return statistic_;
     }
     /**
-     * <code>string statistic = 1;</code>
-     * @return The bytes for statistic.
-     */
-    public com.google.protobuf.ByteString
-        getStatisticBytes() {
-      java.lang.Object ref = statistic_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        statistic_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string statistic = 1;</code>
-     * @param value The statistic to set.
+     * <code>.pt.tecnico.staysafe.dgs.grpc.Statistic statistic = 1;</code>
+     * @param value The enum numeric value on the wire for statistic to set.
      * @return This builder for chaining.
      */
-    public Builder setStatistic(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
+    public Builder setStatisticValue(int value) {
       statistic_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string statistic = 1;</code>
+     * <code>.pt.tecnico.staysafe.dgs.grpc.Statistic statistic = 1;</code>
+     * @return The statistic.
+     */
+    public pt.tecnico.staysafe.dgs.grpc.Statistic getStatistic() {
+      @SuppressWarnings("deprecation")
+      pt.tecnico.staysafe.dgs.grpc.Statistic result = pt.tecnico.staysafe.dgs.grpc.Statistic.valueOf(statistic_);
+      return result == null ? pt.tecnico.staysafe.dgs.grpc.Statistic.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.pt.tecnico.staysafe.dgs.grpc.Statistic statistic = 1;</code>
+     * @param value The statistic to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStatistic(pt.tecnico.staysafe.dgs.grpc.Statistic value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      
+      statistic_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.pt.tecnico.staysafe.dgs.grpc.Statistic statistic = 1;</code>
      * @return This builder for chaining.
      */
     public Builder clearStatistic() {
       
-      statistic_ = getDefaultInstance().getStatistic();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string statistic = 1;</code>
-     * @param value The bytes for statistic to set.
-     * @return This builder for chaining.
-     */
-    public Builder setStatisticBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      statistic_ = value;
+      statistic_ = 0;
       onChanged();
       return this;
     }

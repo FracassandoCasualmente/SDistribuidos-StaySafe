@@ -38,6 +38,10 @@ public class DgsClientApp {
 		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.MEAN_DEV).build();
 		AggregateInfectionProbabilityResponse aipResponse = frontend.aggregateInfectionProbability(aipRequest);
 		System.out.println(aipResponse.getResult());
+
+
+		// close frontend and finish
+		frontend.close();
 	}
 	
 }

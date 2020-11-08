@@ -8,14 +8,13 @@ public interface AggregateInfectionProbabilityRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string statistic = 1;</code>
+   * <code>.pt.tecnico.staysafe.dgs.grpc.Statistic statistic = 1;</code>
+   * @return The enum numeric value on the wire for statistic.
+   */
+  int getStatisticValue();
+  /**
+   * <code>.pt.tecnico.staysafe.dgs.grpc.Statistic statistic = 1;</code>
    * @return The statistic.
    */
-  java.lang.String getStatistic();
-  /**
-   * <code>string statistic = 1;</code>
-   * @return The bytes for statistic.
-   */
-  com.google.protobuf.ByteString
-      getStatisticBytes();
+  pt.tecnico.staysafe.dgs.grpc.Statistic getStatistic();
 }
