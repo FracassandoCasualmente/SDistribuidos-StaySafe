@@ -35,7 +35,7 @@ public class DgsClientApp {
 		
 		//Aggregate infection prob operation
 		System.out.println("AggregateInfectionProbability");
-		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.MEAN_DEV).build();
+		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.PERCENTILES).build();
 		AggregateInfectionProbabilityResponse aipResponse = frontend.aggregateInfectionProbability(aipRequest);
 		System.out.println(aipResponse.getResult());
 
