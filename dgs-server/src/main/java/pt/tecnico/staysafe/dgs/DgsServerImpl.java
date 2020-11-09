@@ -1,6 +1,6 @@
 package pt.tecnico.staysafe.dgs;
 
-import pt.tecnico.staysafe.dgs.exception.SnifferAlreadyRegisteredException;
+import pt.tecnico.staysafe.dgs.exception.*;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import io.grpc.stub.StreamObserver;
 import static io.grpc.Status.INVALID_ARGUMENT;
@@ -11,6 +11,13 @@ import java.util.Date;
 public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	
 	private DgsSystem dgsSystem = new DgsSystem();
+	private Boolean _debug = false;
+	
+	private void debug(String msg) {
+		if (_debug) {
+			System.out.println(msg);
+		}
+	}
 
 	//Control Operations
 	
@@ -20,11 +27,14 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	{
 		String output = "Server State: UP";
 		PingResponse response = PingResponse.newBuilder().setResult(output).build();
-		dgsSystem.debugObservations(); // TESTE
+		if (_debug) {
+			dgsSystem.debugObservations(); // debug
+		}
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
 	}
 	
+	// ctrl_clear
 	@Override
 	public void ctrlClear(ClearRequest request, StreamObserver<ClearResponse> responseObserver)
 	{
@@ -34,7 +44,16 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		responseObserver.onCompleted();
 	}
 	
-	
+	// ctrl_init
+	@Override
+	public void ctrlInit(InitRequest request, StreamObserver<InitResponse> responseObserver)
+	{
+		dgsSystem.init();
+		InitResponse response = InitResponse.getDefaultInstance();
+		responseObserver.onNext(response);
+		responseObserver.onCompleted();
+	}
+
 	//Dgs Operations
 	
 	// sends "OK" if success, Error message otherwise
@@ -55,6 +74,25 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		}
 	}
 	
+	// search for sniffer name and return it's address
+	// returns exception if sniffer does not exist
+	@Override
+	public void snifferInfo(SnifferInfoRequest request, StreamObserver<SnifferInfoResponse> responseObserver) {
+		
+		try {
+			String result = dgsSystem.snifferInfo(request.getName());
+			//sends response
+			SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setAddress(result).build();
+			responseObserver.onNext(response);
+		}
+		catch(SnifferDoesNotExistException sdne) {
+			responseObserver.onError(INVALID_ARGUMENT.withDescription(sdne.getMessage()).asRuntimeException());
+		}
+		
+		responseObserver.onCompleted();
+		
+	}
+
 	//report operation
 	@Override
 	public void report(ReportRequest request, StreamObserver<ReportResponse> responseObserver)
@@ -69,11 +107,13 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 				request.getType(),request.getCitizenId(),request.getEnterTime(),request.getLeaveTime());
 		
 		if ( !dgsSystem.addReport(newObs) ) {
-			// TODO return error
-			System.out.println("Error adding report! Sniffer not found!");
+			// return error
+			responseObserver.onError(INVALID_ARGUMENT.withDescription("ERROR:\n"+
+			"Specified sniffer \""+request.getSnifferName()+"\" does not exist").asRuntimeException());
+			debug("Error adding report! Sniffer not found!");
 		}
 		else {
-			System.out.println("report added with success");
+			debug("report added with success");
 		}
 			
 		ReportResponse response = ReportResponse.getDefaultInstance();

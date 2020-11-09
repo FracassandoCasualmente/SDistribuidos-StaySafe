@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.lang.Math;
 
-import pt.tecnico.staysafe.dgs.exception.SnifferAlreadyRegisteredException;
+import pt.tecnico.staysafe.dgs.exception.*;
 import pt.tecnico.staysafe.dgs.grpc.PersonType;
 import pt.tecnico.staysafe.dgs.grpc.Statistic;
 
@@ -72,7 +72,6 @@ public class DgsSystem
 	* @param Name of the new sniffer
 	* @return nothing
 	*/
-	
 	public synchronized void joinSniffer(String newName, String newAddr) throws SnifferAlreadyRegisteredException {
 		// points to address of the sniffer with same name
 		String conflictingSnifferAddr = _sniffers.get(newName);
@@ -82,12 +81,26 @@ public class DgsSystem
 			if ( !conflictingSnifferAddr.equals(newAddr) ) {
 				System.out.print("Sniffer already exists! The address is " + conflictingSnifferAddr);
 
-				throw new SnifferAlreadyRegisteredException();
+				throw new SnifferAlreadyRegisteredException(newName, conflictingSnifferAddr,newAddr);
 			}
 		}
 		// no problems -> add sniffer to collections
 		_sniffers.put(newName, newAddr);
 		_snifferSearch.put(newName, new ArrayList<>() );
+	}
+
+	/**
+	 * @param Name of sniffer
+	 * @return Address of sniffer
+	 * @throws SnifferDoesNotExistException if sniffer does not exist
+	 */
+	public String snifferInfo(String name) throws SnifferDoesNotExistException{
+		String result = _sniffers.get(name);
+		if ( result == null) {
+			throw new SnifferDoesNotExistException(name);
+		}
+		return result;
+
 	}
 	/**  
 	* @param pretended Observation
@@ -319,6 +332,10 @@ public class DgsSystem
 		return "Server cleared with success!";
 	}
 
+	// Inits server to predefined state (none)
+	public void init() {
+		return;
+	}
 
 }
 

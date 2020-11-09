@@ -1,10 +1,15 @@
 package pt.tecnico.staysafe.dgs.client;
 
 import io.grpc.StatusRuntimeException;
+import java.io.IOException;
 import pt.tecnico.staysafe.dgs.grpc.*;
 
-public class DgsClientApp {
+
+public class DgsClientApp extends DgsAbstractClient{
 	
+	public DgsClientApp (String host, Integer port) {
+		super(host, port, "DgsClient");
+	}
 	public static void main(String[] args) {
 		
 		//Connection parameters
@@ -45,3 +50,4 @@ public class DgsClientApp {
 	}
 	
 }
+
