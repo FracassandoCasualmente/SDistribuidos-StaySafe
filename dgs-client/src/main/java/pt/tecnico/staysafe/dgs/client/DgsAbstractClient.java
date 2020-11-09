@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 import pt.tecnico.staysafe.dgs.grpc.*;
-import pt.tecnico.staysafe.sniffer.ReportRequest;
 import io.grpc.StatusRuntimeException;
-
 import com.google.protobuf.Timestamp;
+
+
 
 public abstract class DgsAbstractClient {
 
@@ -377,128 +377,112 @@ class SnifferInfoCommand extends Command {
 }
 
 //for sniffer simulation
-class SnifferAddReportCommand extends Command
-{
-	private String _snifferName;
+class ReportCommand extends Command {
+
+	private final String _snifferName;
 	
-	public SnifferAddReportCommand(DgsFrontend fe, String snifferName)
+	public ReportCommand(DgsFrontend fe, String snifferName)
 	{
-		super("sniffer_join_command", 1, 1, fe);
+		super("report", 4, 4, fe);
 		_snifferName = snifferName;
 	}
 	
-	private Boolean errorChecking(String [] words)
-	{
-       //check if we have the correct number of words
-		if(!((words.length == 4 && !words[0].equals("sleep")) || (words.length == 2 && words[0].equals("sleep"))))
-			return false;
+	private void errorChecking(String [] words) throws IOException {
+	
      
 		//check if we have valid timestamps
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
 
 		try {
-			LocalDateTime dateTime = LocalDateTime.parse(words[2], formatter);
-			dateTime = LocalDateTime.parse(words[3], formatter);
+			LocalDateTime dateTime1 = LocalDateTime.parse(words[2], formatter);
+			LocalDateTime dateTime2 = LocalDateTime.parse(words[3], formatter);
+			if (dateTime2.isBefore(dateTime1)) {
+				throw new IOException("ERROR: The Timestamp of leaving happens before the Timestamp of entrance");
+			}
  		} catch (DateTimeParseException dtpe) {
-     		return false;
- 		}
+			throw new IOException("ERROR: Invalid timestamp: "+dtpe.getMessage());
+		}
+		
+		
      
 		//check if we have valid person type and citizen id
 		if(!((words[0].equals("infetado") || words[0].equals("nao-infetado")) && words[1].matches("[0-9]+")))
-			return false;
+			throw new IOException("ERROR: Invalid type of person type: "+words[0]);
  
- 		return true;
+ 		return;
 	}
 	
 	@Override
 	public String getHelp()
 	{
-		return "sniffer_command - to test sniffer client.";
+		return "report - sends a sniffer report to server\n"+
+		"Arguments syntax: infectedState,citizenID,Timestamp of entrance,Timestamp of leaving";
 	}
 	
 	@Override
 	public String execute(String [] args) throws IOException, StatusRuntimeException {	
-		
-		// buffer of messages to send
-		ArrayList<String[]> buffer = new ArrayList<>();
  
 		//variables
-		String [] words;
+		String [] words = args;
 		ReportRequest obs;
 		Timestamp entryTimestamp;
 		Timestamp leaveTimestamp;
 	    Date entryDate;
 	    Date leaveDate;
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Integer counter = 0;
 		
-		// main cycle
-		for ( String input: args ) {
-			
-			// check if we are reading a comment
-			if ( input.charAt(0) == '#' ) 
-				continue;
- 
-			// split input by function name and args
-			words = input.split(",");
- 
-			//Removing the whitespaces in the beginning and end of the words
-			for(int i = 0; i < words.length; i++)
-				words[i] = words[i].trim();
- 
-			//check if is to sleep
-			if(words.length == 2)
-			{
-				if(words[1].matches("[0-9]+"))
-				{
-					try
-					{
-						
-						int seconds = Integer.parseInt(words[1]);
-						//for testing only
-						System.out.println("Sleeping for " + seconds + "seconds.");
-						Thread.sleep(seconds);
-					} catch(Exception te)
-					{
-						return "ERROR: thread sleep exception";
-					}
-				}
-				else
-					return "ERROR: Invalid Input!";
-			}
-			
-			//check if valid observation
-			if(errorChecking(words) == false)
-			{
-				return "ERROR: Invalid Input!";
-			}
-			
-			//if everything is ok
-			buffer.add(words);
-         
-		} // end of main cycle
 		
-		for ( String[] observation : buffer ) {
-			// build google Timestamp
-			try {
-		        // create Date objects
-	        	entryDate = format.parse( observation[2] );
-	        	leaveDate = format.parse( observation[3] );
-				
-	        	// adapt to Timestamp objects
-	        	entryTimestamp = Timestamp.newBuilder().setSeconds( entryDate.getTime()/1000L ).buildPartial();
-	          	leaveTimestamp = Timestamp.newBuilder().setSeconds( leaveDate.getTime()/1000L ).buildPartial();
-	        	
-				// build observation object
-				obs = ReportRequest.newBuilder().setSnifferName(_snifferName).setType( observation[0].equals("infetado") ? PersonType.INFECTED : PersonType.NOT_INFECTED).
-						setCitizenId( Integer.parseInt(observation[1]) ).setEnterTime( entryTimestamp  ).setLeaveTime( leaveTimestamp ).
-						build();
-				
-				// send report
-				_fe.report(obs);
-			}
-			catch (Exception exp) {
-				return "ERROR: while building dates in observation.";
-			}
+		//Removing the whitespaces in the beginning and end of the words
+		for(int i = 0; i < words.length; i++)
+		words[i] = words[i].trim();
+	
+		//check if valid observation
+		// if not, it will throw IOException
+		errorChecking(words);
+
+		// build google Timestamp
+		try {
+			String[] observation = words;
+	        // create Date objects
+	       	entryDate = format.parse( observation[2] );
+	       	leaveDate = format.parse( observation[3] );
+			
+	       	// adapt to Timestamp objects
+	       	entryTimestamp = Timestamp.newBuilder().setSeconds( entryDate.getTime()/1000L ).buildPartial();
+	     	leaveTimestamp = Timestamp.newBuilder().setSeconds( leaveDate.getTime()/1000L ).buildPartial();
+	       	
+			// build observation object
+			obs = ReportRequest.newBuilder().setSnifferName(_snifferName).setType( observation[0].equals("infetado") ? PersonType.INFECTED : PersonType.NOT_INFECTED).
+				setCitizenId( Integer.parseInt(observation[1]) ).setEnterTime( entryTimestamp  ).setLeaveTime( leaveTimestamp ).
+				build();
+		} catch (Exception exp) {
+			throw new IOException("ERROR: while building dates: "+exp.getMessage());
 		}
+
+		// send report
+		_fe.report(obs); // returns exception if error occurs
+		return "Report successful";
+
+	}
+}
+
+// snifferJoin command
+class SnifferJoinCommand extends Command {
+	public SnifferJoinCommand(DgsFrontend fe) {
+		super("sniffer_join", 2, 2, fe);
+	}
+
+	@Override
+	public String getHelp() {
+		return "sniffer_join - Registers a sniffer, receives a name and address";
+	}
+
+	@Override
+	public String execute(String[] args)  throws IOException, StatusRuntimeException {
+		String name = args[0];
+		String addr = args[1];
+		// returns exception if problem occurs
+		_fe.snifferJoin(SnifferJoinRequest.newBuilder().setName(name).setAddress(addr).build());
+		return "SnifferJoin successful";
+	}
 }
