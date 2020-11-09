@@ -16,12 +16,29 @@ public class DgsFrontend implements AutoCloseable{
 		stub = DgsServiceGrpc.newBlockingStub(channel);
 	}
 
+	/* CONTROL OPERATIONS */
+
+	// Ping server, receive state info
 	public PingResponse ctrlPing(PingRequest request) {
 		return stub.ctrlPing(request);
 	}
-	
+	// Clear the server
+	public ClearResponse ctrlClear(ClearRequest request)
+	{
+		return stub.ctrlClear(request);
+	}	
+	// Init the server with predefined configs
+	public InitResponse ctrlInit(InitRequest request) {
+		return stub.ctrlInit(request);
+	}
+
+	/* SYSTEM OPERATIONS */
 	public SnifferJoinResponse snifferJoin( SnifferJoinRequest request ) {
 		return stub.snifferJoin( request );
+	}
+
+	public SnifferInfoResponse snifferInfo (SnifferInfoRequest request) {
+		return stub.snifferInfo( request );
 	}
 	
 	public ReportResponse report(ReportRequest request)
@@ -39,12 +56,6 @@ public class DgsFrontend implements AutoCloseable{
 			AggregateInfectionProbabilityRequest request)
 	{
 		return stub.aggregateInfectionProbability(request);
-	}
-	
-	//Clear the server
-	public ClearResponse ctrlClear(ClearRequest request)
-	{
-		return stub.ctrlClear(request);
 	}
 	
 	@Override

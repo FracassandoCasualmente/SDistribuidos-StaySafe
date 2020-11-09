@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import java.lang.RuntimeException;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
 import pt.tecnico.staysafe.dgs.grpc.*;
-import pt.tecnico.staysafe.dgs.client.DgsFrontend;
+import io.grpc.StatusRuntimeException;
 
 import com.google.protobuf.Timestamp;
 
@@ -38,6 +40,17 @@ public abstract class DgsAbstractClient {
 		else if(client.equals("researcher"))
 		{
 			_commands.add(new SingleProbCommand(_frontend));
+			_commands.add(new MeanDevCommand(_frontend));
+			_commands.add(new PercentilesCommand(_frontend));
+		}
+		else if (client.equals("DgsClient")) {
+			_commands.add(new SingleProbCommand(_frontend));
+			_commands.add(new MeanDevCommand(_frontend));
+			_commands.add(new PercentilesCommand(_frontend));
+			_commands.add(new SnifferInfoCommand(_frontend));
+		}
+		else {
+			throw new RuntimeException("Unknown type of client: "+client);
 		}
 		
 		_commands.add(new PingCommand(_frontend));
@@ -95,7 +108,12 @@ public abstract class DgsAbstractClient {
 				} catch (IOException e) {
 					System.out.println("Invalid Input arguments!\n"+e.getMessage());
 					continue;
+				} catch (StatusRuntimeException sre) {
+					System.out.println("Error:\n"+
+					sre.getStatus().getDescription());
+					continue;
 				}
+				
 				// print the result of the command
 				System.out.println(result);
 				
@@ -105,8 +123,8 @@ public abstract class DgsAbstractClient {
 		} // close try
 		// EOF found, close
 		catch ( NoSuchElementException nsee ) {
-			// found EOF! end of cycle
-			System.exit(0);
+			// found EOF! end of program
+			debug("Found EOF, time to stop running.");
 		}
 		
 		//If can't reach the server
@@ -185,51 +203,18 @@ class HelpCommand extends Command{
 	}
 }
 
-class SingleProbCommand extends Command{
-	public SingleProbCommand(DgsFrontend fe) {
-		super("single_prob", 1, Integer.MAX_VALUE, fe);
-	}
-	@Override
-	public String getHelp() {
-		return "Receives 1 or more Citizen ID's and returns their individual infection probability";
-	}
-
-	@Override
-	public String execute(String[] args) throws IOException{
-		// parse args
-		Long citizenId;
-		IndividualInfectionProbabilityRequest request;
-		Double response;
-		String res = "";
-		
-		for (String s : args) {
-			try {
-				citizenId = Long.valueOf( s );
-			} catch (NumberFormatException e) { // if not convertable to long
-				throw new IOException("\""+s+"\" not convertable to Long!");
-			}
-			// valid id, request his individual prob
-			request = IndividualInfectionProbabilityRequest.newBuilder().
-			 setCitizenId(citizenId).build();
-			response = _fe.individualInfectionProbability(request).getProbability();
-			res += response.toString() + "\n";
-		}
-		return res;
-	}
-}
-
 //ping
 class PingCommand extends Command
 {
 	public PingCommand(DgsFrontend fe)
 	{
-		super("ping", 0, 0, fe);
+		super("ctrl_ping", 0, 0, fe);
 	}
 	
 	@Override
 	public String getHelp()
 	{
-		return "ping - Checks if the server is up and running";
+		return "ctrl_ping - Checks if the server is up and running";
 	}
 	
 	@Override
@@ -252,7 +237,7 @@ class MeanDevCommand extends Command
 	@Override
 	public String getHelp()
 	{
-		return "mean_dev - returns the mean and standard deviation of the probabilities of any person that's not declared infected be actually infected.";
+		return "mean_dev - Returns the mean and standard deviation of the probabilities of any person that's not declared infected be actually infected.";
 	}
 	
 	@Override
@@ -275,7 +260,7 @@ class PercentilesCommand extends Command
 	@Override
 	public String getHelp()
 	{
-		return "percentiles - returns the percentile-50, percentile-25 and percentile-75 of the probabilites of any person not declared infected be actually infected.";
+		return "percentiles - Returns the percentile-50, percentile-25 and percentile-75 of the probabilites of any person not declared infected be actually infected.";
 	}
 	
 	@Override
@@ -292,13 +277,13 @@ class ClearCommand extends Command
 {
 	public ClearCommand(DgsFrontend fe)
 	{
-		super("clear",0,0,fe);
+		super("ctrl_clear",0,0,fe);
 	}
 	
 	@Override
 	public String getHelp()
 	{
-		return "clear - clears the server state.";
+		return "ctrl_clear - Clears the server state.";
 	}
 	
 	@Override
@@ -307,5 +292,85 @@ class ClearCommand extends Command
 		ClearRequest clearRequest = ClearRequest.getDefaultInstance();
 		ClearResponse clearResponse = _fe.ctrlClear(clearRequest);
 		return clearResponse.getResult();
+	}
+}
+
+// ctrl init
+class InitCommand extends Command {
+
+	public InitCommand(DgsFrontend fe)
+	{
+		super("ctrl_init", 0, 0, fe);
+	}
+	
+	@Override
+	public String getHelp()
+	{
+		return "ctrl_init - Initializes server to predefined state";
+	}
+	
+	@Override
+	public String execute(String [] args) throws IOException
+	{
+	    InitRequest initRequest = InitRequest.getDefaultInstance();
+	    InitResponse initResponse = _fe.ctrlInit(initRequest);
+		return "ctrlInit executed";
+	}
+}
+
+// single_prob
+class SingleProbCommand extends Command{
+	public SingleProbCommand(DgsFrontend fe) {
+		super("single_prob", 1, Integer.MAX_VALUE, fe);
+	}
+	@Override
+	public String getHelp() {
+		return "single_prob - Receives 1 or more Citizen ID's and returns their individual infection probability";
+	}
+
+	@Override
+	public String execute(String[] args) throws IOException{
+		// parse args
+		Long citizenId;
+		IndividualInfectionProbabilityRequest request;
+		Double response;
+		String res = "";
+		
+		for (String s : args) {
+			try {
+				citizenId = Long.valueOf( s );
+			} catch (NumberFormatException e) { // if not convertable to long
+				throw new IOException("\""+s+"\" not convertable to Long!");
+			}
+			// valid id, request his individual prob
+			request = IndividualInfectionProbabilityRequest.newBuilder().
+			 setCitizenId(citizenId).build();
+			response = _fe.individualInfectionProbability(request).getProbability();
+			res += response.toString() + "\n";
+		}
+		return res.substring(0, res.length() - 2); // remove last \n
+	}
+}
+
+
+// sniffer info command
+class SnifferInfoCommand extends Command {
+
+	public SnifferInfoCommand(DgsFrontend fe)
+	{
+		super("sniffer_info", 1, 1, fe);
+	}
+	
+	@Override
+	public String getHelp()
+	{
+		return "sniffer_info - Receives a sniffer name and returns it's address.";
+	}
+	
+	@Override
+	public String execute(String [] args) throws IOException {		
+	    SnifferInfoRequest request = SnifferInfoRequest.newBuilder().setName(args[0]).build();
+	    SnifferInfoResponse response = _fe.snifferInfo( request );
+		return response.getAddress();
 	}
 }
