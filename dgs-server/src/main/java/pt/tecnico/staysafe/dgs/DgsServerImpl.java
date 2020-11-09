@@ -18,9 +18,18 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	@Override
 	public void ctrlPing(PingRequest request, StreamObserver<PingResponse> responseObserver)
 	{
-		String output = "Dgs server state\n" + dgsSystem.observationsToString();
+		String output = "Server State: UP";
 		PingResponse response = PingResponse.newBuilder().setResult(output).build();
 		dgsSystem.debugObservations(); // TESTE
+		responseObserver.onNext(response);
+		responseObserver.onCompleted();
+	}
+	
+	@Override
+	public void ctrlClear(ClearRequest request, StreamObserver<ClearResponse> responseObserver)
+	{
+		String output = dgsSystem.clear();
+		ClearResponse response = ClearResponse.newBuilder().setResult(output).build();
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
 	}

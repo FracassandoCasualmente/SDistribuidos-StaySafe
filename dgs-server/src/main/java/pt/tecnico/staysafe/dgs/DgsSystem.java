@@ -307,6 +307,17 @@ public class DgsSystem
 		
 		
 	}
+	
+	//Clears the server state
+	public String clear()
+	{
+		_sniffers = new HashMap<String,String>();
+		_obs = new ArrayList<Observation>();
+		_citizenSearch = new HashMap<Long,ArrayList<Observation>>();
+		_snifferSearch = new HashMap<String, ArrayList<Observation>>();
+		
+		return "Server cleared with success!";
+	}
 
 
 }
