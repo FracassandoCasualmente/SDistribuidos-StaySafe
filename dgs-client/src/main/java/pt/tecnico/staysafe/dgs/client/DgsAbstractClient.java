@@ -171,7 +171,7 @@ abstract class Command {
 	abstract public String getHelp();
 
 	// executes the command and returns result
-	abstract public String execute(String[] args) throws IOException;
+	abstract public String execute(String[] args) throws IOException, StatusRuntimeException;
 }
 
 //help
@@ -190,7 +190,7 @@ class HelpCommand extends Command{
 	}
 
 	@Override
-	public String execute(String[] args) throws IOException{
+	public String execute(String[] args) throws IOException, StatusRuntimeException{
 
 		String commandList = "\nCOMMANDS\n--------\n";
 		
@@ -218,7 +218,7 @@ class PingCommand extends Command
 	}
 	
 	@Override
-	public String execute(String [] args) throws IOException
+	public String execute(String [] args) throws IOException, StatusRuntimeException
 	{
 	    PingRequest pingRequest = PingRequest.getDefaultInstance();
 	    PingResponse pingResponse = _fe.ctrlPing(pingRequest);
@@ -241,7 +241,7 @@ class MeanDevCommand extends Command
 	}
 	
 	@Override
-	public String execute(String [] args)
+	public String execute(String [] args) throws IOException, StatusRuntimeException
 	{
 		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.MEAN_DEV).build();
 		AggregateInfectionProbabilityResponse aipResponse = _fe.aggregateInfectionProbability(aipRequest);
@@ -264,7 +264,7 @@ class PercentilesCommand extends Command
 	}
 	
 	@Override
-	public String execute(String [] args)
+	public String execute(String [] args) throws IOException, StatusRuntimeException
 	{
 		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.PERCENTILES).build();
 		AggregateInfectionProbabilityResponse aipResponse = _fe.aggregateInfectionProbability(aipRequest);
@@ -287,7 +287,7 @@ class ClearCommand extends Command
 	}
 	
 	@Override
-	public String execute(String [] args)
+	public String execute(String [] args) throws IOException, StatusRuntimeException
 	{
 		ClearRequest clearRequest = ClearRequest.getDefaultInstance();
 		ClearResponse clearResponse = _fe.ctrlClear(clearRequest);
@@ -310,7 +310,7 @@ class InitCommand extends Command {
 	}
 	
 	@Override
-	public String execute(String [] args) throws IOException
+	public String execute(String [] args) throws IOException, StatusRuntimeException
 	{
 	    InitRequest initRequest = InitRequest.getDefaultInstance();
 	    InitResponse initResponse = _fe.ctrlInit(initRequest);
@@ -329,7 +329,7 @@ class SingleProbCommand extends Command{
 	}
 
 	@Override
-	public String execute(String[] args) throws IOException{
+	public String execute(String[] args) throws IOException, StatusRuntimeException {
 		// parse args
 		Long citizenId;
 		IndividualInfectionProbabilityRequest request;
@@ -368,7 +368,7 @@ class SnifferInfoCommand extends Command {
 	}
 	
 	@Override
-	public String execute(String [] args) throws IOException {		
+	public String execute(String [] args) throws IOException, StatusRuntimeException {		
 	    SnifferInfoRequest request = SnifferInfoRequest.newBuilder().setName(args[0]).build();
 	    SnifferInfoResponse response = _fe.snifferInfo( request );
 		return response.getAddress();
