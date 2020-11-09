@@ -22,6 +22,29 @@ public abstract class DgsAbstractClient {
 	protected DgsFrontend _frontend;
 	protected Boolean _debug = false; // true if wants to print debugs
 	protected ArrayList<Command> _commands;
+	
+	//client is to select the appropriate commands for the respective client
+	public DgsAbstractClient(String host, int port, String client)
+	{
+		_commands = new ArrayList<>();
+		_frontend = new DgsFrontend(host,port);
+		
+		if(client.equals("journalist"))
+		{
+			_commands.add(new MeanDevCommand(_frontend));
+			_commands.add(new PercentilesCommand(_frontend));
+		}
+		
+		else if(client.equals("researcher"))
+		{
+			_commands.add(new SingleProbCommand(_frontend));
+		}
+		
+		_commands.add(new PingCommand(_frontend));
+		_commands.add(new HelpCommand(_frontend,_commands));
+		_commands.add(new ClearCommand(_frontend));
+
+	}
 
 	// read input until blank line or EOF and execute accordingly
 	public final void run() {
@@ -58,16 +81,17 @@ public abstract class DgsAbstractClient {
 				}
 
 				// verify if number of arguments is right
-				if ( cmdCalled.getArgsNumMin() >= (words.length -1) ||
-				  cmdCalled.getArgsNumMax() <= (words.length -1) ) {
+				if ( cmdCalled.getArgsNumMin() > (words.length-1) ||
+				  cmdCalled.getArgsNumMax() < (words.length-1) ) {
 					System.out.println(
-					"Wrong number of args: "+ String.valueOf( words.length-1 )+"\n"+
+					"Wrong number of args: "+ String.valueOf( words.length )+"\n"+
 					"Expected: "+cmdCalled.getArgsNumMin()+" - "+cmdCalled.getArgsNumMax());
+					continue;
 				}
 				//parse and execute input args
 				String result;
 				try {
-					result = cmdCalled.execute(words[1].split(","));
+					result = cmdCalled.execute(words[words.length > 1 ? 1:0].split(","));
 				} catch (IOException e) {
 					System.out.println("Invalid Input arguments!\n"+e.getMessage());
 					continue;
@@ -84,9 +108,10 @@ public abstract class DgsAbstractClient {
 			// found EOF! end of cycle
 			System.exit(0);
 		}
+		
+		//If can't reach the server
 		catch ( Exception e) {
-			System.out.println("Unexpected exception occurred: "+e.getMessage());
-			System.exit(-1);
+			System.out.println("ERROR: Server Unreachable.");
 		}
 		finally {
 			scanner.close();
@@ -97,6 +122,12 @@ public abstract class DgsAbstractClient {
 		if (_debug) {
 			System.out.println(debugMessage);
 		}
+	}
+	
+	//closes the connection
+	public void close()
+	{
+		_frontend.close();
 	}
 	
 }
@@ -125,39 +156,32 @@ abstract class Command {
 	abstract public String execute(String[] args) throws IOException;
 }
 
+//help
 class HelpCommand extends Command{
 	List<Command> _availableCmds;
 
 	public HelpCommand(DgsFrontend fe, List<Command> availableCmds) {
-		super("help", 0, 1, fe);
+		super("help", 0, 0, fe);
 		_availableCmds = availableCmds;
 	}
 
 	@Override
 	public String getHelp() {
-		String res = "--Available Commands--";
-		for ( Command cmd : _availableCmds ) {
-			res += "\n"+cmd.getName();
-		}
-		return res;
+		
+		return "help - Shows the available commands and the respective arguments";
 	}
 
 	@Override
 	public String execute(String[] args) throws IOException{
-		// does the requested command exist?
-		Boolean cmdExists = false;
-		Command foundCmd = null;
-		for (Command cmd : _availableCmds) {
-			if ( cmd.getName().equals(args[0]) ) {
-				cmdExists = true;
-				foundCmd = cmd;
-				break;
-			}
+
+		String commandList = "\nCOMMANDS\n--------\n";
+		
+		for(Command cmd: _availableCmds)
+		{
+			commandList += cmd.getHelp() + "\n";
 		}
-		if (!cmdExists) {
-			throw new IOException("Command \""+args[0]+"\" does not exist");
-		}
-		return foundCmd.getHelp();
+		
+		return commandList;
 	}
 }
 
@@ -177,6 +201,7 @@ class SingleProbCommand extends Command{
 		IndividualInfectionProbabilityRequest request;
 		Double response;
 		String res = "";
+		
 		for (String s : args) {
 			try {
 				citizenId = Long.valueOf( s );
@@ -193,3 +218,94 @@ class SingleProbCommand extends Command{
 	}
 }
 
+//ping
+class PingCommand extends Command
+{
+	public PingCommand(DgsFrontend fe)
+	{
+		super("ping", 0, 0, fe);
+	}
+	
+	@Override
+	public String getHelp()
+	{
+		return "ping - Checks if the server is up and running";
+	}
+	
+	@Override
+	public String execute(String [] args) throws IOException
+	{
+	    PingRequest pingRequest = PingRequest.getDefaultInstance();
+	    PingResponse pingResponse = _fe.ctrlPing(pingRequest);
+		return pingResponse.getResult();
+	}
+}
+
+//mean_dev
+class MeanDevCommand extends Command
+{
+	public MeanDevCommand(DgsFrontend fe)
+	{
+		super("mean_dev",0,0,fe);
+	}
+	
+	@Override
+	public String getHelp()
+	{
+		return "mean_dev - returns the mean and standard deviation of the probabilities of any person that's not declared infected be actually infected.";
+	}
+	
+	@Override
+	public String execute(String [] args)
+	{
+		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.MEAN_DEV).build();
+		AggregateInfectionProbabilityResponse aipResponse = _fe.aggregateInfectionProbability(aipRequest);
+		return aipResponse.getResult();
+	}
+}
+
+//percentiles
+class PercentilesCommand extends Command
+{
+	public PercentilesCommand(DgsFrontend fe)
+	{
+		super("percentiles",0,0,fe);
+	}
+	
+	@Override
+	public String getHelp()
+	{
+		return "percentiles - returns the percentile-50, percentile-25 and percentile-75 of the probabilites of any person not declared infected be actually infected.";
+	}
+	
+	@Override
+	public String execute(String [] args)
+	{
+		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.PERCENTILES).build();
+		AggregateInfectionProbabilityResponse aipResponse = _fe.aggregateInfectionProbability(aipRequest);
+		return aipResponse.getResult();
+	}
+}
+
+//clear
+class ClearCommand extends Command
+{
+	public ClearCommand(DgsFrontend fe)
+	{
+		super("clear",0,0,fe);
+	}
+	
+	@Override
+	public String getHelp()
+	{
+		return "clear - clears the server state.";
+	}
+	
+	@Override
+	public String execute(String [] args)
+	{
+		ClearRequest clearRequest = ClearRequest.getDefaultInstance();
+		ClearResponse clearResponse = _fe.ctrlClear(clearRequest);
+		return clearResponse.getResult();
+	}
+}

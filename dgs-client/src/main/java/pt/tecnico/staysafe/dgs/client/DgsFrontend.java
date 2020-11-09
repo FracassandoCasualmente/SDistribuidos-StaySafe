@@ -41,6 +41,12 @@ public class DgsFrontend implements AutoCloseable{
 		return stub.aggregateInfectionProbability(request);
 	}
 	
+	//Clear the server
+	public ClearResponse ctrlClear(ClearRequest request)
+	{
+		return stub.ctrlClear(request);
+	}
+	
 	@Override
 	public final void close() {
 		channel.shutdown();
