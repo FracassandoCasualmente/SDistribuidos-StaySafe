@@ -119,7 +119,6 @@ public class DgsSystem
 		if ( !_sniffers.containsKey(newObs.getSnifferName()) ) {
 			// the sniffer doesnt exist :(
 			throw new SnifferDoesNotExistException(newObs.getSnifferName());
-			return false;
 		}
 		// the sniffer exists, lets add his observation
 		_obs.add(newObs);
@@ -236,7 +235,12 @@ public class DgsSystem
 		//calculate the mean probability of group infection
 		for(long citizen_id: _citizenSearch.keySet())
 		{
-			mean += individualInfectionProbability(citizen_id);
+			try {
+				mean += individualInfectionProbability(citizen_id);
+			} catch (CitizenDoesNotExistException e) {
+				System.out.println("ERROR on aggregate prob: "+e.getMessage());
+				count--;
+			}
 			count++;
 		}
 		//ensure we don't divide by zero
@@ -245,8 +249,12 @@ public class DgsSystem
 		//calculate the dev of group infection
 		for(long citizen_id: _citizenSearch.keySet())
 		{
-			//(xi - mean)^2
-			dev += Math.pow(individualInfectionProbability(citizen_id)-mean,2);
+			try {
+				//(xi - mean)^2
+				dev += Math.pow(individualInfectionProbability(citizen_id)-mean,2);
+			} catch (CitizenDoesNotExistException e) {
+				System.out.println("ERROR on aggregate prob: "+e.getMessage());
+			}
 		}
 		
 		//ensure we dont divide by zero
@@ -264,7 +272,11 @@ public class DgsSystem
 		
 		for(long citizen_id: _citizenSearch.keySet())
 		{
-			prob.add(individualInfectionProbability(citizen_id));
+			try {
+				prob.add(individualInfectionProbability(citizen_id));
+			} catch (CitizenDoesNotExistException e) {
+				System.out.println("ERROR on aggregate prob: "+e.getMessage());
+			}
 		}
 		//sort the probabilities
 		Collections.sort(prob);

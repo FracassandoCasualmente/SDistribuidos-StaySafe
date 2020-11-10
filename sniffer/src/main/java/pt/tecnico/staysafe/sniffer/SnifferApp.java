@@ -117,6 +117,7 @@ public class SnifferApp {
 								
 								// send report
 								frontend.report(obs);
+								System.out.println("Report successful");
 							}
 							catch (Exception exp) {
 								System.out.println("ERROR: while building dates in observation ("

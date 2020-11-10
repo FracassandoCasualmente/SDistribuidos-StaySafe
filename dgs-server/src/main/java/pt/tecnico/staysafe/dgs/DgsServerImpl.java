@@ -126,14 +126,6 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 			}
 			
 		}
-		if ( errorHappened ) {
-			// return error
-			
-			debug("Error adding report! Sniffer not found!");
-		}
-		else {
-			debug("report added with success");
-		}
 			
 		ReportResponse response = ReportResponse.getDefaultInstance();
 		responseObserver.onNext(response);
@@ -147,7 +139,8 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	 IndividualInfectionProbabilityRequest request,
 	 StreamObserver<IndividualInfectionProbabilityResponse> 
 	 responseObserver) {
-		Double probability = -1D;
+
+		Double probability = new Double(-1);
 		synchronized (this) {
 			// calculate probability
 			try {
@@ -155,7 +148,7 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 					request.getCitizenId() );
 			} catch (CitizenDoesNotExistException e) {
 				responseObserver.onError(INVALID_ARGUMENT.withDescription(
-					e.getMessage()).asRuntimeException())
+					e.getMessage()).asRuntimeException());
 			}
 		}			
 
