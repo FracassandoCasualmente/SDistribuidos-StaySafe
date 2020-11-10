@@ -26,9 +26,17 @@ public class DgsSystem
 	//The observations structure
 	private ArrayList<Observation> _obs;
 	
-  //Structures to facilitate the process of search
+  	//Structures to facilitate the process of search
 	private HashMap<Long, ArrayList<Observation>> _citizenSearch;
-  private HashMap<String, ArrayList<Observation>> _snifferSearch;
+	private HashMap<String, ArrayList<Observation>> _snifferSearch;
+	  
+	private final Boolean _DEBUG = false;
+
+	private void debug(String msg) {
+		if (_DEBUG) {
+			System.out.println(msg);
+		}
+	}
 	
 	public DgsSystem()
 	{
@@ -72,14 +80,14 @@ public class DgsSystem
 	* @param Name of the new sniffer
 	* @return nothing
 	*/
-	public synchronized void joinSniffer(String newName, String newAddr) throws SnifferAlreadyRegisteredException {
+	public void joinSniffer(String newName, String newAddr) throws SnifferAlreadyRegisteredException {
 		// points to address of the sniffer with same name
 		String conflictingSnifferAddr = _sniffers.get(newName);
 				
 		if ( conflictingSnifferAddr != null ) {
 			// if conflictingSniffer has different address
 			if ( !conflictingSnifferAddr.equals(newAddr) ) {
-				System.out.print("Sniffer already exists! The address is " + conflictingSnifferAddr);
+				debug("Sniffer already exists! The address is " + conflictingSnifferAddr);
 
 				throw new SnifferAlreadyRegisteredException(newName, conflictingSnifferAddr,newAddr);
 			}
@@ -107,9 +115,10 @@ public class DgsSystem
 	* @return true if success (the sniffer exists),
 	 false otherwise
 	*/
-	public Boolean addReport(Observation newObs) {
+	public Boolean addReport(Observation newObs) throws SnifferDoesNotExistException{
 		if ( !_sniffers.containsKey(newObs.getSnifferName()) ) {
 			// the sniffer doesnt exist :(
+			throw new SnifferDoesNotExistException(newObs.getSnifferName());
 			return false;
 		}
 		// the sniffer exists, lets add his observation
@@ -130,9 +139,8 @@ public class DgsSystem
     	auxList = _citizenSearch.get( newObs.getCitizenId() ); // list with observations that contain this guy's name
 		auxList.add( newObs );
 		
-		/* TESTE */
 		if ( newObs == null) {
-			System.out.println("addReport: É NULL!!! ");
+			debug("addReport: newObs is NULL! ");
 		}
 		return true;
 	}
@@ -140,14 +148,14 @@ public class DgsSystem
 	* @param target citizen's id
 	* @return probability of being infected with corona-bixo
 	*/
-	public Double individualInfectionProbability(long citizenId) {
+	public Double individualInfectionProbability(long citizenId) throws CitizenDoesNotExistException{
 		
 		Long maxTimeTogether = 0L;
 		
-		//TODO has to throw exception if the citizen doesn't exist
-		if(_citizenSearch.get(citizenId) == null )
-			return 0.0;
-		
+		//throws exception if the citizen doesn't exist
+		if(_citizenSearch.get(citizenId) == null ) {
+			throw new CitizenDoesNotExistException(citizenId);
+		}
     	// find all places where citizen was
 		for (Observation obs : _citizenSearch.get( citizenId ) ) {
 			
@@ -304,7 +312,7 @@ public class DgsSystem
 	  }
 	}
 
-	// TESTE debug the observations
+	// debug the observations
 	public void debugObservations() {
 		System.out.println("Let's debug the List");
 		for ( Observation obs : _obs ) {
@@ -381,7 +389,7 @@ class Observation {
 		return obs;
 	}
 	
-	// TESTE run a debug to detect corrupted input
+	//  run a debug to detect corrupted input
 	// returns a debug message
 	public String debugFields() {
 		System.out.println("snifferName = "+"\""+_snifferName+"\"");

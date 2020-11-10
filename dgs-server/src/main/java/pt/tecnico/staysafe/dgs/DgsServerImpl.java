@@ -38,7 +38,10 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	@Override
 	public void ctrlClear(ClearRequest request, StreamObserver<ClearResponse> responseObserver)
 	{
-		String output = dgsSystem.clear();
+		String output = "";
+		synchronized (this) {
+			output = dgsSystem.clear();
+		}
 		ClearResponse response = ClearResponse.newBuilder().setResult(output).build();
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
@@ -48,7 +51,9 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	@Override
 	public void ctrlInit(InitRequest request, StreamObserver<InitResponse> responseObserver)
 	{
-		dgsSystem.init();
+		synchronized (this) {
+			dgsSystem.init();
+		}
 		InitResponse response = InitResponse.getDefaultInstance();
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
@@ -61,7 +66,9 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	public void snifferJoin(SnifferJoinRequest request, StreamObserver<SnifferJoinResponse> responseObserver) {
 		
 		try {
-			dgsSystem.joinSniffer(request.getName(), request.getAddress());
+			synchronized (this) {
+				dgsSystem.joinSniffer(request.getName(), request.getAddress());
+			}
 			//builds and sends response
 			String result = "OK";
 			SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setResult(result).build();
@@ -80,7 +87,10 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	public void snifferInfo(SnifferInfoRequest request, StreamObserver<SnifferInfoResponse> responseObserver) {
 		
 		try {
-			String result = dgsSystem.snifferInfo(request.getName());
+			String result = "";
+			synchronized (this) {
+				result = dgsSystem.snifferInfo(request.getName());
+			}
 			//sends response
 			SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setAddress(result).build();
 			responseObserver.onNext(response);
@@ -100,16 +110,25 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		// build insertionTime
 		Date insertionDate = java.util.Calendar.getInstance().getTime();
 		Timestamp insertionTimestamp = Timestamp.newBuilder().
-		setSeconds( insertionDate.getTime()/1000L ).
-		buildPartial();
+		 setSeconds( insertionDate.getTime()/1000L ).
+		 buildPartial();
 		// build new Observation instance
 		Observation newObs = new Observation(request.getSnifferName(),insertionTimestamp,
 				request.getType(),request.getCitizenId(),request.getEnterTime(),request.getLeaveTime());
 		
-		if ( !dgsSystem.addReport(newObs) ) {
+		
+		synchronized (this) {
+			try {
+				dgsSystem.addReport(newObs);
+			} catch (SnifferDoesNotExistException e) {
+				responseObserver.onError(INVALID_ARGUMENT.
+				withDescription(e.getMessage()).asRuntimeException());
+			}
+			
+		}
+		if ( errorHappened ) {
 			// return error
-			responseObserver.onError(INVALID_ARGUMENT.withDescription("ERROR:\n"+
-			"Specified sniffer \""+request.getSnifferName()+"\" does not exist").asRuntimeException());
+			
 			debug("Error adding report! Sniffer not found!");
 		}
 		else {
@@ -128,11 +147,17 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	 IndividualInfectionProbabilityRequest request,
 	 StreamObserver<IndividualInfectionProbabilityResponse> 
 	 responseObserver) {
-		
-		// calculate probability
-		Double probability = dgsSystem.individualInfectionProbability(
-			request.getCitizenId() );
-			
+		Double probability = -1D;
+		synchronized (this) {
+			// calculate probability
+			try {
+				probability = dgsSystem.individualInfectionProbability(
+					request.getCitizenId() );
+			} catch (CitizenDoesNotExistException e) {
+				responseObserver.onError(INVALID_ARGUMENT.withDescription(
+					e.getMessage()).asRuntimeException())
+			}
+		}			
 
 		// build response object
 		IndividualInfectionProbabilityResponse response = 
@@ -149,9 +174,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	public void aggregateInfectionProbability(AggregateInfectionProbabilityRequest request,
 			StreamObserver<AggregateInfectionProbabilityResponse> responseObserver)
 	{
-		//calculate probability
-		String probability = dgsSystem.aggregateInfectionProbability(request.getStatistic());
-		
+		String probability = "";
+		synchronized (this) {
+			//calculate probability
+			probability = dgsSystem.aggregateInfectionProbability(request.getStatistic());
+		}
+
 		//build response
 		AggregateInfectionProbabilityResponse response = AggregateInfectionProbabilityResponse.
 				newBuilder().setResult(probability).build();

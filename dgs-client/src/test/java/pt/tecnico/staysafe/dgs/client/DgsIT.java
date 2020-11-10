@@ -2,6 +2,9 @@ package pt.tecnico.staysafe.dgs.client;
 
 import org.junit.jupiter.api.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class DgsIT extends BaseIT {
 	
 	// static members
@@ -41,5 +44,18 @@ public class DgsIT extends BaseIT {
 		
 		
 	}
+
+	@Test
+	public void testPing() {
+		
+		assertEquals("Server State: UP", _dgsClient.executeCommand("ping"));
+	}
+
+	/*
+	@Test
+    public void testGetDefaultGreeting() {
+		//  ( expected, what we are getting)
+        assertEquals("Hello", example.getGreeting());
+    }*/
 
 }
