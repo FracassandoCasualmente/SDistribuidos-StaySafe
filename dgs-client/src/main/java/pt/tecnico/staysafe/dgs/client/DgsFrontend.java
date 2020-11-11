@@ -4,6 +4,8 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import pt.tecnico.staysafe.dgs.grpc.*;
 
+import java.io.IOException;
+
 public class DgsFrontend implements AutoCloseable{
 	private final ManagedChannel channel;
 	private final DgsServiceGrpc.DgsServiceBlockingStub stub;

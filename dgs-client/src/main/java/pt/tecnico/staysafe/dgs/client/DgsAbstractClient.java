@@ -1,23 +1,14 @@
 package pt.tecnico.staysafe.dgs.client;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.Arrays;
 
 import java.lang.RuntimeException;
 import java.io.IOException;
 
-import pt.tecnico.staysafe.dgs.grpc.*;
 import io.grpc.StatusRuntimeException;
-import com.google.protobuf.Timestamp;
-
 
 
 public abstract class DgsAbstractClient {
@@ -96,17 +87,25 @@ public abstract class DgsAbstractClient {
 
 		// debug args
 		Integer i = 0;
-		debug("args length = "+String.valueOf(words.length));
+		debug("args length (with command)= "+String.valueOf(words.length));
 		for (String s : words) {
 			debug("arg["+(i++)+"] = "+s);
 		}
 
+		String[] commandArgs = (words.length != 1) ? words[1].split(",") : new String[0];
+
+		// continue to debug args
+		i = 0;
+		debug("args length (without command)= "+String.valueOf(commandArgs.length));
+		for (String s : commandArgs) {
+			debug("arg["+(i++)+"] = "+s);
+		}
 		// verify if number of arguments is right
-		String[] commandArgs = words[words.length > 1 ? 1:0].split(",");
+		
 		if ( cmdCalled.getArgsNumMin() > (commandArgs.length) ||
 		  cmdCalled.getArgsNumMax() < (commandArgs.length) ) {
 			throw new IOException(
-			"Wrong number of args: "+ String.valueOf( commandArgs.length-1 )+"\n"+
+			"Wrong number of args: "+ String.valueOf( commandArgs.length )+"\n"+
 			"Expected: "+cmdCalled.getArgsNumMin()+" - "+cmdCalled.getArgsNumMax());
 		}
 
@@ -129,6 +128,7 @@ public abstract class DgsAbstractClient {
 		// no exception, the input is generally fine
 
 		// we know the command exists because of parseInput()
+		// lets get our command instance
 		Command cmdCalled = null;
 		for (Command c : _commands ) {
 			if ( c.getName().equals(words[0]) ) {
@@ -136,17 +136,27 @@ public abstract class DgsAbstractClient {
 				break;
 			}
 		}
+
 		//parse and execute command related args
+		debug("arguments:");
+		debug("command_name= "+words[0]);
+		if (words.length > 1) {
+			debug("command_args= "+words[1]);
+		}
+
+		String[] commandArgs = (words.length != 1) ? words[1].split(",") : new String[0];
+		String[] cmdArgs = commandArgs;
 		String result;
-		debug("runCommand(): going to ternary");
+
+		debug("going to execute");
 		try {
-			
-			result = cmdCalled.execute(words[words.length > 1 ? 1:0].split(","));
+			result = cmdCalled.execute(cmdArgs);
 		} catch (IOException e) {
 			throw new IOException("Invalid Input arguments!\n"+e.getMessage());
 		} catch (StatusRuntimeException sre) {
-			throw new IOException(sre.getStatus().getDescription());
+			throw new IOException("Error from server: "+sre.getStatus().getDescription());
 		}
+		debug("ended execution");
 		
 		// return the result of the command	
 		return result;

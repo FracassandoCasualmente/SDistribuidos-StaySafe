@@ -12,6 +12,7 @@ public class BaseIT {
 	private static final String TEST_PROP_FILE = "/test.properties";
 	protected static Properties testProps;
 	
+	
 	@BeforeAll
 	public static void oneTimeSetup () throws IOException {
 		testProps = new Properties();
