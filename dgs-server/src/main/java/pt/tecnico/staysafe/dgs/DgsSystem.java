@@ -193,7 +193,6 @@ public class DgsSystem
         
         		Long begin = Math.max( mainET, otherET);
 				Long end = Math.min( mainLT, otherLT );
-				Long res = end - begin;
         		Long timeTogether = end - begin;
         
         		// should we add it?
