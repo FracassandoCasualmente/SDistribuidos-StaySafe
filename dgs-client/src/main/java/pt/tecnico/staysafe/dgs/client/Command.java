@@ -333,7 +333,7 @@ class ReportCommand extends Command {
 // snifferJoin command
 class SnifferJoinCommand extends Command {
 	public SnifferJoinCommand(DgsFrontend fe) {
-		super("sniffer_join", 2, 2, fe);
+		super("sniffer_join", 2, Integer.MAX_VALUE, fe);
 	}
 
 	@Override
@@ -343,8 +343,14 @@ class SnifferJoinCommand extends Command {
 
 	@Override
 	public String execute(String[] args)  throws IOException, StatusRuntimeException {
+		
 		String name = args[0];
 		String addr = args[1];
+		
+		for (String aux : Arrays.copyOfRange(args, 2, args.length)) {
+			addr += " "+aux;
+		}
+
 		// returns exception if problem occurs
 		_fe.snifferJoin(SnifferJoinRequest.newBuilder().setName(name).setAddress(addr).build());
 		return "SnifferJoin successful";

@@ -1,5 +1,6 @@
 /home/miguel/FileHaven/SDis/SDisGit/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/DgsServerApp.java
 /home/miguel/FileHaven/SDis/SDisGit/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/exception/SnifferDoesNotExistException.java
 /home/miguel/FileHaven/SDis/SDisGit/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/DgsServerImpl.java
+/home/miguel/FileHaven/SDis/SDisGit/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/exception/CitizenDoesNotExistException.java
 /home/miguel/FileHaven/SDis/SDisGit/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/DgsSystem.java
 /home/miguel/FileHaven/SDis/SDisGit/dgs-server/src/main/java/pt/tecnico/staysafe/dgs/exception/SnifferAlreadyRegisteredException.java

@@ -70,6 +70,10 @@ public abstract class DgsAbstractClient {
 	private final String[] parseInput(String inputString) throws IOException{
 		// split input by function name and args
 		String[] words = inputString.split(" ");
+
+		if (words.length > 2) {
+			throw new IOException("Inputs may have a maximum of 1 space!");
+		}
      
 		//Removing the whitespaces in the beginning and end of the words
 		for(int i = 0; i < words.length; i++) {
@@ -90,11 +94,19 @@ public abstract class DgsAbstractClient {
 			throw new IOException("Invalid command: "+words[0]);
 		}
 
+		// debug args
+		Integer i = 0;
+		debug("args length = "+String.valueOf(words.length));
+		for (String s : words) {
+			debug("arg["+(i++)+"] = "+s);
+		}
+
 		// verify if number of arguments is right
-		if ( cmdCalled.getArgsNumMin() > (words.length-1) ||
-		  cmdCalled.getArgsNumMax() < (words.length-1) ) {
+		String[] commandArgs = words[words.length > 1 ? 1:0].split(",");
+		if ( cmdCalled.getArgsNumMin() > (commandArgs.length) ||
+		  cmdCalled.getArgsNumMax() < (commandArgs.length) ) {
 			throw new IOException(
-			"Wrong number of args: "+ String.valueOf( words.length )+"\n"+
+			"Wrong number of args: "+ String.valueOf( commandArgs.length-1 )+"\n"+
 			"Expected: "+cmdCalled.getArgsNumMin()+" - "+cmdCalled.getArgsNumMax());
 		}
 
@@ -110,7 +122,9 @@ public abstract class DgsAbstractClient {
 		// parse input generic problems
 		// and process input
 		// throws IOException if any error is detected
+		debug("Entered in runCommand(), going to parse");
 		String[] words = parseInput(input);
+		debug("Parsed successful, continue runCommand()");
 
 		// no exception, the input is generally fine
 
@@ -124,13 +138,14 @@ public abstract class DgsAbstractClient {
 		}
 		//parse and execute command related args
 		String result;
+		debug("runCommand(): going to ternary");
 		try {
+			
 			result = cmdCalled.execute(words[words.length > 1 ? 1:0].split(","));
 		} catch (IOException e) {
 			throw new IOException("Invalid Input arguments!\n"+e.getMessage());
 		} catch (StatusRuntimeException sre) {
-			throw new IOException("Error:\n"+
-			sre.getStatus().getDescription());
+			throw new IOException(sre.getStatus().getDescription());
 		}
 		
 		// return the result of the command	
@@ -172,7 +187,8 @@ public abstract class DgsAbstractClient {
 		
 		//If can't reach the server
 		catch ( Exception e) {
-			System.out.println("ERROR: Server Unreachable.");
+			System.out.println("Unexpected ERROR:\n"+e.getMessage());
+			e.printStackTrace();
 		}
 		finally {
 			scanner.close();

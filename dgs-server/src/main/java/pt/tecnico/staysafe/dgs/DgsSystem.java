@@ -352,8 +352,9 @@ public class DgsSystem
 		return "Server cleared with success!";
 	}
 
-	// Inits server to predefined state (none)
+	// Inits server to predefined state (empty)
 	public void init() {
+		clear();
 		return;
 	}
 
