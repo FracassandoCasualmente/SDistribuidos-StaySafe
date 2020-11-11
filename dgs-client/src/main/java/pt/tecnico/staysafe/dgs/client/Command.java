@@ -14,6 +14,8 @@ import pt.tecnico.staysafe.dgs.grpc.*;
 import io.grpc.StatusRuntimeException;
 import com.google.protobuf.Timestamp;
 
+import pt.tecnico.staysafe.dgs.client.DgsAbstractClient; // use debug
+
 public abstract class Command {
 	protected final String _name;
 	protected final Integer _argsNumMin;
@@ -199,6 +201,7 @@ class SingleProbCommand extends Command{
 		IndividualInfectionProbabilityRequest request;
 		Double response;
 		String res = "";
+		String strDouble = "";
 		
 		for (String s : args) {
 			try {
@@ -210,7 +213,11 @@ class SingleProbCommand extends Command{
 			request = IndividualInfectionProbabilityRequest.newBuilder().
 			 setCitizenId(citizenId).build();
 			response = _fe.individualInfectionProbability(request).getProbability();
-			res += response.toString() + "\n";
+
+			// convert this probability to string
+			DgsAbstractClient.debug("debug prob as double: "+response.toString());
+			strDouble = String.format("%.4f", response).replace(",",".");
+			res += strDouble + "\n";
 		}
 		return res.substring(0, res.length() - 2); // remove last \n
 	}

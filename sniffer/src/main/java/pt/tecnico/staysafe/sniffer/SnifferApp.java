@@ -190,6 +190,7 @@ public class SnifferApp {
 		{
 			//If sniffer already exists
 			System.out.println(e.getStatus().getDescription());
+			frontend.close();
 			System.exit(-1);
 		}
 

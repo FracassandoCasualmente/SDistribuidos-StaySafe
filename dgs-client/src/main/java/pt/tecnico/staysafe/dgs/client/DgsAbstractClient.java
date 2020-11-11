@@ -14,7 +14,7 @@ import io.grpc.StatusRuntimeException;
 public abstract class DgsAbstractClient {
 
 	protected DgsFrontend _frontend;
-	protected Boolean _debug = false; // true if wants to print debugs
+	protected static Boolean _debug = true; // true if wants to print debugs
 	protected ArrayList<Command> _commands;
 	
 	//client is to select the appropriate commands for the respective client
@@ -206,7 +206,7 @@ public abstract class DgsAbstractClient {
 		}
 	}
 
-	protected void debug(String debugMessage) {
+	public static void debug(String debugMessage) {
 		if (_debug) {
 			System.out.println(debugMessage);
 		}

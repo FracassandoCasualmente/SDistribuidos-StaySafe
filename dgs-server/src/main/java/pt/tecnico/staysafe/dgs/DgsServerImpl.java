@@ -11,7 +11,7 @@ import java.util.Date;
 public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	
 	private DgsSystem dgsSystem = new DgsSystem();
-	private Boolean _debug = false;
+	private Boolean _debug = true;
 	
 	private void debug(String msg) {
 		if (_debug) {
