@@ -28,8 +28,8 @@ public class SnifferApp {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
 
 		try {
-			LocalDateTime dateTime = LocalDateTime.parse(words[2], formatter);
-			dateTime = LocalDateTime.parse(words[3], formatter);
+			LocalDateTime.parse(words[2], formatter);
+			LocalDateTime.parse(words[3], formatter);
  		} catch (DateTimeParseException dtpe) {
      		return false;
  		}

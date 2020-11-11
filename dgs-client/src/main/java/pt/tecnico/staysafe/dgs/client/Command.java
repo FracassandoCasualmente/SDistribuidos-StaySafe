@@ -4,14 +4,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.Arrays;
 
-import java.lang.RuntimeException;
 import java.io.IOException;
 
 import pt.tecnico.staysafe.dgs.grpc.*;
@@ -181,7 +177,7 @@ class InitCommand extends Command {
 	public String execute(String [] args) throws IOException, StatusRuntimeException
 	{
 	    InitRequest initRequest = InitRequest.getDefaultInstance();
-	    InitResponse initResponse = _fe.ctrlInit(initRequest);
+	    _fe.ctrlInit(initRequest);
 		return "ctrlInit executed";
 	}
 }

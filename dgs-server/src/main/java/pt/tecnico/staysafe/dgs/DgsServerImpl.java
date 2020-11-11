@@ -28,6 +28,7 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		String output = "Server State: UP";
 		PingResponse response = PingResponse.newBuilder().setResult(output).build();
 		if (_debug) {
+			debug("--Going to debug observations--");
 			dgsSystem.debugObservations(); // debug
 		}
 		responseObserver.onNext(response);
@@ -145,25 +146,26 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	 StreamObserver<IndividualInfectionProbabilityResponse> 
 	 responseObserver) {
 
-		Double probability = new Double(-1);
 		synchronized (this) {
 			// calculate probability
 			try {
-				probability = dgsSystem.individualInfectionProbability(
+				Double probability = dgsSystem.individualInfectionProbability(
 					request.getCitizenId() );
+				// build response object
+				IndividualInfectionProbabilityResponse response = 
+				IndividualInfectionProbabilityResponse.newBuilder().
+				setProbability( probability ).build();
+
+	   			responseObserver.onNext(response);
+				   responseObserver.onCompleted();
+				   
 			} catch (CitizenDoesNotExistException e) {
 				responseObserver.onError(INVALID_ARGUMENT.withDescription(
 					e.getMessage()).asRuntimeException());
 			}
 		}			
 
-		// build response object
-		IndividualInfectionProbabilityResponse response = 
-		 IndividualInfectionProbabilityResponse.newBuilder().
-		 setProbability( probability ).build();
-
-		responseObserver.onNext(response);
-		responseObserver.onCompleted();
+		
 
 	}
 	

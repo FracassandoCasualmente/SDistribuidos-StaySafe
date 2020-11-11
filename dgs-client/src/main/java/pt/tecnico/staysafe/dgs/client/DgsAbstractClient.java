@@ -42,6 +42,7 @@ public abstract class DgsAbstractClient {
 			_commands.add(new SnifferInfoCommand(_frontend));
 			_commands.add(new SnifferJoinCommand(_frontend));
 			// report implemented in DgsClient methods
+			// DEPRECATED, DOESNT WORK IN SHELL (Cause: space inside timestmap)
 			//_commands.add(new ReportCommand(_frontend, SNIFFER_NAME));
 			
 		}

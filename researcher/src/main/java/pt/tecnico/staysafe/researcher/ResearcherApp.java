@@ -1,8 +1,6 @@
 package pt.tecnico.staysafe.researcher;
-import pt.tecnico.staysafe.dgs.grpc.*;
-import pt.tecnico.staysafe.dgs.client.DgsFrontend;
-import pt.tecnico.staysafe.dgs.client.DgsAbstractClient;
 
+import pt.tecnico.staysafe.dgs.client.DgsAbstractClient;
 
 public class ResearcherApp extends DgsAbstractClient{
 

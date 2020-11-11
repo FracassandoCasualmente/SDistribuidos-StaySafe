@@ -12,7 +12,6 @@ import pt.tecnico.staysafe.dgs.grpc.Statistic;
 
 import com.google.protobuf.Timestamp;
 import java.util.Date;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 
@@ -125,7 +124,7 @@ public class DgsSystem
 		_obs.add(newObs);
     
     	/* ADD observation to maps */
-    	List auxList = _snifferSearch.get( newObs.getSnifferName() ); // list with the observations of that sniffer
+    	List<Observation> auxList = _snifferSearch.get( newObs.getSnifferName() ); // list with the observations of that sniffer
     	auxList.add( newObs ); // Add new observation to the list of that sniffer
     
     	// verify if citizen is already registered
@@ -139,9 +138,6 @@ public class DgsSystem
     	auxList = _citizenSearch.get( newObs.getCitizenId() ); // list with observations that contain this guy's name
 		auxList.add( newObs );
 		
-		if ( newObs == null) {
-			debug("addReport: newObs is NULL! ");
-		}
 		return true;
 	}
 	/**  
@@ -194,7 +190,6 @@ public class DgsSystem
         
         		Long begin = Math.max( mainET, otherET);
 				Long end = Math.min( mainLT, otherLT );
-				Long res = end - begin;
         		Long timeTogether = end - begin;
         
         		// should we add it?

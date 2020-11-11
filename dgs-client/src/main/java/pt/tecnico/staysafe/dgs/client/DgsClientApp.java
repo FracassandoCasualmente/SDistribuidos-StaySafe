@@ -1,9 +1,7 @@
 package pt.tecnico.staysafe.dgs.client;
 
-import io.grpc.StatusRuntimeException;
 import java.io.IOException;
-import pt.tecnico.staysafe.dgs.grpc.*;
-
+import io.grpc.StatusRuntimeException;
 
 public final class DgsClientApp extends DgsAbstractClient{
 	
@@ -27,25 +25,6 @@ public final class DgsClientApp extends DgsAbstractClient{
 		DgsClientApp client = new DgsClientApp(host, port);
 
 		client.run();
-		/*
-		//Ping operation
-		System.out.println("Pinging");
-	    PingRequest pingRequest = PingRequest.getDefaultInstance();
-	    PingResponse pingResponse = frontend.ctrlPing(pingRequest);
-		System.out.println(pingResponse.getResult());
-		
-		//Individual infection prob operation
-	    System.out.println("Individual inf. prob. of 2225");
-	    IndividualInfectionProbabilityRequest iipRequest = IndividualInfectionProbabilityRequest.newBuilder().setCitizenId(2225).build();
-	    IndividualInfectionProbabilityResponse iipResponse = frontend.individualInfectionProbability(iipRequest);
-		System.out.println(iipResponse.getProbability());
-		
-		//Aggregate infection prob operation
-		System.out.println("AggregateInfectionProbability");
-		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.PERCENTILES).build();
-		AggregateInfectionProbabilityResponse aipResponse = frontend.aggregateInfectionProbability(aipRequest);
-		System.out.println(aipResponse.getResult());*/
-
 
 		// close frontend and finish
 		client.close();
@@ -60,33 +39,34 @@ public final class DgsClientApp extends DgsAbstractClient{
 		}
 	}
 
-	
-	
-
-	/*public String report(String snifferName, String args) {
-		String[] obs = args;
-		ReportCommand newRep = new ReportCommand(_frontend, snifferName);
+	public String report(String snifferName, String input) {
+		String[] args = input.split(",");
+		ReportCommand newRep = new ReportCommand(_frontend);
 
 		// verify if number of arguments is right
 		String res;
-		if ( res = checkNumArgs(newRep, args) != null ) {
+		if ( (res = checkNumArgs(newRep, args)) != null ) {
 			// returned error msg instead of null
 			return res;
 		}
 		  
-		//Removing the whitespaces in the beginning and end of the words
-		for(int i = 0; i < obs.length; i++) {
-			obs[i] = obs[i].trim();
+		//Removing the whitespaces in the beginning and end of the arguments
+		for(int i = 0; i < args.length; i++) {
+			args[i] = args[i].trim();
 		}
-		return newRep.execute(obs);
+		try {
+			return newRep.execute(args);
+		} catch (IOException | StatusRuntimeException e) {
+			return e.getMessage();
+		}
 	} 
 	
 	// receives a command and arguments for it, returns error msg if
 	// arguments number is wrong and null otherwise
 	private String checkNumArgs(Command cmd, String[] words) {
 		// verify if number of arguments is right
-		if ( cmd.getArgsNumMin() > (words.length-1) ||
-		 cmd.getArgsNumMax() < (words.length-1) ) {
+		if ( cmd.getArgsNumMin() > (words.length) ||
+		 cmd.getArgsNumMax() < (words.length) ) {
 
 		  return (
 		  "Wrong number of args: "+ String.valueOf( words.length )+"\n"+
@@ -95,7 +75,7 @@ public final class DgsClientApp extends DgsAbstractClient{
 		}
 		return null;
 	}
-
+	/*
 	public String snifferJoin(String name, String addr) {
 		String[] obs = args;
 		SnifferJoinCommand snifferJoinCmd = new SnifferJoinCommand(_frontend, name, addr);
@@ -112,7 +92,7 @@ public final class DgsClientApp extends DgsAbstractClient{
 			obs[i] = obs[i].trim();
 		}
 		return snifferJoinCmd.execute(obs);
-	} */
+	}*/
 
 	
 }
