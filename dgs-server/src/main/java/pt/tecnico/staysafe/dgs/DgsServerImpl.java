@@ -51,12 +51,17 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	@Override
 	public void ctrlInit(InitRequest request, StreamObserver<InitResponse> responseObserver)
 	{
-		synchronized (this) {
-			dgsSystem.init();
+		try {
+			synchronized (this) {
+				dgsSystem.init();
+			}
+			InitResponse response = InitResponse.getDefaultInstance();
+			responseObserver.onNext(response);
+			responseObserver.onCompleted();
+		} catch(InternalServerErrorException isee){
+			responseObserver.onError(INVALID_ARGUMENT.withDescription(isee.getMessage()).asRuntimeException());
 		}
-		InitResponse response = InitResponse.getDefaultInstance();
-		responseObserver.onNext(response);
-		responseObserver.onCompleted();
+
 	}
 
 	//Dgs Operations
@@ -169,8 +174,14 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	{
 		String probability = "";
 		synchronized (this) {
-			//calculate probability
-			probability = dgsSystem.aggregateInfectionProbability(request.getStatistic());
+			try {
+				//calculate probability
+				probability = dgsSystem.aggregateInfectionProbability(request.getStatistic());
+			}
+			catch(CitizenDoesNotExistException | InternalServerErrorException e)
+			{
+				responseObserver.onError(INVALID_ARGUMENT.withDescription(e.getMessage()).asRuntimeException());
+			}
 		}
 
 		//build response

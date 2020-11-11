@@ -12,6 +12,7 @@ import pt.tecnico.staysafe.dgs.grpc.Statistic;
 
 import com.google.protobuf.Timestamp;
 import java.util.Date;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 
@@ -176,7 +177,7 @@ public class DgsSystem
     
     		    // is this person not infected? If so, skip
         		if ( otherObs.getPersonType() == PersonType.NOT_INFECTED ) {
-          		continue;
+        			continue;
         		}
         
 				// get this person timestamps
@@ -193,6 +194,7 @@ public class DgsSystem
         
         		Long begin = Math.max( mainET, otherET);
 				Long end = Math.min( mainLT, otherLT );
+				Long res = end - begin;
         		Long timeTogether = end - begin;
         
         		// should we add it?
@@ -215,7 +217,7 @@ public class DgsSystem
 	* @param statistic
 	* @return aggregate infection probability
 	*/
-	public String aggregateInfectionProbability(Statistic stat)
+	public String aggregateInfectionProbability(Statistic stat) throws CitizenDoesNotExistException, InternalServerErrorException
 	{
 	  double mean = 0;
 	  int count = 0;
@@ -229,6 +231,7 @@ public class DgsSystem
 	  double gte = 0;
 	  double wa = 0;
 	  
+	  
 	  if(stat == Statistic.MEAN_DEV)
 	  {
 		//calculate the mean probability of group infection
@@ -238,7 +241,7 @@ public class DgsSystem
 				mean += individualInfectionProbability(citizen_id);
 			} catch (CitizenDoesNotExistException e) {
 				System.out.println("ERROR on aggregate prob: "+e.getMessage());
-				count--;
+				throw new CitizenDoesNotExistException(citizen_id);
 			}
 			count++;
 		}
@@ -259,13 +262,23 @@ public class DgsSystem
 		//ensure we dont divide by zero
 		dev = (count == 0) ? dev : Math.sqrt(dev / count);
 		
+		// mean and dev in string format
+		String meanString = "" + mean;
+		String devString = "" + dev;
+		
+		if(mean == 0)
+			meanString = "0.000";
+		
+		if(dev == 0)
+			devString = "0.000";
+		
 		//return the response
-		return mean + "," + dev;
+		return meanString.substring(0, 5) + "," + devString.substring(0, 5); 
 		
 	  }
 	  
 	  //stat == PERCENTILES
-	  else if(stat == Statistic.PERCENTILES)
+	  else
 	  {
 		ArrayList<Double> prob = new ArrayList<Double>();
 		
@@ -285,7 +298,7 @@ public class DgsSystem
 		
 		//we need a minimum of 3 observations
 		if(size < 3)
-		  return "0,0,0";
+		  return "0.000,0.000,0.000";
 		
 		//percentil-50
 		index = (int) Math.round(0.50 * size);
@@ -311,16 +324,15 @@ public class DgsSystem
 		wa = (gt + gte) / 2;  
 		percentil75 = wa;
 		
-		return percentil50 + "," + percentil25 + "," + percentil75;
+		String percentil50String = "" + String.valueOf(percentil50);
+		String percentil25String = "" + String.valueOf(percentil25);
+		String percentil75String = "" + String.valueOf(percentil75);
+		
+		return percentil50String.substring(0, 5) + "," + percentil25String.substring(0, 5) + "," + percentil75String.substring(0, 5);
 		
 	  
 	  }
 	  
-	  //TODO exception
-	  else
-	  {
-		  return "Incorrect Statistic";
-	  }
 	}
 
 	// debug the observations
@@ -352,9 +364,43 @@ public class DgsSystem
 	}
 
 	// Inits server to predefined state (empty)
-	public void init() {
-		clear();
-		return;
+	public void init() throws InternalServerErrorException{
+		
+		ArrayList<Observation> obs = new ArrayList<>();
+		
+		Date insertionDate = java.util.Calendar.getInstance().getTime();
+		Timestamp insertionTimestamp = Timestamp.newBuilder().
+		setSeconds( insertionDate.getTime()/1000L ).
+		buildPartial();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		try {
+		//tests
+		obs.add(new Observation("sniffer_test",insertionTimestamp,PersonType.INFECTED,111111111,
+				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:12:16").getTime()/1000L )).buildPartial(),
+				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:18:24").getTime()/1000L )).buildPartial()));
+		
+		obs.add(new Observation("sniffer_test",insertionTimestamp,PersonType.NOT_INFECTED,555555555,
+				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:12:16").getTime()/1000L )).buildPartial(),
+				Timestamp.newBuilder().setSeconds( (format.parse("22020-10-23 09:18:24").getTime()/1000L )).buildPartial()));
+		
+		obs.add(new Observation("sniffer_test",insertionTimestamp,PersonType.NOT_INFECTED,777777777,
+				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:33:33").getTime()/1000L )).buildPartial(),
+				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 11:18:24").getTime()/1000L )).buildPartial()));
+	    
+	    
+		
+			this.joinSniffer("sniffer_test", "sniffer_test_address");
+			
+			for(Observation o: obs) {
+				this.addReport(o);
+			}
+		}
+		catch(Exception e){
+			System.out.println("ERROR: something is wrong with predefined input data");
+			this.clear();
+			throw new InternalServerErrorException();
+		}
 	}
 
 }
