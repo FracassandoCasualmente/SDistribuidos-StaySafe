@@ -258,8 +258,8 @@ public class DgsSystem
 		dev = (count == 0) ? dev : Math.sqrt(dev / count);
 		
 		// mean and dev in string format
-		String meanString = "" + mean;
-		String devString = "" + dev;
+		String meanString = String.format("%.3f",mean).replace(",", ".");
+		String devString = String.format("%.3f",dev).replace(",", ".");
 		
 		if(mean == 0)
 			meanString = "0.000";
@@ -268,7 +268,7 @@ public class DgsSystem
 			devString = "0.000";
 		
 		//return the response
-		return meanString.substring(0, 5) + "," + devString.substring(0, 5); 
+		return meanString + "," + devString; 
 		
 	  }
 	  
@@ -319,11 +319,11 @@ public class DgsSystem
 		wa = (gt + gte) / 2;  
 		percentil75 = wa;
 		
-		String percentil50String = "" + String.valueOf(percentil50);
-		String percentil25String = "" + String.valueOf(percentil25);
-		String percentil75String = "" + String.valueOf(percentil75);
+		String percentil50String = String.format("%.3f", percentil50).replace(",",".");
+		String percentil25String = String.format("%.3f", percentil25).replace(",",".");
+		String percentil75String = String.format("%.3f", percentil75).replace(",",".");
 		
-		return percentil50String.substring(0, 5) + "," + percentil25String.substring(0, 5) + "," + percentil75String.substring(0, 5);
+		return percentil50String + "," + percentil25String + "," + percentil75String;
 		
 	  
 	  }
@@ -370,22 +370,39 @@ public class DgsSystem
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try {
-		//tests
-		obs.add(new Observation("sniffer_test",insertionTimestamp,PersonType.INFECTED,111111111,
-				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:12:16").getTime()/1000L )).buildPartial(),
-				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:18:24").getTime()/1000L )).buildPartial()));
-		
-		obs.add(new Observation("sniffer_test",insertionTimestamp,PersonType.NOT_INFECTED,555555555,
-				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:12:16").getTime()/1000L )).buildPartial(),
-				Timestamp.newBuilder().setSeconds( (format.parse("22020-10-23 09:18:24").getTime()/1000L )).buildPartial()));
-		
-		obs.add(new Observation("sniffer_test",insertionTimestamp,PersonType.NOT_INFECTED,777777777,
-				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:33:33").getTime()/1000L )).buildPartial(),
-				Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 11:18:24").getTime()/1000L )).buildPartial()));
-	    
-	    
-		
+			//creating sniffers
 			this.joinSniffer("sniffer_test", "sniffer_test_address");
+			this.joinSniffer("sniffer_test2", "sniffer_test_address2");
+				
+			//creating observations for sniffer_test
+			obs.add(new Observation("sniffer_test",insertionTimestamp,PersonType.INFECTED,111111111,
+					Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:12:16").getTime()/1000L )).buildPartial(),
+					Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:18:24").getTime()/1000L )).buildPartial()));
+			
+			obs.add(new Observation("sniffer_test",insertionTimestamp,PersonType.NOT_INFECTED,555555555,
+					Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:12:16").getTime()/1000L )).buildPartial(),
+					Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:18:24").getTime()/1000L )).buildPartial()));
+			
+			obs.add(new Observation("sniffer_test",insertionTimestamp,PersonType.NOT_INFECTED,777777777,
+					Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 09:33:33").getTime()/1000L )).buildPartial(),
+					Timestamp.newBuilder().setSeconds( (format.parse("2020-10-23 11:18:24").getTime()/1000L )).buildPartial()));
+			
+			//creating observations for sniffer_test2
+			obs.add(new Observation("sniffer_test2",insertionTimestamp,PersonType.INFECTED,32,
+					Timestamp.newBuilder().setSeconds( (format.parse("2001-08-20 09:30:00").getTime()/1000L )).buildPartial(),
+					Timestamp.newBuilder().setSeconds( (format.parse("2001-08-20 09:40:00").getTime()/1000L )).buildPartial()));
+			
+			obs.add(new Observation("sniffer_test2",insertionTimestamp,PersonType.NOT_INFECTED,33,
+					Timestamp.newBuilder().setSeconds( (format.parse("2001-08-20 09:30:00").getTime()/1000L )).buildPartial(),
+					Timestamp.newBuilder().setSeconds( (format.parse("2001-08-20 10:30:00").getTime()/1000L )).buildPartial()));
+			
+			obs.add(new Observation("sniffer_test2",insertionTimestamp,PersonType.INFECTED,48,
+					Timestamp.newBuilder().setSeconds( (format.parse("2002-08-20 09:30:00").getTime()/1000L )).buildPartial(),
+					Timestamp.newBuilder().setSeconds( (format.parse("2002-08-20 09:43:00").getTime()/1000L )).buildPartial()));
+			
+			obs.add(new Observation("sniffer_test2",insertionTimestamp,PersonType.NOT_INFECTED,49,
+					Timestamp.newBuilder().setSeconds( (format.parse("2002-08-20 09:30:00").getTime()/1000L )).buildPartial(),
+					Timestamp.newBuilder().setSeconds( (format.parse("2002-08-20 10:30:00").getTime()/1000L )).buildPartial()));
 			
 			for(Observation o: obs) {
 				this.addReport(o);
