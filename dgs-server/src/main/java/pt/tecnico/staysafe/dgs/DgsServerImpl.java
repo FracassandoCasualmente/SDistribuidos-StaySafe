@@ -72,11 +72,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	public void snifferJoin(SnifferJoinRequest request, StreamObserver<SnifferJoinResponse> responseObserver) {
 		
 		try {
+			//joining sniffer and getting respective response
+			String result = "";
 			synchronized (this) {
-				dgsSystem.joinSniffer(request.getName(), request.getAddress());
+				result = dgsSystem.joinSniffer(request.getName(), request.getAddress());
 			}
-			//builds and sends response
-			String result = "OK";
+			
 			SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setResult(result).build();
 			responseObserver.onNext(response);
 			responseObserver.onCompleted();
@@ -100,12 +101,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 			//sends response
 			SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setAddress(result).build();
 			responseObserver.onNext(response);
+			responseObserver.onCompleted();
 		}
 		catch(SnifferDoesNotExistException sdne) {
 			responseObserver.onError(INVALID_ARGUMENT.withDescription(sdne.getMessage()).asRuntimeException());
 		}
 		
-		responseObserver.onCompleted();
 		
 	}
 

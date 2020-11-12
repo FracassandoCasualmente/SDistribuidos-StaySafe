@@ -78,9 +78,9 @@ public class DgsSystem
 	
 	/**  
 	* @param Name of the new sniffer
-	* @return nothing
+	* @return A string with the sniffer added
 	*/
-	public void joinSniffer(String newName, String newAddr) throws SnifferAlreadyRegisteredException {
+	public String joinSniffer(String newName, String newAddr) throws SnifferAlreadyRegisteredException {
 		// points to address of the sniffer with same name
 		String conflictingSnifferAddr = _sniffers.get(newName);
 				
@@ -88,13 +88,17 @@ public class DgsSystem
 			// if conflictingSniffer has different address
 			if ( !conflictingSnifferAddr.equals(newAddr) ) {
 				debug("Sniffer already exists! The address is " + conflictingSnifferAddr);
-
 				throw new SnifferAlreadyRegisteredException(newName, conflictingSnifferAddr,newAddr);
 			}
 		}
 		// no problems -> add sniffer to collections
 		_sniffers.put(newName, newAddr);
 		_snifferSearch.put(newName, new ArrayList<>() );
+		
+		System.out.println("Sniffer added");
+		
+		//return the sniffer added
+		return "Sniffer added: " + newName + "," + newAddr;
 	}
 
 	/**
