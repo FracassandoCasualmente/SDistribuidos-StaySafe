@@ -7,12 +7,6 @@ Distributed Systems 2020-2021, 1st semester project
 
 **Group G15**
 
-### Code identification
-
-In all the source files (including POMs), please replace __GXX__ with your group identifier.  
-The group identifier is composed of a G and the group number - always with two digits.  
-This change is important for code dependency management, to make sure that your code runs using the correct components and not someone else's.
-
 ### Team members
  
 

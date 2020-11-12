@@ -12,9 +12,13 @@ pt/tecnico/staysafe/dgs/grpc/ReportResponse$1.class
 pt/tecnico/staysafe/dgs/grpc/IndividualInfectionProbabilityRequest$Builder.class
 pt/tecnico/staysafe/dgs/grpc/InitRequest$Builder.class
 pt/tecnico/staysafe/dgs/grpc/SnifferInfoRequest.class
+pt/tecnico/staysafe/dgs/grpc/AggregateInfectionProbabilityResponseOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/InitRequestOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/DgsServiceGrpc$DgsServiceStub.class
+pt/tecnico/staysafe/dgs/grpc/ClearRequestOrBuilder.class
+pt/tecnico/staysafe/dgs/grpc/IndividualInfectionProbabilityRequest.class
 pt/tecnico/staysafe/dgs/grpc/DgsServiceGrpc$MethodHandlers.class
+pt/tecnico/staysafe/dgs/grpc/AggregateInfectionProbabilityRequestOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/DgsServiceGrpc$3.class
 pt/tecnico/staysafe/dgs/grpc/AggregateInfectionProbabilityResponse.class
 pt/tecnico/staysafe/dgs/grpc/IndividualInfectionProbabilityResponse$1.class
@@ -40,6 +44,7 @@ pt/tecnico/staysafe/dgs/grpc/IndividualInfectionProbabilityRequest$1.class
 pt/tecnico/staysafe/dgs/grpc/AggregateInfectionProbabilityRequest$Builder.class
 pt/tecnico/staysafe/dgs/grpc/InitRequest$1.class
 pt/tecnico/staysafe/dgs/grpc/InitResponseOrBuilder.class
+pt/tecnico/staysafe/dgs/grpc/ClearResponseOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/SnifferJoinRequestOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/ReportRequestOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/AggregateInfectionProbabilityRequest$1.class
@@ -67,6 +72,7 @@ pt/tecnico/staysafe/dgs/grpc/ReportRequest$1.class
 pt/tecnico/staysafe/dgs/grpc/DgsServiceGrpc$DgsServiceImplBase.class
 pt/tecnico/staysafe/dgs/grpc/IndividualInfectionProbabilityRequestOrBuilder.class
 pt/tecnico/staysafe/dgs/grpc/ReportResponseOrBuilder.class
+pt/tecnico/staysafe/dgs/grpc/Dgs.class
 pt/tecnico/staysafe/dgs/grpc/SnifferInfoRequest$Builder.class
 pt/tecnico/staysafe/dgs/grpc/PingResponse.class
 pt/tecnico/staysafe/dgs/grpc/PingResponseOrBuilder.class
