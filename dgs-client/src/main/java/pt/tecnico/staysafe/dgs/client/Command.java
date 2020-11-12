@@ -215,10 +215,10 @@ class SingleProbCommand extends Command{
 
 			// convert this probability to string
 			DgsAbstractClient.debug("debug prob as double: "+response.toString());
-			strDouble = String.format("%.3f", response).replace(",",".");
+			strDouble = String.format("%.4f", response).replace(",",".");
 			res += strDouble + "\n";
 		}
-		return res.substring(0, res.length() - 1); // remove last \n
+		return res.substring(0, res.length() - 2); // remove last \n
 	}
 }
 
@@ -332,10 +332,19 @@ class ReportCommand extends Command {
 		} catch (Exception exp) {
 			throw new IOException("ERROR: while building dates: "+exp.getMessage());
 		}
+		
+		
+		String result = "";
+		try {
+		    ReportResponse response = _fe.report(obs);
+		    result = response.getResult();
+		}catch(StatusRuntimeException sre)
+		{
+			result = sre.getStatus().getDescription();
+		}
 
-		// send report
-		_fe.report(obs); // returns exception if error occurs
-		return "Report successful";
+		
+		return result;
 
 	}
 }
