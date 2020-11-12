@@ -49,7 +49,7 @@ public class DgsIT extends BaseIT {
 	@Test
 	public void testPing() {
 		
-		assertEquals("Server State: UP", _dgsClient.executeCommand("ping"));
+		assertEquals("Server State: UP", _dgsClient.executeCommand("ctrl_ping"));
 	}
 
 	/*

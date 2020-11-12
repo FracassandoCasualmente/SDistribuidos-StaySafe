@@ -11,7 +11,7 @@ import java.util.Date;
 public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	
 	private DgsSystem dgsSystem = new DgsSystem();
-	private Boolean _debug = true;
+	private Boolean _debug = false;
 	
 	private void debug(String msg) {
 		if (_debug) {
@@ -130,6 +130,7 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 			} catch (SnifferDoesNotExistException e) {
 				responseObserver.onError(INVALID_ARGUMENT.
 				withDescription(e.getMessage()).asRuntimeException());
+				responseObserver.onCompleted();
 			}
 			
 		}

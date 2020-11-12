@@ -14,7 +14,7 @@ import io.grpc.StatusRuntimeException;
 public abstract class DgsAbstractClient {
 
 	protected DgsFrontend _frontend;
-	protected static Boolean _debug = true; // true if wants to print debugs
+	protected static Boolean _debug = false; // true if wants to print debugs
 	protected ArrayList<Command> _commands;
 	
 	//client is to select the appropriate commands for the respective client
@@ -181,8 +181,7 @@ public abstract class DgsAbstractClient {
 				try {
 					result = runCommand(input);
 				} catch (IOException ioe) {
-					//result = ioe.getMessage();
-					result = "ERROR: couldn't execute command.";
+					result = ioe.getMessage();
 				}
 				// print the result of the command
 				System.out.println(result);
