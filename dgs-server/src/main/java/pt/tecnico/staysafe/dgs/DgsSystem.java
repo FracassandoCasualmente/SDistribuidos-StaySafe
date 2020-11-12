@@ -95,7 +95,7 @@ public class DgsSystem
 		_sniffers.put(newName, newAddr);
 		_snifferSearch.put(newName, new ArrayList<>() );
 		
-		System.out.println("Sniffer added");
+		debug("Sniffer added");
 		
 		//return the sniffer added
 		return "Sniffer added: " + newName + "," + newAddr;

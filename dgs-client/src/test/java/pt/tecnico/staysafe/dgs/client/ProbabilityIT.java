@@ -2,10 +2,13 @@ package pt.tecnico.staysafe.dgs.client;
 
 import org.junit.jupiter.api.*;
 
+import io.grpc.StatusRuntimeException;
+import pt.tecnico.staysafe.dgs.grpc.*;
+
 //import pt.tecnico.staysafe.dgs.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ProbabilityIT extends BaseIT {
 	
@@ -59,15 +62,15 @@ public class ProbabilityIT extends BaseIT {
 		
 	// tests 
 	
+
 	@Test
-	public void test() {
-		
-		
+	public void testSingleProbRegularCitizen() {
+		assertEquals("0.007", _dgsClient.executeCommand("single_prob 33"));
 	}
 
 	@Test
-	public void testSingleProbNotInfectedCitizen() {
-		assertEquals("0.007", _dgsClient.executeCommand("single_prob 33"));
+	public void testSingleProbMultipleCitizens() {
+		assertEquals("0.119"+"\n"+"0.500"+"\n"+"0.007", _dgsClient.executeCommand("single_prob 49,16,33"));
 	}
 
 	@Test
@@ -77,11 +80,29 @@ public class ProbabilityIT extends BaseIT {
 	}
 
 	@Test
+	public void testSingleProbInfectedInvalidArgument() {
+		// use a string instead of a long
+		assertEquals("Invalid Input arguments!\n"+
+		"\"banana\" not convertable to Long!", _dgsClient.executeCommand("single_prob banana"));
+	}
+
+	@Test
+	public void testSingleProbInfectedWrongNumberOfArguments() {
+		// use zero arguments, when the minimum is 1
+		assertEquals("Wrong number of args: 0\n"+
+		"Expected: 1 - "+String.valueOf(Integer.MAX_VALUE), _dgsClient.executeCommand("single_prob"));
+	}
+
+	@Test
 	public void testSingleProbNoCitizen() {
 		// tests probabiliy of citizen that doesnt exist
 		Long citizenId = 100L; // 100 is a citizen that does not exist
-		assertEquals("Error from server: "+"ERROR: Citizen \""+citizenId+
-		"\" does not exist.", _dgsClient.executeCommand("single_prob "+citizenId));
+		/*assertEquals("Error from server: "+"ERROR: Citizen \""+citizenId+
+		"\" does not exist.", _dgsClient.executeCommand("single_prob "+citizenId));*/
+		assertThrows(StatusRuntimeException.class, () -> 
+		 frontend.individualInfectionProbability(
+		 IndividualInfectionProbabilityRequest.newBuilder().
+		 setCitizenId(citizenId).build() ) );
 	}
 
 	@Test
