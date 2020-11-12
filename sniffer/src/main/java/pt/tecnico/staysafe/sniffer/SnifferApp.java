@@ -180,16 +180,54 @@ public class SnifferApp {
 			// EOF found, send what we have and close
 			catch ( NoSuchElementException nsee ) {
 				// found EOF! end of cycle
-				frontend.close();
-				System.exit(0);
-			}
+				//sends whatever is on buffer
+				ReportRequest obs;
+				Timestamp entryTimestamp;
+				Timestamp leaveTimestamp;
+			    Date entryDate;
+			    Date leaveDate;
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Integer counter = 0;
+				if(buffer.isEmpty() == false) {
+				
+
+					for ( String[] observation : buffer ) {
+						// build google Timestamp
+						try {
+							// create Date objects
+							entryDate = format.parse( observation[2] );
+							leaveDate = format.parse( observation[3] );
+							
+							// adapt to Timestamp objects
+							entryTimestamp = Timestamp.newBuilder().setSeconds( entryDate.getTime()/1000L ).buildPartial();
+							  leaveTimestamp = Timestamp.newBuilder().setSeconds( leaveDate.getTime()/1000L ).buildPartial();
+							
+							// build observation object
+							obs = ReportRequest.newBuilder().setSnifferName(name).setType( observation[0].equals("infetado") ? PersonType.INFECTED : PersonType.NOT_INFECTED).
+									setCitizenId( Integer.parseInt(observation[1]) ).setEnterTime( entryTimestamp  ).setLeaveTime( leaveTimestamp ).
+									build();
+							
+							// send report
+							frontend.report(obs);
+							System.out.println("Report successful");
+						}
+						catch (Exception exp) {
+							System.out.println("ERROR: while building dates in observation ("
+							+ counter.toString() + ")");
+							System.out.println(exp.getMessage());
+							System.exit(-1);
+						}
+					}
+				}
+			} // end catch EOF
 			
-			frontend.close();
+			
 
 		} catch(StatusRuntimeException e)
 		{
 			//If sniffer already exists
 			System.out.println(e.getStatus().getDescription());
+			//frontend.close();
 			System.exit(-1);
 		}
 
