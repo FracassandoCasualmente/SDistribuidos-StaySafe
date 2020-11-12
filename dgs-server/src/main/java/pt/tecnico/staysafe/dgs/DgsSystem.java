@@ -236,6 +236,10 @@ public class DgsSystem
 		//calculate the mean probability of group infection
 		for(long citizen_id: _citizenSearch.keySet())
 		{
+			// skip infected person
+			if (_citizenSearch.get(citizen_id)).get(0).getPersonType()==PersonType.INFECTED ) {
+				continue;
+			}
 			try {
 				mean += individualInfectionProbability(citizen_id);
 			} catch (CitizenDoesNotExistException e) {
@@ -250,6 +254,10 @@ public class DgsSystem
 		//calculate the dev of group infection
 		for(long citizen_id: _citizenSearch.keySet())
 		{
+			// skip infected person
+			if (_citizenSearch.get(citizen_id)).get(0).getPersonType()==PersonType.INFECTED ) {
+				continue;
+			}
 			try {
 				//(xi - mean)^2
 				dev += Math.pow(individualInfectionProbability(citizen_id)-mean,2);
@@ -283,6 +291,10 @@ public class DgsSystem
 		
 		for(long citizen_id: _citizenSearch.keySet())
 		{
+			// skip infected person
+			if (_citizenSearch.get(citizen_id)).get(0).getPersonType()==PersonType.INFECTED ) {
+				continue;
+			}
 			try {
 				prob.add(individualInfectionProbability(citizen_id));
 			} catch (CitizenDoesNotExistException e) {

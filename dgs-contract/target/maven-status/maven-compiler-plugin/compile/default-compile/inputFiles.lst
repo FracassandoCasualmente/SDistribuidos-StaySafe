@@ -17,6 +17,7 @@
 /home/miguel/FileHaven/SDis/SDisGit/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/ReportResponse.java
 /home/miguel/FileHaven/SDis/SDisGit/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/InitRequestOrBuilder.java
 /home/miguel/FileHaven/SDis/SDisGit/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/SnifferInfoRequestOrBuilder.java
+/home/miguel/FileHaven/SDis/SDisGit/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/Statistic.java
 /home/miguel/FileHaven/SDis/SDisGit/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/SnifferJoinRequestOrBuilder.java
 /home/miguel/FileHaven/SDis/SDisGit/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/IndividualInfectionProbabilityRequest.java
 /home/miguel/FileHaven/SDis/SDisGit/dgs-contract/target/generated-sources/protobuf/java/pt/tecnico/staysafe/dgs/grpc/ClearResponseOrBuilder.java

@@ -26,6 +26,7 @@ pt/tecnico/staysafe/dgs/grpc/IndividualInfectionProbabilityResponseOrBuilder.cla
 pt/tecnico/staysafe/dgs/grpc/SnifferJoinRequest.class
 pt/tecnico/staysafe/dgs/grpc/AggregateInfectionProbabilityRequest.class
 pt/tecnico/staysafe/dgs/grpc/SnifferInfoResponse$1.class
+pt/tecnico/staysafe/dgs/grpc/IndividualInfectionProbabilityResponse.class
 pt/tecnico/staysafe/dgs/grpc/SnifferInfoRequest$1.class
 pt/tecnico/staysafe/dgs/grpc/PersonType.class
 pt/tecnico/staysafe/dgs/grpc/PingRequest$1.class

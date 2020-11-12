@@ -11,3 +11,4 @@ pt/tecnico/staysafe/dgs/client/MeanDevCommand.class
 pt/tecnico/staysafe/dgs/client/SnifferJoinCommand.class
 pt/tecnico/staysafe/dgs/client/HelpCommand.class
 pt/tecnico/staysafe/dgs/client/SingleProbCommand.class
+pt/tecnico/staysafe/dgs/client/DgsAbstractClient.class
