@@ -116,10 +116,10 @@ public class DgsSystem
 	}
 	/**  
 	* @param pretended Observation
-	* @return true if success (the sniffer exists),
-	 false otherwise
+	* @return returns a message saying if observation
+	* was added with success
 	*/
-	public Boolean addReport(Observation newObs) throws SnifferDoesNotExistException{
+	public String addReport(Observation newObs) throws SnifferDoesNotExistException{
 		if ( !_sniffers.containsKey(newObs.getSnifferName()) ) {
 			// the sniffer doesnt exist :(
 			throw new SnifferDoesNotExistException(newObs.getSnifferName());
@@ -142,8 +142,9 @@ public class DgsSystem
     	auxList = _citizenSearch.get( newObs.getCitizenId() ); // list with observations that contain this guy's name
 		auxList.add( newObs );
 		
-		return true;
+		return "Observation added: " + newObs.toString();
 	}
+	
 	/**  
 	* @param target citizen's id
 	* @return probability of being infected with corona-bixo
@@ -237,12 +238,10 @@ public class DgsSystem
 		for(long citizen_id: _citizenSearch.keySet())
 		{
 			// skip infected person
-			if ( _citizenSearch.get(citizen_id).get(0).getPersonType()==PersonType.INFECTED ) {
+			if (_citizenSearch.get(citizen_id).get(0).getPersonType()==PersonType.INFECTED ) {
 				continue;
 			}
-			
 			try {
-				debug("mean: "+String.valueOf(citizen_id)+" -> "+String.valueOf(individualInfectionProbability(citizen_id)) );
 				mean += individualInfectionProbability(citizen_id);
 			} catch (CitizenDoesNotExistException e) {
 				System.out.println("ERROR on aggregate prob: "+e.getMessage());
@@ -250,7 +249,6 @@ public class DgsSystem
 			}
 			count++;
 		}
-		debug("mean: count -> "+String.valueOf(count));
 		//ensure we don't divide by zero
 		mean = (count == 0) ? mean : mean / count;
 		

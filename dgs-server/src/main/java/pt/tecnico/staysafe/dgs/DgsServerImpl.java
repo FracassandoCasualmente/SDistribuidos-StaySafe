@@ -117,27 +117,24 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		// build insertionTime
 		Date insertionDate = java.util.Calendar.getInstance().getTime();
 		Timestamp insertionTimestamp = Timestamp.newBuilder().
-		 setSeconds( insertionDate.getTime()/1000L ).
-		 buildPartial();
+		setSeconds( insertionDate.getTime()/1000L ).
+		buildPartial();
 		// build new Observation instance
 		Observation newObs = new Observation(request.getSnifferName(),insertionTimestamp,
 				request.getType(),request.getCitizenId(),request.getEnterTime(),request.getLeaveTime());
 		
-		
 		synchronized (this) {
 			try {
-				dgsSystem.addReport(newObs);
+				String result = dgsSystem.addReport(newObs);
+				ReportResponse response = ReportResponse.newBuilder().setResult(result).build();
+				responseObserver.onNext(response);
+				responseObserver.onCompleted();
 			} catch (SnifferDoesNotExistException e) {
 				responseObserver.onError(INVALID_ARGUMENT.
 				withDescription(e.getMessage()).asRuntimeException());
-				responseObserver.onCompleted();
 			}
 			
 		}
-			
-		ReportResponse response = ReportResponse.getDefaultInstance();
-		responseObserver.onNext(response);
-		responseObserver.onCompleted();
 				
 	}
 
