@@ -49,6 +49,7 @@ mvn clean install -DskipTests
 	* Type `single_prob potato` and an error message will show up because "potato" is not a valid number
 	* Type `sniffer_info ISCTE` and an error message will show up because there is not a sniffer with that name
 	* Type `kappa` and an error message will show up because it isn't a valid command
+	* Type `sniffer_join tecnico,tagus` and then `sniffer_join tecnico,alameda` and and error will show up because the sniffer name is already in use with a different address
 
 
 
