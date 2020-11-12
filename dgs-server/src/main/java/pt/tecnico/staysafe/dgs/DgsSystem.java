@@ -237,7 +237,7 @@ public class DgsSystem
 		for(long citizen_id: _citizenSearch.keySet())
 		{
 			// skip infected person
-			if (_citizenSearch.get(citizen_id)).get(0).getPersonType()==PersonType.INFECTED ) {
+			if ( _citizenSearch.get(citizen_id).get(0).getPersonType()==PersonType.INFECTED ) {
 				continue;
 			}
 			try {
@@ -255,7 +255,7 @@ public class DgsSystem
 		for(long citizen_id: _citizenSearch.keySet())
 		{
 			// skip infected person
-			if (_citizenSearch.get(citizen_id)).get(0).getPersonType()==PersonType.INFECTED ) {
+			if (_citizenSearch.get(citizen_id).get(0).getPersonType()==PersonType.INFECTED ) {
 				continue;
 			}
 			try {
@@ -292,7 +292,7 @@ public class DgsSystem
 		for(long citizen_id: _citizenSearch.keySet())
 		{
 			// skip infected person
-			if (_citizenSearch.get(citizen_id)).get(0).getPersonType()==PersonType.INFECTED ) {
+			if (_citizenSearch.get(citizen_id).get(0).getPersonType()==PersonType.INFECTED ) {
 				continue;
 			}
 			try {
