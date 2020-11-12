@@ -181,7 +181,8 @@ public abstract class DgsAbstractClient {
 				try {
 					result = runCommand(input);
 				} catch (IOException ioe) {
-					result = ioe.getMessage();
+					//result = ioe.getMessage();
+					result = "ERROR: couldn't execute command.";
 				}
 				// print the result of the command
 				System.out.println(result);

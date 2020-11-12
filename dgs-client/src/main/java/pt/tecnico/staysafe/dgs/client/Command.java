@@ -14,7 +14,6 @@ import pt.tecnico.staysafe.dgs.grpc.*;
 import io.grpc.StatusRuntimeException;
 import com.google.protobuf.Timestamp;
 
-import pt.tecnico.staysafe.dgs.client.DgsAbstractClient; // use debug
 
 public abstract class Command {
 	protected final String _name;
@@ -153,7 +152,7 @@ class ClearCommand extends Command
 	}
 	
 	@Override
-	public String execute(String [] args) throws IOException, StatusRuntimeException
+	public String execute(String [] args) throws IOException
 	{
 		ClearRequest clearRequest = ClearRequest.getDefaultInstance();
 		ClearResponse clearResponse = _fe.ctrlClear(clearRequest);
@@ -239,10 +238,18 @@ class SnifferInfoCommand extends Command {
 	}
 	
 	@Override
-	public String execute(String [] args) throws IOException, StatusRuntimeException {		
-	    SnifferInfoRequest request = SnifferInfoRequest.newBuilder().setName(args[0]).build();
-	    SnifferInfoResponse response = _fe.snifferInfo( request );
-		return response.getAddress();
+	public String execute(String [] args) {	
+		String result = "";
+		try {
+		    SnifferInfoRequest request = SnifferInfoRequest.newBuilder().setName(args[0]).build();
+		    SnifferInfoResponse response = _fe.snifferInfo( request );
+		    result = response.getAddress();
+		}catch(StatusRuntimeException sre)
+		{
+			result = sre.getStatus().getDescription();
+		}
+
+		return result;
 	}
 }
 
@@ -345,7 +352,7 @@ class SnifferJoinCommand extends Command {
 	}
 
 	@Override
-	public String execute(String[] args)  throws IOException, StatusRuntimeException {
+	public String execute(String[] args){
 		
 		String name = args[0];
 		String addr = args[1];
@@ -353,9 +360,15 @@ class SnifferJoinCommand extends Command {
 		for (String aux : Arrays.copyOfRange(args, 2, args.length)) {
 			addr += " "+aux;
 		}
+		String result = "";
+		try {
+			result = _fe.snifferJoin(SnifferJoinRequest.newBuilder().setName(name).setAddress(addr).build()).getResult();
+		}catch(StatusRuntimeException sre)
+		{
+			result = sre.getStatus().getDescription();
+		}
 
 		// returns exception if problem occurs
-		_fe.snifferJoin(SnifferJoinRequest.newBuilder().setName(name).setAddress(addr).build());
-		return "SnifferJoin successful";
+		return result;
 	}
 }
