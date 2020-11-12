@@ -215,10 +215,10 @@ class SingleProbCommand extends Command{
 
 			// convert this probability to string
 			DgsAbstractClient.debug("debug prob as double: "+response.toString());
-			strDouble = String.format("%.4f", response).replace(",",".");
+			strDouble = String.format("%.3f", response).replace(",",".");
 			res += strDouble + "\n";
 		}
-		return res.substring(0, res.length() - 2); // remove last \n
+		return res.substring(0, res.length() - 1); // remove last \n
 	}
 }
 

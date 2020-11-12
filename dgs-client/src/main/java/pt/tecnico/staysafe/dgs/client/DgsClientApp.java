@@ -40,7 +40,7 @@ public final class DgsClientApp extends DgsAbstractClient{
 	}
 
 	public String report(String snifferName, String input) {
-		String[] args = input.split(",");
+		String[] args = (snifferName+","+input).split(",");
 		ReportCommand newRep = new ReportCommand(_frontend);
 
 		// verify if number of arguments is right
@@ -75,24 +75,7 @@ public final class DgsClientApp extends DgsAbstractClient{
 		}
 		return null;
 	}
-	/*
-	public String snifferJoin(String name, String addr) {
-		String[] obs = args;
-		SnifferJoinCommand snifferJoinCmd = new SnifferJoinCommand(_frontend, name, addr);
-
-		// verify if number of arguments is right
-		String res;
-		if ( res = checkNumArgs(newRep, args) != null ) {
-			// returned error msg instead of null
-			return res;
-		}
-		  
-		//Removing the whitespaces in the beginning and end of the words
-		for(int i = 0; i < obs.length; i++) {
-			obs[i] = obs[i].trim();
-		}
-		return snifferJoinCmd.execute(obs);
-	}*/
+	
 
 	
 }

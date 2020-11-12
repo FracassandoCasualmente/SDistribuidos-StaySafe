@@ -35,6 +35,7 @@ public class DgsIT extends BaseIT {
 	
 	@AfterEach
 	public void tearDown() {
+		_dgsClient.close();
 		_dgsClient = null;
 	}
 		
@@ -52,11 +53,20 @@ public class DgsIT extends BaseIT {
 		assertEquals("Server State: UP", _dgsClient.executeCommand("ctrl_ping"));
 	}
 
-	/*
 	@Test
-    public void testGetDefaultGreeting() {
-		//  ( expected, what we are getting)
-        assertEquals("Hello", example.getGreeting());
-    }*/
+	public void testInit() {
+		
+		assertEquals("ctrlInit executed", _dgsClient.executeCommand("ctrl_init"));
+	}
+
+	@Test
+	public void testClear() {
+		
+		assertEquals("Server cleared with success!", _dgsClient.executeCommand("ctrl_clear"));
+	}
+
+	
+
+	
 
 }

@@ -53,6 +53,7 @@ public class ProbabilityIT extends BaseIT {
 	
 	@AfterEach
 	public void tearDown() {
+		_dgsClient.close();
 		_dgsClient = null;
 	}
 		

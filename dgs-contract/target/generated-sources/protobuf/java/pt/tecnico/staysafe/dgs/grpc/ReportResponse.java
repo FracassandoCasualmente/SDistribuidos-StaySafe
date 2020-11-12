@@ -16,6 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ReportResponse() {
+    result_ = "";
   }
 
   @java.lang.Override
@@ -48,6 +49,12 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            result_ = s;
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -80,6 +87,42 @@ private static final long serialVersionUID = 0L;
             pt.tecnico.staysafe.dgs.grpc.ReportResponse.class, pt.tecnico.staysafe.dgs.grpc.ReportResponse.Builder.class);
   }
 
+  public static final int RESULT_FIELD_NUMBER = 1;
+  private volatile java.lang.Object result_;
+  /**
+   * <code>string result = 1;</code>
+   * @return The result.
+   */
+  public java.lang.String getResult() {
+    java.lang.Object ref = result_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      result_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string result = 1;</code>
+   * @return The bytes for result.
+   */
+  public com.google.protobuf.ByteString
+      getResultBytes() {
+    java.lang.Object ref = result_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      result_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -94,6 +137,9 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (!getResultBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, result_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -103,6 +149,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (!getResultBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, result_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -118,6 +167,8 @@ private static final long serialVersionUID = 0L;
     }
     pt.tecnico.staysafe.dgs.grpc.ReportResponse other = (pt.tecnico.staysafe.dgs.grpc.ReportResponse) obj;
 
+    if (!getResult()
+        .equals(other.getResult())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -129,6 +180,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + RESULT_FIELD_NUMBER;
+    hash = (53 * hash) + getResult().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -262,6 +315,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      result_ = "";
+
       return this;
     }
 
@@ -288,6 +343,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public pt.tecnico.staysafe.dgs.grpc.ReportResponse buildPartial() {
       pt.tecnico.staysafe.dgs.grpc.ReportResponse result = new pt.tecnico.staysafe.dgs.grpc.ReportResponse(this);
+      result.result_ = result_;
       onBuilt();
       return result;
     }
@@ -336,6 +392,10 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(pt.tecnico.staysafe.dgs.grpc.ReportResponse other) {
       if (other == pt.tecnico.staysafe.dgs.grpc.ReportResponse.getDefaultInstance()) return this;
+      if (!other.getResult().isEmpty()) {
+        result_ = other.result_;
+        onChanged();
+      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -362,6 +422,82 @@ private static final long serialVersionUID = 0L;
           mergeFrom(parsedMessage);
         }
       }
+      return this;
+    }
+
+    private java.lang.Object result_ = "";
+    /**
+     * <code>string result = 1;</code>
+     * @return The result.
+     */
+    public java.lang.String getResult() {
+      java.lang.Object ref = result_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        result_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string result = 1;</code>
+     * @return The bytes for result.
+     */
+    public com.google.protobuf.ByteString
+        getResultBytes() {
+      java.lang.Object ref = result_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        result_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string result = 1;</code>
+     * @param value The result to set.
+     * @return This builder for chaining.
+     */
+    public Builder setResult(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      result_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string result = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearResult() {
+      
+      result_ = getDefaultInstance().getResult();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string result = 1;</code>
+     * @param value The bytes for result to set.
+     * @return This builder for chaining.
+     */
+    public Builder setResultBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      result_ = value;
+      onChanged();
       return this;
     }
     @java.lang.Override

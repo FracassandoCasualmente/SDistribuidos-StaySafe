@@ -114,45 +114,45 @@ public final class Dgs {
       "s.grpc.PersonType\022\021\n\tcitizenId\030\003 \001(\004\022-\n\t" +
       "enterTime\030\004 \001(\0132\032.google.protobuf.Timest" +
       "amp\022-\n\tleaveTime\030\005 \001(\0132\032.google.protobuf" +
-      ".Timestamp\"\020\n\016ReportResponse\":\n%Individu" +
-      "alInfectionProbabilityRequest\022\021\n\tcitizen" +
-      "Id\030\001 \001(\004\"=\n&IndividualInfectionProbabili" +
-      "tyResponse\022\023\n\013probability\030\001 \001(\001\"b\n$Aggre" +
-      "gateInfectionProbabilityRequest\022:\n\tstati" +
-      "stic\030\001 \001(\0162\'.pt.tecnico.staysafe.dgs.grp" +
-      "c.Statistic\"7\n%AggregateInfectionProbabi" +
-      "lityResponse\022\016\n\006result\030\001 \001(\t\"\r\n\013PingRequ" +
-      "est\"\036\n\014PingResponse\022\016\n\006result\030\001 \001(\t\"\016\n\014C" +
-      "learRequest\"\037\n\rClearResponse\022\016\n\006result\030\001" +
-      " \001(\t\"\r\n\013InitRequest\"\016\n\014InitResponse*,\n\nP" +
-      "ersonType\022\020\n\014NOT_INFECTED\020\000\022\014\n\010INFECTED\020" +
-      "\001**\n\tStatistic\022\014\n\010MEAN_DEV\020\000\022\017\n\013PERCENTI" +
-      "LES\020\0012\347\007\n\nDgsService\022s\n\014sniffer_join\0220.p" +
-      "t.tecnico.staysafe.dgs.grpc.SnifferJoinR" +
-      "equest\0321.pt.tecnico.staysafe.dgs.grpc.Sn" +
-      "ifferJoinResponse\022s\n\014sniffer_info\0220.pt.t" +
-      "ecnico.staysafe.dgs.grpc.SnifferInfoRequ" +
-      "est\0321.pt.tecnico.staysafe.dgs.grpc.Sniff" +
-      "erInfoResponse\022c\n\006report\022+.pt.tecnico.st" +
-      "aysafe.dgs.grpc.ReportRequest\032,.pt.tecni" +
-      "co.staysafe.dgs.grpc.ReportResponse\022\255\001\n " +
-      "individual_infection_probability\022C.pt.te" +
-      "cnico.staysafe.dgs.grpc.IndividualInfect" +
-      "ionProbabilityRequest\032D.pt.tecnico.stays" +
-      "afe.dgs.grpc.IndividualInfectionProbabil" +
-      "ityResponse\022\252\001\n\037aggregate_infection_prob" +
-      "ability\022B.pt.tecnico.staysafe.dgs.grpc.A" +
-      "ggregateInfectionProbabilityRequest\032C.pt" +
-      ".tecnico.staysafe.dgs.grpc.AggregateInfe" +
-      "ctionProbabilityResponse\022b\n\tctrl_ping\022)." +
-      "pt.tecnico.staysafe.dgs.grpc.PingRequest" +
-      "\032*.pt.tecnico.staysafe.dgs.grpc.PingResp" +
-      "onse\022e\n\nctrl_clear\022*.pt.tecnico.staysafe" +
-      ".dgs.grpc.ClearRequest\032+.pt.tecnico.stay" +
-      "safe.dgs.grpc.ClearResponse\022b\n\tctrl_init" +
-      "\022).pt.tecnico.staysafe.dgs.grpc.InitRequ" +
-      "est\032*.pt.tecnico.staysafe.dgs.grpc.InitR" +
-      "esponseB\002P\001b\006proto3"
+      ".Timestamp\" \n\016ReportResponse\022\016\n\006result\030\001" +
+      " \001(\t\":\n%IndividualInfectionProbabilityRe" +
+      "quest\022\021\n\tcitizenId\030\001 \001(\004\"=\n&IndividualIn" +
+      "fectionProbabilityResponse\022\023\n\013probabilit" +
+      "y\030\001 \001(\001\"b\n$AggregateInfectionProbability" +
+      "Request\022:\n\tstatistic\030\001 \001(\0162\'.pt.tecnico." +
+      "staysafe.dgs.grpc.Statistic\"7\n%Aggregate" +
+      "InfectionProbabilityResponse\022\016\n\006result\030\001" +
+      " \001(\t\"\r\n\013PingRequest\"\036\n\014PingResponse\022\016\n\006r" +
+      "esult\030\001 \001(\t\"\016\n\014ClearRequest\"\037\n\rClearResp" +
+      "onse\022\016\n\006result\030\001 \001(\t\"\r\n\013InitRequest\"\016\n\014I" +
+      "nitResponse*,\n\nPersonType\022\020\n\014NOT_INFECTE" +
+      "D\020\000\022\014\n\010INFECTED\020\001**\n\tStatistic\022\014\n\010MEAN_D" +
+      "EV\020\000\022\017\n\013PERCENTILES\020\0012\347\007\n\nDgsService\022s\n\014" +
+      "sniffer_join\0220.pt.tecnico.staysafe.dgs.g" +
+      "rpc.SnifferJoinRequest\0321.pt.tecnico.stay" +
+      "safe.dgs.grpc.SnifferJoinResponse\022s\n\014sni" +
+      "ffer_info\0220.pt.tecnico.staysafe.dgs.grpc" +
+      ".SnifferInfoRequest\0321.pt.tecnico.staysaf" +
+      "e.dgs.grpc.SnifferInfoResponse\022c\n\006report" +
+      "\022+.pt.tecnico.staysafe.dgs.grpc.ReportRe" +
+      "quest\032,.pt.tecnico.staysafe.dgs.grpc.Rep" +
+      "ortResponse\022\255\001\n individual_infection_pro" +
+      "bability\022C.pt.tecnico.staysafe.dgs.grpc." +
+      "IndividualInfectionProbabilityRequest\032D." +
+      "pt.tecnico.staysafe.dgs.grpc.IndividualI" +
+      "nfectionProbabilityResponse\022\252\001\n\037aggregat" +
+      "e_infection_probability\022B.pt.tecnico.sta" +
+      "ysafe.dgs.grpc.AggregateInfectionProbabi" +
+      "lityRequest\032C.pt.tecnico.staysafe.dgs.gr" +
+      "pc.AggregateInfectionProbabilityResponse" +
+      "\022b\n\tctrl_ping\022).pt.tecnico.staysafe.dgs." +
+      "grpc.PingRequest\032*.pt.tecnico.staysafe.d" +
+      "gs.grpc.PingResponse\022e\n\nctrl_clear\022*.pt." +
+      "tecnico.staysafe.dgs.grpc.ClearRequest\032+" +
+      ".pt.tecnico.staysafe.dgs.grpc.ClearRespo" +
+      "nse\022b\n\tctrl_init\022).pt.tecnico.staysafe.d" +
+      "gs.grpc.InitRequest\032*.pt.tecnico.staysaf" +
+      "e.dgs.grpc.InitResponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -194,7 +194,7 @@ public final class Dgs {
     internal_static_pt_tecnico_staysafe_dgs_grpc_ReportResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pt_tecnico_staysafe_dgs_grpc_ReportResponse_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "Result", });
     internal_static_pt_tecnico_staysafe_dgs_grpc_IndividualInfectionProbabilityRequest_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_pt_tecnico_staysafe_dgs_grpc_IndividualInfectionProbabilityRequest_fieldAccessorTable = new
