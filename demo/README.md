@@ -8,19 +8,19 @@
 mvn clean install -DskipTests
 ```
 * **Now** chose **1** of the following:
-	(1) Open 4 terminals in this directory if you want to test each client individually
+	**(1)** Open 4 terminals in this directory if you want to test each client individually
 			**OR**
-	(2) Open 2 terminals in this directory if you want to use a general client
+	**(2)** Open 2 terminals in this directory if you want to use a general client
 
-* If you chose (1) : change to this directories:
-	* (**{directory}** `run command`)
+* If you chose **(1)** : change to this directories:
+	* (**directory** `run command`)
 	* **dgs-server**  `mvn exec:java`
 	* **journalist**  `./target/appassembler/bin/journalist localhost 8080`
 	* **researcher**  `./target/appassembler/bin/researcher localhost 8080`
 	* **sniffer**	  `./target/appassembler/bin/sniffer localhost 8080 IST-T Taguspark, Porto Salvo` (optional->) `< ../demo/tests/SnifferInputs.txt`
 
-* If you chose (2) : change to this directories:
-	* (**{directory}** `run command`)
+* If you chose **(2)** : change to this directories:
+	* (**directory** `run command`)
 	* **dgs-server**  `mvn exec:java`
 	* **dgs-client**  `mvn exec:java`
 
@@ -42,7 +42,7 @@ mvn clean install -DskipTests
 		`ctrl_init` Initializes the server with some new observations, mean_dev and percentiles will stop being zero
 
 ## Now let's see some of the **exceptions** that might be triggered
-	## open **dgs-client** with `mvn exec:java`
+	* open **dgs-client** with `mvn exec:java`
 	
 	* Type `ctrl_clear potato` and an error message will show up because you used too many arguments
 	* Type `single_prob 400` and an error message will show up because there is no citizen with that ID
