@@ -240,7 +240,9 @@ public class DgsSystem
 			if ( _citizenSearch.get(citizen_id).get(0).getPersonType()==PersonType.INFECTED ) {
 				continue;
 			}
+			
 			try {
+				debug("mean: "+String.valueOf(citizen_id)+" -> "+String.valueOf(individualInfectionProbability(citizen_id)) );
 				mean += individualInfectionProbability(citizen_id);
 			} catch (CitizenDoesNotExistException e) {
 				System.out.println("ERROR on aggregate prob: "+e.getMessage());
@@ -248,6 +250,7 @@ public class DgsSystem
 			}
 			count++;
 		}
+		debug("mean: count -> "+String.valueOf(count));
 		//ensure we don't divide by zero
 		mean = (count == 0) ? mean : mean / count;
 		
