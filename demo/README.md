@@ -32,8 +32,8 @@ mvn clean install -DskipTests
 ## **run** the project with option **(1)** (showed above) including the **optional** part
 	* If you now type `ctrl_ping` in *journalist* you should see a message confirming that the server is running
 	* Type `help` to see the list of available commands, you may try it in *researcher* too.
-	* If you now type in *researcher*:
-		
+	* If you now type in *researcher*
+
 		`ctrl_ping` You'll verify if the server is running
 		`single_prob 32,33,48,49,24,25,16,17` You'll see the individual infection probability(**IIP**) of each person registered, the even numbers are infected (IIP = 1) and the odds are not infected (0 <= IIP <= 1)
 		`mean_dev` You'll see the mean and standart deviation of the **IIP** of the non-infected declared citizens
@@ -41,7 +41,7 @@ mvn clean install -DskipTests
 		`ctrl_clear` Makes the server state clear all the values, mean_dev and percentiles will be zero
 		`ctrl_init` Initializes the server with some new observations, mean_dev and percentiles will stop being zero
 
-## Now let's see some of the **exceptions** that might be triggered:
+## Now let's see some of the **exceptions** that might be triggered
 	## open **dgs-client** with `mvn exec:java`
 	
 	* Type `ctrl_clear potato` and an error message will show up because you used too many arguments
@@ -49,7 +49,6 @@ mvn clean install -DskipTests
 	* Type `single_prob potato` and an error message will show up because "potato" is not a valid number
 	* Type `sniffer_info ISCTE` and an error message will show up because there is not a sniffer with that name
 	* Type `kappa` and an error message will show up because it isn't a valid command
-	* Type
 
 
 
