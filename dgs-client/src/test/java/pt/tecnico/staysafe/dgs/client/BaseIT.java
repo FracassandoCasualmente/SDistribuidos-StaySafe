@@ -2,7 +2,6 @@ package pt.tecnico.staysafe.dgs.client;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-
 import java.io.IOException;
 import java.util.Properties;
 
@@ -11,7 +10,7 @@ public class BaseIT {
 
 	private static final String TEST_PROP_FILE = "/test.properties";
 	protected static Properties testProps;
-	
+	static DgsFrontend frontend;
 	
 	@BeforeAll
 	public static void oneTimeSetup () throws IOException {
@@ -26,6 +25,11 @@ public class BaseIT {
 			System.out.println(msg);
 			throw e;
 		}
+
+		//connecting to server
+		final String host = testProps.getProperty("server.host");
+		final int port = Integer.parseInt(testProps.getProperty("server.port"));
+		frontend = new DgsFrontend(host, port);
 	}
 	
 	@AfterAll
