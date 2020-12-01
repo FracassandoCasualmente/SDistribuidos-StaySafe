@@ -1,0 +1,242 @@
+2020-12-01 21:15:46,946 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-01 21:15:46,954 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:host.name=Torradeira
+2020-12-01 21:15:46,956 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-01 21:15:46,956 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-01 21:15:46,956 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-01 21:15:46,956 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.class.path=/home/miguel/FileHaven/programs/maven/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar
+2020-12-01 21:15:46,956 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-01 21:15:46,957 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-01 21:15:46,957 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.compiler=<NA>
+2020-12-01 21:15:46,957 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.name=Linux
+2020-12-01 21:15:46,957 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.arch=amd64
+2020-12-01 21:15:46,957 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.version=5.4.0-53-generic
+2020-12-01 21:15:46,957 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.name=miguel
+2020-12-01 21:15:46,958 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.home=/home/miguel
+2020-12-01 21:15:46,958 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.dir=/home/miguel/FileHaven/SDis/SDisGit/dgs-server
+2020-12-01 21:15:46,958 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.free=34MB
+2020-12-01 21:15:46,963 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.max=498MB
+2020-12-01 21:15:46,964 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.total=69MB
+2020-12-01 21:15:46,977 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@1136763d
+2020-12-01 21:15:46,993 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-01 21:15:47,011 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 21:15:47,035 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 21:15:47,083 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 21:15:47,085 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 21:15:47,149 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47158, server: localhost/127.0.0.1:2181
+2020-12-01 21:15:47,171 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x10000eb8cee0001, negotiated timeout = 5000
+2020-12-01 21:15:47,299 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x10000eb8cee0001 closed
+2020-12-01 21:15:47,300 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x10000eb8cee0001
+2020-12-01 21:15:47,341 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@5353c28d
+2020-12-01 21:15:47,342 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 21:15:47,343 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 21:15:47,365 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 21:15:47,366 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 21:15:47,369 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47160, server: localhost/127.0.0.1:2181
+2020-12-01 21:15:47,381 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x10000eb8cee0002, negotiated timeout = 5000
+2020-12-01 21:15:47,389 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x10000eb8cee0002.
+EndOfStreamException: Unable to read additional data from server sessionid 0x10000eb8cee0002, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-01 21:15:47,497 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x10000eb8cee0002 closed
+2020-12-01 21:15:47,498 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x10000eb8cee0002
+2020-12-01 21:19:41,599 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-01 21:19:41,606 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:host.name=Torradeira
+2020-12-01 21:19:41,607 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-01 21:19:41,607 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-01 21:19:41,608 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-01 21:19:41,608 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.class.path=/home/miguel/FileHaven/programs/maven/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar
+2020-12-01 21:19:41,609 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-01 21:19:41,611 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-01 21:19:41,611 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.compiler=<NA>
+2020-12-01 21:19:41,611 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.name=Linux
+2020-12-01 21:19:41,611 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.arch=amd64
+2020-12-01 21:19:41,612 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.version=5.4.0-53-generic
+2020-12-01 21:19:41,612 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.name=miguel
+2020-12-01 21:19:41,612 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.home=/home/miguel
+2020-12-01 21:19:41,612 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.dir=/home/miguel/FileHaven/SDis/SDisGit/dgs-server
+2020-12-01 21:19:41,613 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.free=27MB
+2020-12-01 21:19:41,618 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.max=498MB
+2020-12-01 21:19:41,618 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.total=47MB
+2020-12-01 21:19:41,630 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@5c929192
+2020-12-01 21:19:41,642 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-01 21:19:41,659 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 21:19:41,679 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 21:19:41,721 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 21:19:41,723 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 21:19:41,763 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47178, server: localhost/127.0.0.1:2181
+2020-12-01 21:19:41,783 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x10000eb8cee0003, negotiated timeout = 5000
+2020-12-01 21:19:41,818 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x10000eb8cee0003.
+EndOfStreamException: Unable to read additional data from server sessionid 0x10000eb8cee0003, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-01 21:19:41,927 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x10000eb8cee0003 closed
+2020-12-01 21:19:41,928 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x10000eb8cee0003
+2020-12-01 21:19:41,967 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@6c82bd6b
+2020-12-01 21:19:41,969 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 21:19:41,970 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 21:19:41,988 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 21:19:41,988 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 21:19:41,991 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47180, server: localhost/127.0.0.1:2181
+2020-12-01 21:19:42,006 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x10000eb8cee0004, negotiated timeout = 5000
+2020-12-01 21:19:42,128 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x10000eb8cee0004 closed
+2020-12-01 21:19:42,128 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x10000eb8cee0004
+2020-12-01 21:20:01,061 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-01 21:20:01,075 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:host.name=Torradeira
+2020-12-01 21:20:01,076 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-01 21:20:01,077 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-01 21:20:01,077 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-01 21:20:01,077 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.class.path=/home/miguel/FileHaven/programs/maven/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar
+2020-12-01 21:20:01,077 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-01 21:20:01,078 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-01 21:20:01,078 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.compiler=<NA>
+2020-12-01 21:20:01,078 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.name=Linux
+2020-12-01 21:20:01,078 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.arch=amd64
+2020-12-01 21:20:01,078 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.version=5.4.0-53-generic
+2020-12-01 21:20:01,079 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.name=miguel
+2020-12-01 21:20:01,079 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.home=/home/miguel
+2020-12-01 21:20:01,079 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.dir=/home/miguel/FileHaven/SDis/SDisGit/dgs-server
+2020-12-01 21:20:01,079 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.free=25MB
+2020-12-01 21:20:01,086 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.max=498MB
+2020-12-01 21:20:01,087 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.total=55MB
+2020-12-01 21:20:01,114 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@611dbab2
+2020-12-01 21:20:01,134 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-01 21:20:01,186 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 21:20:01,255 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 21:20:01,311 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 21:20:01,313 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 21:20:01,401 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47184, server: localhost/127.0.0.1:2181
+2020-12-01 21:20:01,433 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x10000eb8cee0005, negotiated timeout = 5000
+2020-12-01 21:20:01,596 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x10000eb8cee0005
+2020-12-01 21:20:01,601 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x10000eb8cee0005 closed
+2020-12-01 21:20:01,688 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@71061b3b
+2020-12-01 21:20:01,689 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 21:20:01,689 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 21:20:01,697 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 21:20:01,697 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 21:20:01,702 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47186, server: localhost/127.0.0.1:2181
+2020-12-01 21:20:01,717 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x10000eb8cee0006, negotiated timeout = 5000
+2020-12-01 21:20:01,740 [myid:localhost:2181] - WARN  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1266] - An exception was thrown while closing send thread for session 0x10000eb8cee0006.
+EndOfStreamException: Unable to read additional data from server sessionid 0x10000eb8cee0006, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-01 21:20:01,854 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x10000eb8cee0006 closed
+2020-12-01 21:20:01,854 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x10000eb8cee0006
+2020-12-01 21:56:31,632 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-01 21:56:31,640 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:host.name=Torradeira
+2020-12-01 21:56:31,641 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-01 21:56:31,642 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-01 21:56:31,642 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-01 21:56:31,642 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.class.path=/home/miguel/FileHaven/programs/maven/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar
+2020-12-01 21:56:31,642 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-01 21:56:31,643 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-01 21:56:31,643 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.compiler=<NA>
+2020-12-01 21:56:31,643 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.name=Linux
+2020-12-01 21:56:31,643 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.arch=amd64
+2020-12-01 21:56:31,644 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.version=5.4.0-53-generic
+2020-12-01 21:56:31,644 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.name=miguel
+2020-12-01 21:56:31,644 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.home=/home/miguel
+2020-12-01 21:56:31,644 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.dir=/home/miguel/FileHaven/SDis/SDisGit/dgs-server
+2020-12-01 21:56:31,645 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.free=50MB
+2020-12-01 21:56:31,647 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.max=498MB
+2020-12-01 21:56:31,648 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.total=87MB
+2020-12-01 21:56:31,665 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@1d25377f
+2020-12-01 21:56:31,681 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-01 21:56:31,699 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 21:56:31,725 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 21:56:31,758 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 21:56:31,760 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 21:56:31,855 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47300, server: localhost/127.0.0.1:2181
+2020-12-01 21:56:31,963 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100011a20810000, negotiated timeout = 5000
+2020-12-01 21:56:32,105 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x100011a20810000 closed
+2020-12-01 21:56:32,106 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x100011a20810000
+2020-12-01 21:56:32,186 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@19904193
+2020-12-01 21:56:32,187 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 21:56:32,187 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 21:56:32,189 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 21:56:32,189 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 21:56:32,192 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47302, server: localhost/127.0.0.1:2181
+2020-12-01 21:56:32,197 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100011a20810001, negotiated timeout = 5000
+2020-12-01 21:56:32,309 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x100011a20810001 closed
+2020-12-01 21:56:32,311 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x100011a20810001
+2020-12-01 22:01:20,978 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-01 22:01:20,986 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:host.name=Torradeira
+2020-12-01 22:01:20,988 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-01 22:01:20,988 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-01 22:01:20,989 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-01 22:01:20,990 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.class.path=/home/miguel/FileHaven/programs/maven/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar
+2020-12-01 22:01:20,990 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-01 22:01:20,990 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-01 22:01:20,991 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.compiler=<NA>
+2020-12-01 22:01:20,991 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.name=Linux
+2020-12-01 22:01:20,991 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.arch=amd64
+2020-12-01 22:01:20,991 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.version=5.4.0-53-generic
+2020-12-01 22:01:20,992 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.name=miguel
+2020-12-01 22:01:20,992 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.home=/home/miguel
+2020-12-01 22:01:20,992 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.dir=/home/miguel/FileHaven/SDis/SDisGit/dgs-server
+2020-12-01 22:01:20,993 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.free=39MB
+2020-12-01 22:01:20,997 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.max=498MB
+2020-12-01 22:01:20,997 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.total=82MB
+2020-12-01 22:01:21,009 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@2e21dd3e
+2020-12-01 22:01:21,023 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-01 22:01:21,043 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 22:01:21,066 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 22:01:21,111 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 22:01:21,113 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 22:01:21,191 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47352, server: localhost/127.0.0.1:2181
+2020-12-01 22:01:21,212 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100011a20810002, negotiated timeout = 5000
+2020-12-01 22:01:21,341 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x100011a20810002 closed
+2020-12-01 22:01:21,342 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x100011a20810002
+2020-12-01 22:01:21,384 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@12f34404
+2020-12-01 22:01:21,386 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 22:01:21,387 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 22:01:21,389 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 22:01:21,392 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 22:01:21,396 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47354, server: localhost/127.0.0.1:2181
+2020-12-01 22:01:21,403 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100011a20810003, negotiated timeout = 5000
+2020-12-01 22:01:21,512 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x100011a20810003 closed
+2020-12-01 22:01:21,514 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x100011a20810003
+2020-12-01 22:02:30,029 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-01 22:02:30,038 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:host.name=Torradeira
+2020-12-01 22:02:30,040 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-01 22:02:30,040 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-01 22:02:30,041 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-01 22:02:30,041 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.class.path=/home/miguel/FileHaven/programs/maven/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar
+2020-12-01 22:02:30,041 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-01 22:02:30,042 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-01 22:02:30,042 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:java.compiler=<NA>
+2020-12-01 22:02:30,042 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.name=Linux
+2020-12-01 22:02:30,043 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.arch=amd64
+2020-12-01 22:02:30,043 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.version=5.4.0-53-generic
+2020-12-01 22:02:30,043 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.name=miguel
+2020-12-01 22:02:30,043 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.home=/home/miguel
+2020-12-01 22:02:30,044 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:user.dir=/home/miguel/FileHaven/SDis/SDisGit/dgs-server
+2020-12-01 22:02:30,044 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.free=26MB
+2020-12-01 22:02:30,047 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.max=498MB
+2020-12-01 22:02:30,047 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():Environment@98] - Client environment:os.memory.total=72MB
+2020-12-01 22:02:30,065 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@28a06d90
+2020-12-01 22:02:30,080 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-01 22:02:30,098 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 22:02:30,126 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 22:02:30,166 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 22:02:30,168 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 22:02:30,252 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47362, server: localhost/127.0.0.1:2181
+2020-12-01 22:02:30,289 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100011a20810004, negotiated timeout = 5000
+2020-12-01 22:02:30,381 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@3eb6dd8e
+2020-12-01 22:02:30,397 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 22:02:30,405 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 22:02:30,422 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 22:02:30,422 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 22:02:30,425 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47364, server: localhost/127.0.0.1:2181
+2020-12-01 22:02:30,436 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100011a20810005, negotiated timeout = 5000
+2020-12-01 22:02:30,581 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1005] - Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@3b0a8671
+2020-12-01 22:02:30,582 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-01 22:02:30,583 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-01 22:02:30,593 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:2181.
+2020-12-01 22:02:30,594 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-01 22:02:30,599 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@986] - Socket connection established, initiating session, client: /127.0.0.1:47366, server: localhost/127.0.0.1:2181
+2020-12-01 22:02:30,608 [myid:localhost:2181] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main(localhost:2181):ClientCnxn$SendThread@1420] - Session establishment complete on server localhost/127.0.0.1:2181, session id = 0x100011a20810006, negotiated timeout = 5000
+2020-12-01 22:02:30,738 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main():ZooKeeper@1618] - Session: 0x100011a20810006 closed
+2020-12-01 22:02:30,739 [myid:] - INFO  [pt.tecnico.staysafe.dgs.DgsServerApp.main()-EventThread:ClientCnxn$EventThread@566] - EventThread shut down for session: 0x100011a20810006

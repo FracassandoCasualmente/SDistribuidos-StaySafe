@@ -1,3 +1,5 @@
 execute.sh
 *.class
 target
+t_script_echo.sh
+

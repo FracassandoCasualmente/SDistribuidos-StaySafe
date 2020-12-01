@@ -29,7 +29,7 @@ public class BaseIT {
 		//connecting to server
 		final String host = testProps.getProperty("server.host");
 		final int port = Integer.parseInt(testProps.getProperty("server.port"));
-		frontend = new DgsFrontend(host, port);
+		frontend = new DgsFrontend(host, String.valueOf(port));
 	}
 	
 	@AfterAll

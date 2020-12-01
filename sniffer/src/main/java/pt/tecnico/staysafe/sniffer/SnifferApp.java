@@ -74,7 +74,7 @@ public class SnifferApp {
 		//try to connect to server
 		
 		//try to join sniffer
-		try(DgsFrontend frontend = new DgsFrontend(host,port);){
+		try(DgsFrontend frontend = new DgsFrontend(host,String.valueOf(port));){
 			frontend.snifferJoin(SnifferJoinRequest.newBuilder().setName(name).setAddress(address).build());
 			
 			// buffer of messages to send

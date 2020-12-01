@@ -4,9 +4,12 @@ import java.io.IOException;
 import io.grpc.BindableService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import pt.ulisboa.tecnico.sdis.zk.ZKNaming;
+import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
 
 public class DgsServerApp {
-	
+	private static Boolean _debug = true;
+
 	public static void main(String[] args) throws IOException, InterruptedException {
 		System.out.println("StaySafe dgs server");
 		
@@ -17,26 +20,64 @@ public class DgsServerApp {
 		}
 
 		// check arguments
-		if (args.length < 1) {
-			System.err.println("Argument(s) missing!");
+		if (args.length != 5) {
+			System.err.println("Argument(s) are wrong! We need 5!");
 			System.err.printf("Usage: java %s port%n", DgsServerApp.class.getName());
 			return;
 		}
 		
-		final int port = Integer.parseInt(args[0]);
-		final BindableService impl = new DgsServerImpl();
+		// parse arguments
+		final String zooHost = args[0];
+		final String zooPort = args[1];
+		final String host = args[2];
+		final String port = args[3];
+		final String path = args[4];
 
-		// Create a new server to listen on port
-		Server server = ServerBuilder.forPort(port).addService(impl).build();
+		ZKNaming zkNaming = null;
 
-		// Start the server
-		server.start();
+		try {
 
-		System.out.println("DgsServer started");
+			zkNaming = new ZKNaming(zooHost, zooPort);
+			// publish
+			debug("path: \""+path+"\"");
+			zkNaming.rebind(path, host, port);
 
-		// Do not exit the main thread. Wait until server is terminated.
-		server.awaitTermination();
-	}
+			final BindableService impl = new DgsServerImpl();
+
+			// Create a new server to listen on port
+			Server server = ServerBuilder.forPort( Integer.parseInt(port) ).addService(impl).build();
+
+			// Start the server
+			server.start();
+
+			System.out.println("DgsServer started");
+
+			// Do not exit the main thread. Wait until server is terminated.
+			server.awaitTermination();
+		}
+		catch (pt.ulisboa.tecnico.sdis.zk.ZKNamingException e) {
+			System.out.println("ERROR: "+e.getMessage()+" -> "+
+			e.getCause().getMessage());
+
+		} finally {
+			System.out.println("server going to finish...");
+			if (zkNaming != null) {
+				// remove
+				try {
+					zkNaming.unbind(path,host,port);
+				} catch (ZKNamingException e) {
+					System.out.println("Problem ocurred while unbinding:\n"+
+					 e.getLocalizedMessage());
+				}
+			}
+		}
 		
+	}
+	
+	private static void debug(String s) {
+		if (_debug) {
+			System.out.println(s);
+		}
+	}
 }	
 

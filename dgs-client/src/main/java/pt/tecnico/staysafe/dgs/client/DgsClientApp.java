@@ -2,6 +2,7 @@ package pt.tecnico.staysafe.dgs.client;
 
 import java.io.IOException;
 import io.grpc.StatusRuntimeException;
+import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
 
 public final class DgsClientApp extends DgsAbstractClient{
 	
@@ -21,9 +22,9 @@ public final class DgsClientApp extends DgsAbstractClient{
 		for (int i = 0; i < args.length; i++) {
 			System.out.printf("arg[%d] = %s%n", i, args[i]);
 		}
-		
-		DgsClientApp client = new DgsClientApp(host, port);
 
+		DgsClientApp client = new DgsClientApp(host, port);
+		
 		client.run();
 
 		// close frontend and finish

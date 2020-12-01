@@ -9,6 +9,7 @@ import java.lang.RuntimeException;
 import java.io.IOException;
 
 import io.grpc.StatusRuntimeException;
+import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
 
 
 public abstract class DgsAbstractClient {
@@ -18,10 +19,10 @@ public abstract class DgsAbstractClient {
 	protected ArrayList<Command> _commands;
 	
 	//client is to select the appropriate commands for the respective client
-	public DgsAbstractClient(String host, int port, String client)
+	public DgsAbstractClient(String zooAddr, Integer zooPort, String client)
 	{
 		_commands = new ArrayList<>();
-		_frontend = new DgsFrontend(host,port);
+		_frontend = new DgsFrontend(zooAddr, String.valueOf(zooPort));
 		
 		if(client.equals("journalist"))
 		{
