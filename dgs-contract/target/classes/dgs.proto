@@ -26,13 +26,13 @@ message SnifferJoinRequest
 {
 	string name = 1;
 	string address = 2;
-	repeated string prevTimestamp = 3;
+	repeated uint32 prevTV = 3;
 }
 
 message SnifferJoinResponse
 {
 	string result = 1;
-	repeated string currentTimestamp = 2;
+	repeated uint32 currentTV = 2;
 }
 
 
@@ -40,11 +40,13 @@ message SnifferJoinResponse
 message SnifferInfoRequest
 {
 	string name = 1;
+	repeated uint32 prevTV = 2;
 }
 
 message SnifferInfoResponse
 {
 	string address = 1;
+	repeated uint32 currentTV = 2;
 }
 
 
@@ -56,11 +58,13 @@ message ReportRequest
 	uint64 citizenId = 3;
 	google.protobuf.Timestamp enterTime = 4;
 	google.protobuf.Timestamp leaveTime = 5;
+	repeated uint32 prevTV = 6;
 }
 
 message ReportResponse
 {
 	string result = 1;
+	repeated uint32 currentTV = 2;
 }
 
 
@@ -68,11 +72,13 @@ message ReportResponse
 message IndividualInfectionProbabilityRequest
 {
 	uint64 citizenId = 1;
+	repeated uint32 prevTV = 2;
 }
 
 message IndividualInfectionProbabilityResponse
 {
 	double probability = 1;
+	repeated uint32 currentTV = 2;
 }
 
 
@@ -80,11 +86,13 @@ message IndividualInfectionProbabilityResponse
 message AggregateInfectionProbabilityRequest
 {
 	Statistic statistic = 1;
+	repeated uint32 prevTV = 2;
 }
 
 message AggregateInfectionProbabilityResponse
 {
 	string result = 1;
+	repeated uint32 currentTV = 2;
 }
 
 
@@ -93,36 +101,38 @@ message AggregateInfectionProbabilityResponse
 //ctrl_ping
 message PingRequest
 {
-	
+	repeated uint32 prevTV = 1;
 }
 
 message PingResponse
 {
 	string result = 1;
+	repeated uint32 currentTV = 2;
 }
 
 
 //ctrl_clear
 message ClearRequest
 {
-
+	repeated uint32 prevTV = 1;
 }
 
 message ClearResponse
 {
 	string result = 1;
+	repeated uint32 currentTV = 2;
 }
 
 
 //ctrl_init
 message InitRequest
 {
-
+	repeated uint32 prevTV = 1;
 }
 
 message InitResponse
 {
-
+	repeated uint32 currentTV = 2;
 }
 
 

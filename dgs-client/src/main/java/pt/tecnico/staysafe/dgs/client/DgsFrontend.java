@@ -17,11 +17,12 @@ public class DgsFrontend implements AutoCloseable{
 	private final ManagedChannel channel;
 	private final DgsServiceGrpc.DgsServiceBlockingStub stub;
 	// List that saves the existing servers
-	private final ArrayList<ZKRecord> _serverRecords;
+	private ArrayList<ZKRecord> _serverRecords;
 	private final String PATH = "/grpc/staysafe/dgs";
 	private ZKRecord _currentRecord;
 
 	public DgsFrontend(String zooHost, String zooPort ) {
+		_serverRecords = null;
 		
 		try {
 			// start zookeeper modifications
