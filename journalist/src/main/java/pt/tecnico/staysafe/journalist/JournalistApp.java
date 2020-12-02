@@ -21,17 +21,28 @@ public class JournalistApp extends DgsAbstractClient{
 		}
 		
 		//basic arguments checking
-		if(args.length != 2)
+		if(args.length != 2 && args.length != 3)
 		{
 			System.out.println("ERROR: Invalid number of arguments!");
-			System.out.println("./journalist host port");
+			System.out.println("./journalist host port [%ReplicaID%]");
 			System.exit(-1);
 		}
 		
 		//Connection parameters
 		final String host = args[0];
 		final int port = Integer.parseInt(args[1]);
-		
+		//optional parameter
+		if (args.length == 3) { // if has additional param
+			if (args[2].split("%").length != 1) { // if 
+				final String repId = args[1].split("%")[1];
+			}
+			else { // detected bad syntax
+				
+				System.out.println("ERROR: Invalid arguments!")
+				System.out.println("./journalist host port [%ReplicaID%]");
+				System.exit(-1);
+			}
+		}
 		JournalistApp journalist = new JournalistApp(host,port);
 			
 		//Add journalist commands

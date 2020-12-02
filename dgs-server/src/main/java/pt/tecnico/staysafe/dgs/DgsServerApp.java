@@ -8,7 +8,7 @@ import pt.ulisboa.tecnico.sdis.zk.ZKNaming;
 import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
 
 public class DgsServerApp {
-	private static Boolean _debug = true;
+	private static Boolean _debug = false;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		System.out.println("StaySafe dgs server");
@@ -40,6 +40,8 @@ public class DgsServerApp {
 			zkNaming = new ZKNaming(zooHost, zooPort);
 			// publish
 			debug("path: \""+path+"\"");
+
+			// Tell ZKNaming to link the path (...)/dgs/1 to my ip and port
 			zkNaming.rebind(path, host, port);
 
 			final BindableService impl = new DgsServerImpl();
@@ -56,11 +58,14 @@ public class DgsServerApp {
 			server.awaitTermination();
 		}
 		catch (pt.ulisboa.tecnico.sdis.zk.ZKNamingException e) {
+			// prints {error in ZKNaming} -> {error in ZooKeeper}
 			System.out.println("ERROR: "+e.getMessage()+" -> "+
 			e.getCause().getMessage());
 
 		} finally {
 			System.out.println("server going to finish...");
+
+			// removes the zNode in ZooKeeper associated with my ip and port
 			if (zkNaming != null) {
 				// remove
 				try {
