@@ -6,14 +6,13 @@ import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
 
 public final class DgsClientApp extends DgsAbstractClient{
 	
+	public DgsClientApp (String host, Integer port, String repId) {
+		super(host, port, repId, "DgsClient");
+	}
 	public DgsClientApp (String host, Integer port) {
-		super(host, port, "DgsClient");
+		super(host, port, null, "DgsClient");
 	}
 	public static void main(String[] args) {
-		
-		//Connection parameters
-		final String host = args[0];
-		final int port = Integer.parseInt(args[1]);
 		
 		System.out.println(DgsClientApp.class.getSimpleName());
 		
@@ -23,7 +22,21 @@ public final class DgsClientApp extends DgsAbstractClient{
 			System.out.printf("arg[%d] = %s%n", i, args[i]);
 		}
 
-		DgsClientApp client = new DgsClientApp(host, port);
+		// number of arguments checking
+		if(args.length != 2 && args.length != 3)
+		{
+			System.out.println("ERROR: Invalid number of arguments!");
+			System.out.println("./{client} host port [%ReplicaID%]");
+			System.exit(-1);
+		}
+
+		// parse the input length and extract replica id (optional parameter)
+		String repId = DgsAbstractClient.extractRepId(args);
+		//Connection parameters
+		final String host = args[0];
+		final int port = Integer.parseInt(args[1]);
+
+		DgsClientApp client = new DgsClientApp(host, port, repId);
 		
 		client.run();
 

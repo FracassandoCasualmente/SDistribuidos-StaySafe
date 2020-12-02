@@ -18,11 +18,13 @@ public abstract class DgsAbstractClient {
 	protected static Boolean _debug = false; // true if wants to print debugs
 	protected ArrayList<Command> _commands;
 	
-	//client is to select the appropriate commands for the respective client
-	public DgsAbstractClient(String zooAddr, Integer zooPort, String client)
+
+	//client specifies the type of client
+	// repId is null if no replica is specified
+	public DgsAbstractClient(String zooAddr, Integer zooPort, String repId, String client)
 	{
 		_commands = new ArrayList<>();
-		_frontend = new DgsFrontend(zooAddr, String.valueOf(zooPort));
+		_frontend = new DgsFrontend(zooAddr, String.valueOf(zooPort), repId);
 		
 		if(client.equals("journalist"))
 		{
@@ -56,7 +58,27 @@ public abstract class DgsAbstractClient {
 		_commands.add(new InitCommand(_frontend));
 		_commands.add(new HelpCommand(_frontend,_commands));
 		
+	}
 
+
+	// used to extract the repID from the mainArguments
+	public static String extractRepId(String[] mainArgs) {
+		
+
+		// if has exactly 3 args
+		if (mainArgs.length == 3) { // if has additional param
+			if (mainArgs[2].split("%").length != 1) { // if 
+				return mainArgs[2].split("%")[1];
+			}
+			else { // detected bad syntax
+				
+				System.out.println("ERROR: Invalid arguments!");
+				System.out.println("./{client} host port [%ReplicaID%]");
+				System.exit(-1);
+			}
+		}
+		// only 2 args, return null (no repID was given)
+		return null;
 	}
 
 	// receives input string and returns 
@@ -166,6 +188,7 @@ public abstract class DgsAbstractClient {
 	
 	// read input until blank line or EOF and execute accordingly
 	public final void run() {
+		
 		Scanner scanner = new Scanner(System.in);
 		try  {
 			// main cycle

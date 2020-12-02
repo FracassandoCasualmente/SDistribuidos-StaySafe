@@ -6,9 +6,11 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import pt.ulisboa.tecnico.sdis.zk.ZKNaming;
 import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
+import pt.ulisboa.tecnico.sdis.zk.ZKRecord;
 
 public class DgsServerApp {
-	private static Boolean _debug = false;
+	private static final Boolean _debug = false;
+	private static final Integer MAX_PORT = 9500;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		System.out.println("StaySafe dgs server");
@@ -30,7 +32,7 @@ public class DgsServerApp {
 		final String zooHost = args[0];
 		final String zooPort = args[1];
 		final String host = args[2];
-		final String port = args[3];
+		final String port = args[3]; // going to be substituted dynamically
 		final String path = args[4];
 
 		ZKNaming zkNaming = null;
@@ -41,6 +43,26 @@ public class DgsServerApp {
 			// publish
 			debug("path: \""+path+"\"");
 
+			// find path that is not taken yet
+			Integer newPort = Integer.valueOf(port);
+			while (true) {
+				if (newPort > MAX_PORT ) {
+					System.out.println("I've reached the maximum value for a port, closing");
+					System.exit(-1);
+				}
+				try {
+					zkNaming.bind(path+String.valueOf(newPort), host, String.valueOf(newPort) );
+				} catch (ZKNamingException zke) {
+					// this path already exists in ZooKeeper, try new one
+					newPort++;
+					continue;
+				}
+				// the bind was successful, exit cycle
+				break;
+			}
+
+			debug("I've successfully taken port: "+newPort);
+			
 			// Tell ZKNaming to link the path (...)/dgs/1 to my ip and port
 			zkNaming.rebind(path, host, port);
 

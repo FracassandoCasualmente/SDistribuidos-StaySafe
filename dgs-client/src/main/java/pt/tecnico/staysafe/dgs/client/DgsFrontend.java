@@ -14,19 +14,26 @@ import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
 import pt.ulisboa.tecnico.sdis.zk.ZKRecord;
 
 public class DgsFrontend implements AutoCloseable{
-	private final ManagedChannel channel;
-	private final DgsServiceGrpc.DgsServiceBlockingStub stub;
+	private ManagedChannel channel;
+	private DgsServiceGrpc.DgsServiceBlockingStub stub;
+
+	/* ZooKeeper stuff */
+	ZKNaming zkNaming; // Naming server
 	// List that saves the existing servers
 	private ArrayList<ZKRecord> _serverRecords;
 	private final String PATH = "/grpc/staysafe/dgs";
 	private ZKRecord _currentRecord;
 
-	public DgsFrontend(String zooHost, String zooPort ) {
+	// constructor compatible with IT tests
+	public DgsFrontend( String host, String port) {
+		this(host, port, null);
+	}
+	public DgsFrontend(String zooHost, String zooPort, String repId ) {
 		_serverRecords = null;
-		
+
 		try {
 			// start zookeeper modifications
-			ZKNaming zkNaming = new ZKNaming(zooHost,zooPort);
+			zkNaming = new ZKNaming(zooHost,zooPort);
 
 			// gets a List of available servers
 			_serverRecords = 
@@ -40,14 +47,16 @@ public class DgsFrontend implements AutoCloseable{
 		
 		// searches for a random replica to connect
 		// puts it's address in _currentRecord
-		connectToReplica(null);
-		String target = _currentRecord.getURI();
-		// connects to random replica
-		channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
+		connectToReplica(repId);
 
 		//this.channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
 		// end of zookeeper modifications
+	}
 
+	// connects to the current Record
+	private final void connect() {
+		String target = _currentRecord.getURI();
+		channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
 		// Create a blocking stub.
 		stub = DgsServiceGrpc.newBlockingStub(channel);
 	}
@@ -59,8 +68,28 @@ public class DgsFrontend implements AutoCloseable{
 		Random random = new Random();
 		if (repId == null) {
 			// random record
-			_serverRecords.get( random.nextInt(_serverRecords.size() );
+			_currentRecord = _serverRecords.get( random.nextInt(_serverRecords.size()) );
+			connect(); // establish connection
+			return;
 		}
+		
+		// repId is specified, lets search it
+		Integer portAux;
+		for (ZKRecord zkAux : _serverRecords ) {
+			// get the port of this record
+			portAux = Integer.valueOf(zkAux.getURI().split(":")[1]);
+			// if 8080 + repId = this port
+			if ( portAux == Integer.valueOf(repId) + 8080 ) {
+				// found the replica we wanted
+				_currentRecord = zkAux;
+				connect(); // establish connection
+				return;
+			}
+		}
+		// didnt find our replica, lets choose a random one
+		System.out.println("ERROR: The replica you specified \""+repId+"\" wasn't found.");
+		connectToReplica(null);
+
 	}
 
 	// called when we lose connection to the current replica

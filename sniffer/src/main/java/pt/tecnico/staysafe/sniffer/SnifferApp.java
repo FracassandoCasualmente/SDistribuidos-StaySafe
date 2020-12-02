@@ -1,5 +1,7 @@
 package pt.tecnico.staysafe.sniffer;
 
+import pt.tecnico.staysafe.dgs.client.DgsAbstractClient;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -56,6 +58,10 @@ public class SnifferApp {
 		for (int i = 0; i < args.length; i++) {
 			System.out.printf("arg[%d] = %s%n", i, args[i]);
 		}
+
+
+		// parse the input length and extract replica id (optional parameter)
+		String repId = DgsAbstractClient.extractRepId(args);
  
 		//Connection parameters
 		final String host = args[0];
@@ -74,7 +80,7 @@ public class SnifferApp {
 		//try to connect to server
 		
 		//try to join sniffer
-		try(DgsFrontend frontend = new DgsFrontend(host,String.valueOf(port));){
+		try(DgsFrontend frontend = new DgsFrontend(host,String.valueOf(port), repId);){
 			frontend.snifferJoin(SnifferJoinRequest.newBuilder().setName(name).setAddress(address).build());
 			
 			// buffer of messages to send
