@@ -6,11 +6,13 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import pt.ulisboa.tecnico.sdis.zk.ZKNaming;
 import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
-import pt.ulisboa.tecnico.sdis.zk.ZKRecord;
+
+import sun.misc.Signal; //  signal handler
 
 public class DgsServerApp {
-	private static final Boolean _debug = false;
+	private static final Boolean _debug = true;
 	private static final Integer MAX_PORT = 9500;
+	
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		System.out.println("StaySafe dgs server");
@@ -35,6 +37,14 @@ public class DgsServerApp {
 		final String port = args[3]; // going to be substituted dynamically
 		final String path = args[4];
 
+		// create signal handler
+		Signal.handle(new Signal("INT"), 
+    	signal -> {
+			System.out.println("\nOk, I'll (kindly) kill myself. Bye");
+			System.exit(1);
+		}
+		);
+
 		ZKNaming zkNaming = null;
 
 		try {
@@ -44,32 +54,34 @@ public class DgsServerApp {
 			debug("path: \""+path+"\"");
 
 			// find path that is not taken yet
-			Integer newPort = Integer.valueOf(port);
+			Integer newId = 1;
 			while (true) {
-				if (newPort > MAX_PORT ) {
+				if (newId +8080 > MAX_PORT ) {
 					System.out.println("I've reached the maximum value for a port, closing");
 					System.exit(-1);
 				}
 				try {
-					zkNaming.bind(path+String.valueOf(newPort), host, String.valueOf(newPort) );
+					// tries to bind this path
+					zkNaming.bind(path+String.valueOf(newId), host, String.valueOf(8080+newId) );
+					debug("fez o inner try sem exp");
 				} catch (ZKNamingException zke) {
+					debug("Exception inside ZK catch:\n"+zke.getMessage()+" -> "+zke.getCause().getMessage());
 					// this path already exists in ZooKeeper, try new one
-					newPort++;
+					newId++;
 					continue;
 				}
 				// the bind was successful, exit cycle
 				break;
 			}
 
-			debug("I've successfully taken port: "+newPort);
+			Integer repPort = newId + 8080;
+			debug("I've successfully taken port: "+String.valueOf(repPort));
 			
-			// Tell ZKNaming to link the path (...)/dgs/1 to my ip and port
-			zkNaming.rebind(path, host, port);
 
 			final BindableService impl = new DgsServerImpl();
 
 			// Create a new server to listen on port
-			Server server = ServerBuilder.forPort( Integer.parseInt(port) ).addService(impl).build();
+			Server server = ServerBuilder.forPort( repPort ).addService(impl).build();
 
 			// Start the server
 			server.start();
@@ -79,7 +91,11 @@ public class DgsServerApp {
 			// Do not exit the main thread. Wait until server is terminated.
 			server.awaitTermination();
 		}
-		catch (pt.ulisboa.tecnico.sdis.zk.ZKNamingException e) {
+		catch (Exception e) {
+			
+			debug("Exception name: "+e.getClass().getName());
+			debug("Exception msg:\n"+e.getMessage()+" -> "+e.getCause().getMessage());
+			debug("exception in outer catch: "+e.getStackTrace());
 			// prints {error in ZKNaming} -> {error in ZooKeeper}
 			System.out.println("ERROR: "+e.getMessage()+" -> "+
 			e.getCause().getMessage());

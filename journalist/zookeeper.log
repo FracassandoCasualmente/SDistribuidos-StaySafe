@@ -1,0 +1,126 @@
+2020-12-03 18:17:58,397 [myid:] - INFO  [main:Environment@98] - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+2020-12-03 18:17:58,405 [myid:] - INFO  [main:Environment@98] - Client environment:host.name=Torradeira
+2020-12-03 18:17:58,412 [myid:] - INFO  [main:Environment@98] - Client environment:java.version=11.0.9.1
+2020-12-03 18:17:58,412 [myid:] - INFO  [main:Environment@98] - Client environment:java.vendor=Ubuntu
+2020-12-03 18:17:58,412 [myid:] - INFO  [main:Environment@98] - Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2020-12-03 18:17:58,412 [myid:] - INFO  [main:Environment@98] - Client environment:java.class.path=/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/etc:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/pt/tecnico/staysafe/G15/dgs-contract/1.0.0-SNAPSHOT/dgs-contract-1.0.0-SNAPSHOT.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/grpc/grpc-protobuf/1.28.0/grpc-protobuf-1.28.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/grpc/grpc-api/1.28.0/grpc-api-1.28.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/grpc/grpc-context/1.28.0/grpc-context-1.28.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/org/codehaus/mojo/animal-sniffer-annotations/1.18/animal-sniffer-annotations-1.18.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/protobuf/protobuf-java/3.11.0/protobuf-java-3.11.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/guava/guava/28.1-android/guava-28.1-android.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/org/checkerframework/checker-compat-qual/2.5.5/checker-compat-qual-2.5.5.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/api/grpc/proto-google-common-protos/1.17.0/proto-google-common-protos-1.17.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/grpc/grpc-protobuf-lite/1.28.0/grpc-protobuf-lite-1.28.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/grpc/grpc-stub/1.28.0/grpc-stub-1.28.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/grpc/grpc-netty-shaded/1.28.0/grpc-netty-shaded-1.28.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/grpc/grpc-core/1.28.0/grpc-core-1.28.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/perfmark/perfmark-api/0.19.0/perfmark-api-0.19.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/grpc/grpc-testing/1.28.0/grpc-testing-1.28.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/junit/junit/4.12/junit-4.12.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/opencensus/opencensus-api/0.24.0/opencensus-api-0.24.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/protobuf/protobuf-java-util/3.11.4/protobuf-java-util-3.11.4.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/errorprone/error_prone_annotations/2.3.4/error_prone_annotations-2.3.4.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/pt/tecnico/staysafe/G15/dgs-client/1.0.0-SNAPSHOT/dgs-client-1.0.0-SNAPSHOT.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/pt/ulisboa/tecnico/sdis/zk-naming/1.0.3/zk-naming-1.0.3.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/org/apache/zookeeper/zookeeper/3.6.0/zookeeper-3.6.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/org/apache/zookeeper/zookeeper-jute/3.6.0/zookeeper-jute-3.6.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/log4j/log4j/1.2.17/log4j-1.2.17.jar:/home/miguel/FileHaven/SDis/SDisGit/journalist/target/appassembler/repo/pt/tecnico/staysafe/G15/journalist/1.0.0-SNAPSHOT/journalist-1.0.0-SNAPSHOT.jar
+2020-12-03 18:17:58,413 [myid:] - INFO  [main:Environment@98] - Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-12-03 18:17:58,414 [myid:] - INFO  [main:Environment@98] - Client environment:java.io.tmpdir=/tmp
+2020-12-03 18:17:58,414 [myid:] - INFO  [main:Environment@98] - Client environment:java.compiler=<NA>
+2020-12-03 18:17:58,414 [myid:] - INFO  [main:Environment@98] - Client environment:os.name=Linux
+2020-12-03 18:17:58,415 [myid:] - INFO  [main:Environment@98] - Client environment:os.arch=amd64
+2020-12-03 18:17:58,415 [myid:] - INFO  [main:Environment@98] - Client environment:os.version=5.4.0-53-generic
+2020-12-03 18:17:58,415 [myid:] - INFO  [main:Environment@98] - Client environment:user.name=miguel
+2020-12-03 18:17:58,415 [myid:] - INFO  [main:Environment@98] - Client environment:user.home=/home/miguel
+2020-12-03 18:17:58,416 [myid:] - INFO  [main:Environment@98] - Client environment:user.dir=/home/miguel/FileHaven/SDis/SDisGit/journalist
+2020-12-03 18:17:58,416 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.free=30MB
+2020-12-03 18:17:58,421 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.max=498MB
+2020-12-03 18:17:58,421 [myid:] - INFO  [main:Environment@98] - Client environment:os.memory.total=34MB
+2020-12-03 18:17:58,446 [myid:] - INFO  [main:ZooKeeper@1005] - Initiating client connection, connectString=localhost:8080 sessionTimeout=5000 watcher=pt.ulisboa.tecnico.sdis.zk.ZKNaming$1@4e04a765
+2020-12-03 18:17:58,478 [myid:] - INFO  [main:X509Util@77] - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+2020-12-03 18:17:58,512 [myid:] - INFO  [main:ClientCnxnSocket@239] - jute.maxbuffer value is 1048575 Bytes
+2020-12-03 18:17:58,534 [myid:] - INFO  [main:ClientCnxn@1703] - zookeeper.request.timeout value is 0. feature enabled=false
+2020-12-03 18:17:58,589 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:17:58,591 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:17:58,639 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:17:59,751 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:17:59,752 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:17:59,755 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:00,858 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:00,858 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:00,859 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:01,969 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:01,970 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:01,971 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:03,074 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:03,075 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:03,076 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:04,179 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:04,179 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:04,181 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:05,284 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:05,284 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:05,286 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:06,389 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:06,389 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:06,391 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:07,493 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:07,494 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:07,495 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:08,597 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:08,598 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:08,599 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:09,702 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:09,702 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:09,703 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:10,806 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:10,806 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:10,808 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+2020-12-03 18:18:11,910 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1154] - Opening socket connection to server localhost/127.0.0.1:8080.
+2020-12-03 18:18:11,910 [myid:localhost:8080] - INFO  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1156] - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+2020-12-03 18:18:11,911 [myid:localhost:8080] - WARN  [main-SendThread(localhost:8080):ClientCnxn$SendThread@1272] - Session 0x0 for sever localhost/127.0.0.1:8080, Closing socket connection. Attempting reconnect except it is a SessionExpiredException.
+java.net.ConnectException: Ligação recusada
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:342)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
