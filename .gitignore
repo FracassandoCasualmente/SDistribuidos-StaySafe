@@ -4,3 +4,5 @@ target
 t_script_echo.sh
 
 *.log
+run3.sh
+
