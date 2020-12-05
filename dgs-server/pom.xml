@@ -42,6 +42,12 @@
     		<artifactId>zk-naming</artifactId>
     		<version>1.0.3</version>
 		</dependency>
+		<!-- Vectorial Timestamp stuff-->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>dgs-update</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
