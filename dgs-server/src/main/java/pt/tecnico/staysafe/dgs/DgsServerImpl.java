@@ -12,6 +12,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	
 	private DgsSystem dgsSystem = new DgsSystem();
 	private Boolean _debug = false;
+	private Integer _port;
+
+	public DgsServerImpl(Integer port) {
+		super();
+		_port = port;
+	}
 	
 	private void debug(String msg) {
 		if (_debug) {

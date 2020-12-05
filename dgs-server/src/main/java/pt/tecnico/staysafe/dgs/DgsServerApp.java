@@ -59,7 +59,8 @@ public class DgsServerApp {
 			// regists in naming server
 			zkNaming.rebind(path, host, port);
 
-			final BindableService impl = new DgsServerImpl();
+			//final BindableService impl = new DgsServerImpl();
+			final BindableService impl = new DgsServerImpl( Integer.valueOf(port) );
 
 			// Create a new server to listen on port
 			Server server = ServerBuilder.forPort( Integer.valueOf(port) ).addService(impl).build();
