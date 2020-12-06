@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import java.io.IOException;
 
+import pt.tecnico.staysafe.dgs.client.exceptions.OutdatedReadException;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import io.grpc.StatusRuntimeException;
 import com.google.protobuf.Timestamp;
@@ -55,7 +56,7 @@ class HelpCommand extends Command{
 	}
 
 	@Override
-	public String execute(String[] args) throws IOException, StatusRuntimeException{
+	public String execute(String[] args) throws IOException, StatusRuntimeException {
 
 		String commandList = "\nCOMMANDS\n--------\n";
 		
@@ -106,7 +107,8 @@ class MeanDevCommand extends Command
 	}
 	
 	@Override
-	public String execute(String [] args) throws IOException, StatusRuntimeException
+	public String execute(String [] args) throws IOException, StatusRuntimeException,
+		OutdatedReadException
 	{
 		AggregateInfectionProbabilityRequest aipRequest = AggregateInfectionProbabilityRequest.newBuilder().setStatistic(Statistic.MEAN_DEV).build();
 		AggregateInfectionProbabilityResponse aipResponse = _fe.aggregateInfectionProbability(aipRequest);
@@ -238,7 +240,7 @@ class SnifferInfoCommand extends Command {
 	}
 	
 	@Override
-	public String execute(String [] args) {	
+	public String execute(String [] args) throws OutdatedReadException {	
 		String result = "";
 		try {
 		    SnifferInfoRequest request = SnifferInfoRequest.newBuilder().setName(args[0]).build();

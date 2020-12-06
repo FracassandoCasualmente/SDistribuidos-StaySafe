@@ -9,6 +9,7 @@ import java.lang.RuntimeException;
 import java.io.IOException;
 
 import io.grpc.StatusRuntimeException;
+import pt.tecnico.staysafe.dgs.client.exceptions.OutdatedReadException;
 import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
 
 
@@ -175,11 +176,13 @@ public abstract class DgsAbstractClient {
 		debug("going to execute");
 		try {
 			result = cmdCalled.execute(cmdArgs);
+		}catch (OutdatedReadException ore) {
+			throw new IOException(ore.getMessage());
 		} catch (IOException e) {
 			throw new IOException("Invalid Input arguments!\n"+e.getMessage());
 		} catch (StatusRuntimeException sre) {
 			throw new IOException("Error from server: "+sre.getStatus().getDescription());
-		}
+		} 
 		debug("ended execution");
 		
 		// return the result of the command	
@@ -199,18 +202,15 @@ public abstract class DgsAbstractClient {
 					continue;
 				}
 				
-				
 				// parses and executes input accordingly
 				String result;
 				try {
 					result = runCommand(input);
 				} catch (IOException ioe) {
 					result = ioe.getMessage();
-					
 				}
 				// print the result of the command
 				System.out.println(result);
-				
              
 			} // end of main cycle
    

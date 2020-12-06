@@ -1,12 +1,16 @@
 package pt.tecnico.staysafe.dgs;
 
 import java.io.IOException;
+
 import io.grpc.BindableService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+
 import pt.ulisboa.tecnico.sdis.zk.ZKNaming;
 import pt.ulisboa.tecnico.sdis.zk.ZKRecord;
 import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
+
+import pt.tecnico.staysafe.dgs.update.DgsDebugger;
 
 import sun.misc.Signal; //  signal handler
 
@@ -19,10 +23,10 @@ public class DgsServerApp {
 		System.out.println("StaySafe dgs server");
 		
 		// receive and print arguments
-		System.out.printf("Received %d arguments%n", args.length);
+		/*System.out.printf("Received %d arguments%n", args.length);
 		for (int i = 0; i < args.length; i++) {
 			System.out.printf("arg[%d] = %s%n", i, args[i]);
-		}
+		}*/
 
 		// check arguments
 		if (args.length != 6) {
@@ -78,9 +82,8 @@ public class DgsServerApp {
 			debug("Exception name: "+e.getClass().getName());
 			debug("Exception msg:\n"+e.getMessage()+" -> "+e.getCause().getMessage());
 			debug("exception in outer catch: "+e.getStackTrace());
-			// prints {error in ZKNaming} -> {error in ZooKeeper}
-			System.out.println("ERROR: "+e.getMessage()+" -> "+
-			e.getCause().getMessage());
+			
+			System.out.println("ERROR: "+e.getMessage());
 
 		} finally {
 			System.out.println("server going to finish...");
@@ -90,6 +93,7 @@ public class DgsServerApp {
 				// remove
 				try {
 					zkNaming.unbind(path,host,port);
+					System.out.println("Unbinding successful");
 				} catch (ZKNamingException e) {
 					System.out.println("Problem ocurred while unbinding:\n"+
 					 e.getLocalizedMessage());

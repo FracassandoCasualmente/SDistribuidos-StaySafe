@@ -2,7 +2,7 @@ package pt.tecnico.staysafe.journalist;
 
 import pt.tecnico.staysafe.dgs.client.DgsAbstractClient;
 
-public class JournalistApp extends DgsAbstractClient{
+public class JournalistApp extends DgsAbstractClient {
 	
 	//call the super class constructor because of frontend
 	public JournalistApp(String host, int port, String repId)
@@ -36,7 +36,6 @@ public class JournalistApp extends DgsAbstractClient{
 		//Connection parameters
 		final String host = args[0];
 		final int port = Integer.parseInt(args[1]);
-		
 
 		JournalistApp journalist = new JournalistApp(host, port, repId);
 			

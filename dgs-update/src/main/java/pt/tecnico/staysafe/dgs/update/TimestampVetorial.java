@@ -4,7 +4,12 @@ import java.io.IOException;
 
 public class TimestampVetorial {
 	private Integer[] _array;
+	private final Integer DEFAULT_NUM_REPLICAS = 3;
 
+	// builds the default timestamp
+	public TimestampVetorial() {
+		_array = new Integer[DEFAULT_NUM_REPLICAS];
+	}
 	// receives the number of replicas and creates zero-ed timestamp
 	public TimestampVetorial(Integer numReps) {
 		_array = new Integer[numReps];
@@ -105,5 +110,15 @@ public class TimestampVetorial {
 		res = res.substring(0, res.length() - 2); // remove last ", "
 		res = res + " >";
 		return res;
+	}
+
+	// increments every position [i] of my timestamp
+	// to the max of ours both timestamps
+	public void update(TimestampVetorial otherTV) {
+		for (int i = 0; i < _array.length; i++) {
+			if ( _array[i] < otherTV._array[i] ) {
+				_array[i] = otherTV._array[i];
+			}
+		}
 	}
 }
