@@ -4,7 +4,7 @@
 #host=$1
 #port=$2
 host=localhost
-port=8080
+port=2181
 otherArgs="$1 $2"
 
 # Loop until all parameters are used up
