@@ -72,8 +72,14 @@ public class SnifferApp {
 		// build address
 		String snifferAux = "";
 		for ( int i = 3; i < args.length; i++) {
-
 			snifferAux+= " "+args[i];
+		}
+		snifferAux = snifferAux.split("%")[0]; // remove %repId%
+
+		if (snifferAux.equals("")) {
+			System.out.println("Argument(s) missing!");
+			System.out.println("./sniffer host port name address [%repId%]");
+			return;
 		}
 		final String address = snifferAux.substring(1, snifferAux.length());
  

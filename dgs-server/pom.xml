@@ -18,8 +18,8 @@
 		<zoo.port>2181</zoo.port>
 		<server.host>localhost</server.host>
 		<instance>1</instance>
-		<server.port>808{instance}</server.port>
-		<server.path>/grpc/staysafe/dgs/{instance}</server.path>
+		<server.port>808${instance}</server.port>
+		<server.path>/grpc/staysafe/dgs/${instance}</server.path>
 
 		<mainclass>pt.tecnico.staysafe.dgs.DgsServerApp</mainclass>
 		<!-- this port was used in proj1

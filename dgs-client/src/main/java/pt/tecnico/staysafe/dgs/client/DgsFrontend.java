@@ -2,7 +2,7 @@ package pt.tecnico.staysafe.dgs.client;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.Random;
 
 import io.grpc.ManagedChannel;

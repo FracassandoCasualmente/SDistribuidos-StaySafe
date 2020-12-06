@@ -39,6 +39,7 @@
 		<module>dgs-server</module>
 		<module>dgs-client</module>
 		<module>sniffer</module>
+		<module>dgs-update</module>
 		<module>journalist</module>
 		<module>researcher</module>
 	</modules>
