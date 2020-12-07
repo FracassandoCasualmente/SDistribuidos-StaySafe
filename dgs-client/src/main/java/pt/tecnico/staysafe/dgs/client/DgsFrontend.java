@@ -85,7 +85,9 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 	}
 
 	private void read(List<Integer> listTV) throws OutdatedReadException {
-		read(new TimestampVetorial( (Integer[]) listTV.toArray() ) );
+		Integer [] aux = new Integer[listTV.size()];
+		aux = listTV.toArray(aux);
+		read(new TimestampVetorial(aux));
 	}
 
 	// called in methods that make writings
