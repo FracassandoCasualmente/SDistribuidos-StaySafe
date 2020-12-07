@@ -2,6 +2,7 @@ package pt.tecnico.staysafe.dgs;
 
 import pt.tecnico.staysafe.dgs.exception.*;
 import pt.tecnico.staysafe.dgs.grpc.*;
+import pt.tecnico.staysafe.dgs.update.DgsDebugger;
 import io.grpc.stub.StreamObserver;
 import static io.grpc.Status.INVALID_ARGUMENT;
 import com.google.protobuf.Timestamp;
@@ -13,10 +14,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	private DgsSystem dgsSystem = new DgsSystem();
 	private Boolean _debug = false;
 	private Integer _port;
+	private DgsUpdateManager _replicaManager;
 
 	public DgsServerImpl(Integer port) {
 		super();
 		_port = port;
+		_replicaManager = new DgsUpdateManager(_port);
 	}
 	
 	private void debug(String msg) {
@@ -32,7 +35,8 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	public void ctrlPing(PingRequest request, StreamObserver<PingResponse> responseObserver)
 	{
 		String output = "Server State: UP";
-		PingResponse response = PingResponse.newBuilder().setResult(output).build();
+		PingResponse response = PingResponse.newBuilder().setResult(output).
+				addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
 		if (_debug) {
 			debug("--Going to debug observations--");
 			dgsSystem.debugObservations(); // debug
@@ -49,7 +53,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		synchronized (this) {
 			output = dgsSystem.clear();
 		}
-		ClearResponse response = ClearResponse.newBuilder().setResult(output).build();
+		
+		// inserting into executed updates log
+		_replicaManager.update(request);
+		
+		ClearResponse response = ClearResponse.newBuilder().setResult(output).
+				addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
 	}
@@ -62,7 +71,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 			synchronized (this) {
 				dgsSystem.init();
 			}
-			InitResponse response = InitResponse.getDefaultInstance();
+			
+			// inserting into executed updates log
+			_replicaManager.update(request);
+			
+			InitResponse response = InitResponse.newBuilder().
+					addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
 			responseObserver.onNext(response);
 			responseObserver.onCompleted();
 		} catch(InternalServerErrorException isee){
@@ -84,7 +98,11 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 				result = dgsSystem.joinSniffer(request.getName(), request.getAddress());
 			}
 			
-			SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setResult(result).build();
+			// inserting into executed updates log
+			_replicaManager.update(request);
+			
+			SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setResult(result).
+					addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
 			responseObserver.onNext(response);
 			responseObserver.onCompleted();
 		}
@@ -105,7 +123,8 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 				result = dgsSystem.snifferInfo(request.getName());
 			}
 			//sends response
-			SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setAddress(result).build();
+			SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setAddress(result).
+					addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
 			responseObserver.onNext(response);
 			responseObserver.onCompleted();
 		}
@@ -132,7 +151,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		synchronized (this) {
 			try {
 				String result = dgsSystem.addReport(newObs);
-				ReportResponse response = ReportResponse.newBuilder().setResult(result).build();
+								
+				// inserting into executed updates log
+				_replicaManager.update(request);
+				
+				ReportResponse response = ReportResponse.newBuilder().setResult(result).
+						addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			} catch (SnifferDoesNotExistException e) {
@@ -159,7 +183,8 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 				// build response object
 				IndividualInfectionProbabilityResponse response = 
 				IndividualInfectionProbabilityResponse.newBuilder().
-				setProbability( probability ).build();
+				setProbability( probability ).
+				addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
 
 	   			responseObserver.onNext(response);
 				   responseObserver.onCompleted();
@@ -193,7 +218,8 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 
 		//build response
 		AggregateInfectionProbabilityResponse response = AggregateInfectionProbabilityResponse.
-				newBuilder().setResult(probability).build();
+				newBuilder().setResult(probability).
+				addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
 		
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
