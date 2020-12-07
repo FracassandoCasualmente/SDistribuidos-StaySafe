@@ -1,6 +1,9 @@
 package pt.tecnico.staysafe.dgs.update;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class TimestampVetorial {
 	private Integer[] _array;
@@ -9,14 +12,18 @@ public class TimestampVetorial {
 	// builds the default timestamp
 	public TimestampVetorial() {
 		_array = new Integer[DEFAULT_NUM_REPLICAS];
+		for(int i=0;i<DEFAULT_NUM_REPLICAS;i++) _array[i] = 0;
 	}
 	// receives the number of replicas and creates zero-ed timestamp
 	public TimestampVetorial(Integer numReps) {
 		_array = new Integer[numReps];
+		for(int i=0;i<DEFAULT_NUM_REPLICAS;i++) _array[i] = 0;
 	}
 
 	public TimestampVetorial(Integer[] array) {
 		_array = array;
+		for(int i=0;i<DEFAULT_NUM_REPLICAS;i++) _array[i] = 0;
+
 	}
 
 	// returns
@@ -120,5 +127,11 @@ public class TimestampVetorial {
 				_array[i] = otherTV._array[i];
 			}
 		}
+	}
+	
+	// returns the timestamp as a list
+	public ArrayList<Integer> getTvAsList()
+	{
+		return new ArrayList<Integer>(Arrays.asList(_array));
 	}
 }
