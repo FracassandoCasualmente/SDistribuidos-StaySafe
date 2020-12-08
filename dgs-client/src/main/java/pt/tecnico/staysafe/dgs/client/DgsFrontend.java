@@ -10,7 +10,6 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 import pt.tecnico.staysafe.dgs.client.exceptions.OutdatedReadException;
 import pt.tecnico.staysafe.dgs.grpc.*;
-import com.google.protobuf.GeneratedMessageV3;
 
 import pt.tecnico.staysafe.dgs.update.DgsDebugger;
 import pt.tecnico.staysafe.dgs.update.TimestampVetorial;
@@ -71,6 +70,8 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 	// updates our TV if it is newer than the last version the client had seen
 	// throws exception if the version of server happened before or is concurrent
 	private void read(TimestampVetorial serverCurrTV) throws OutdatedReadException{
+		debug("My Timestamp is "+_prevTV);
+		debug("The server timestamp is "+serverCurrTV);
 		try {
 			if ( serverCurrTV.happensBefore(_prevTV) != true) {
 				throw new OutdatedReadException();
@@ -80,8 +81,10 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 			ioe.printStackTrace();
 			throw new RuntimeException();
 		}
+		
 		// our timestamp is older than the server's, lets update our tv
 		_prevTV.update(serverCurrTV);
+		debug("after the update, my Timestamp is "+_prevTV);
 	}
 
 	private void read(List<Integer> listTV) throws OutdatedReadException {
@@ -93,17 +96,25 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 	// called in methods that make writings
 	// receives a response's TV from server
 	// updates our TV with the new server's TV after our writing
-	private void write(TimestampVetorial serverCurrTV) {	
+	private void write(TimestampVetorial serverCurrTV) {
+		debug("My Timestamp is "+_prevTV);	
 		// lets update our tv with the new one
+		debug("The server timestamp is "+serverCurrTV);
 		_prevTV.update(serverCurrTV);
+		debug("after the update, my Timestamp is "+_prevTV);
 	}
 	private void write(List<Integer> listTV) {
-		write(new TimestampVetorial( (Integer[])listTV.toArray() ) );
+		Integer[] auxArray = new Integer[listTV.size()];
+		write(new TimestampVetorial( listTV.toArray(auxArray) ) );
 	}
 
 	/* METHODS TO HANDLE MULTIPLE REPLICAS */
 	// connects to the current Record
 	private final void connect() {
+		if (channel != null) {
+			close(); // shutdown previous channel
+		}
+		
 		String target = _currentRecord.getURI();
 		Integer port = Integer.valueOf(target.split(":")[1]);
 
@@ -346,11 +357,10 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 	public IndividualInfectionProbabilityResponse individualInfectionProbability( 
 	  IndividualInfectionProbabilityRequest request)
 	  throws OutdatedReadException {
+
 		IndividualInfectionProbabilityResponse iipr = null;
 		try
 		{
-			System.out.println("Reconecting...");
-
 			iipr = stub.individualInfectionProbability(request);
 		}
 		catch(StatusRuntimeException e)
@@ -407,16 +417,20 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 	}
 
 	private void debug(String s) {
-		DgsDebugger.debug(s);
+		DgsDebugger.debug("debug: "+s);
 	}
 
 	// returns true if exception means that we lost connection
-	private Boolean isDcException(Exception e) {
-		if (e.getClass().getName().equals("io.grpc.StatusRuntimeException")) {
-			debug("Exception name is statusRuntime");
-			if ( e.getMessage().equals("UNAVAILABLE: io exception") ) {
-				return true;
-			}
+	private Boolean isDcException(StatusRuntimeException e) {
+		
+		//debug("Exception status.code is: \""+e.getStatus().getCode().toString()+"\"");
+		//debug("Exception msg is: "+e.getMessage());
+
+		// invalid argument is an expected exception code
+		// other exceptions codes mean server is down / crashed
+		if ( !e.getStatus().getCode().toString().equals("INVALID_ARGUMENT") ) {
+			//debug("exception is NOT invalid argument");
+			return true;
 		}
 		return false;
 	}

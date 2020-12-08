@@ -19,12 +19,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	public DgsServerImpl(Integer port) {
 		super();
 		_port = port;
-		_replicaManager = new DgsUpdateManager(_port);
+		_replicaManager = new DgsUpdateManager( Integer.valueOf(_port) - 8080 );
 	}
 	
 	private void debug(String msg) {
 		if (_debug) {
-			System.out.println(msg);
+			DgsServerApp.debug(msg);
 		}
 	}
 
@@ -37,10 +37,6 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 		String output = "Server State: UP";
 		PingResponse response = PingResponse.newBuilder().setResult(output).
 				addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
-		if (_debug) {
-			debug("--Going to debug observations--");
-			dgsSystem.debugObservations(); // debug
-		}
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
 	}

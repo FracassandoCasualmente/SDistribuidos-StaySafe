@@ -11,17 +11,21 @@ color=$color_yellow
 
 pidList=""
 
+# remove last servers pids
+rm tmp/*txt 2>/dev/null
+
 for repId in $(seq 1 3);
 do
 	./execute.sh ${repId} &
 	pid=$!
 	pidList="${pidList} ${pid}"
 	sleep 1
-	#echo -e "${color}pidof ${repId} -> ${pid}${color_reset}"
-	echo -e "${color}Replica ${repId} ${color_reset}"
+	
+	#echo -e "${color}Replica ${repId} ${color_reset}"
 done
 # get time to "Server Started" appears
 sleep 5
+
 # print pid list
 #echo -e "${color}PIDs : -> ${pidList} <- ${color_reset}"
 # writes into /tmp/dgs/pids.txt the list of pids

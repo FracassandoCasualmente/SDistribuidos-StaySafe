@@ -17,20 +17,20 @@ public class TimestampVetorial {
 	// receives the number of replicas and creates zero-ed timestamp
 	public TimestampVetorial(Integer numReps) {
 		_array = new Integer[numReps];
-		for(int i=0;i<DEFAULT_NUM_REPLICAS;i++) _array[i] = 0;
+		for(int i=0;i<numReps;i++) _array[i] = 0;
 	}
 
 	public TimestampVetorial(Integer[] array) {
 		_array = array;
-		for(int i=0;i<DEFAULT_NUM_REPLICAS;i++) _array[i] = 0;
+		for(int i=0;i<array.length;i++) _array[i] = 0;
 
 	}
 
 	// returns
-	// true - if this happens before the other
+	// true - if this happens before the other or are equal
 	// false - if this happens after the other
 	// null - if they are concurrent
-	// throws exception if size is different or timestamps are equal
+	// throws exception if size is different
 	public Boolean happensBefore(TimestampVetorial otherTV) throws IOException {
 		// its true if every pos is >= than the other and
 		// atleast one is bigger
@@ -66,7 +66,7 @@ public class TimestampVetorial {
 		}
 		// if none is bigger and none is smaller, they are equal
 		if (!oneIsBigger && !oneIsSmaller) {
-			throw new IOException("The timestamps are equal");
+			return true;
 		}
 		// if mine happens after the other
 		if (oneIsBigger && !oneIsSmaller) return false;
@@ -95,13 +95,13 @@ public class TimestampVetorial {
 	// receives replica id and returns it's timestamp position
 	// null if the rep id is too long
 	public Integer getPos(Integer repId) {
-		return (_array.length > repId) ? null : _array[repId - 1];
+		return (_array.length < repId) ? null : _array[repId - 1];
 	}
 
 	// sets the repId timestamp position to value
 	// returns true if success, false otherwise
 	public Boolean setPos(Integer repId, Integer value) {
-		if ( _array.length > repId ) {
+		if ( _array.length < repId ) {
 			return false;
 		}
 		_array[repId - 1] = value;

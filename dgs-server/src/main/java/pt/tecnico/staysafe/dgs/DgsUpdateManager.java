@@ -16,13 +16,16 @@ public class DgsUpdateManager {
 	{
 		_currentTV = new TimestampVetorial();
 		_replicaId = replicaId;
+		_executedUpdates = new LinkedList<>();
 	}
 	
 	// updates the current TV, adds the update to the list and returns the new TV to client
 	public TimestampVetorial update(com.google.protobuf.GeneratedMessageV3 request) {
+		debug("My timestamp is "+_currentTV.toString());
+		
 		_currentTV.setPos(_replicaId, _currentTV.getPos(_replicaId) + 1);
 		_executedUpdates.add(new Update(_currentTV,request));
-		DgsDebugger.debug("Update added: " + _currentTV.toString());
+		debug("Update added: " + _currentTV.toString());
 		return _currentTV;
 	}
 	
@@ -30,5 +33,9 @@ public class DgsUpdateManager {
 	public TimestampVetorial getCurrentTV()
 	{
 		return _currentTV;
+	}
+
+	private void debug(String s) {
+		DgsServerApp.debug(s);
 	}
 }
