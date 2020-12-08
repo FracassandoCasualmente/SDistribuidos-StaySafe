@@ -73,7 +73,7 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 		debug("My Timestamp is "+_prevTV);
 		debug("The server timestamp is "+serverCurrTV);
 		try {
-			if ( serverCurrTV.happensBefore(_prevTV) != true) {
+			if ( !serverCurrTV.happensBefore(_prevTV) ) {
 				throw new OutdatedReadException();
 			}
 		} catch ( IOException ioe ) {

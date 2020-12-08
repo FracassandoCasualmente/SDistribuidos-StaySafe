@@ -27,8 +27,8 @@ public class TimestampVetorial {
 
 	// returns
 	// true - if this happens before the other or are equal
-	// false - if this happens after the other
-	// null - if they are concurrent
+	// false - if this happens after the other, or if they are concurrent
+	// (deprecated)null - if they are concurrent
 	// throws exception if size is different
 	public Boolean happensBefore(TimestampVetorial otherTV) throws IOException {
 		// its true if every pos is >= than the other and
@@ -61,7 +61,7 @@ public class TimestampVetorial {
 		// if one is smaller and one is bigger, then
 		// they are concurrent
 		if ( oneIsBigger && oneIsSmaller ) { 
-			return null; 
+			return false; // it used to be null in deprecated version!
 		}
 		// if none is bigger and none is smaller, they are equal
 		if (!oneIsBigger && !oneIsSmaller) {

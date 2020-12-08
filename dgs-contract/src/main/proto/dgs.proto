@@ -21,12 +21,18 @@ enum Statistic
 	PERCENTILES = 1;
 };
 
+// request's sender type
+enum SenderType {
+	CLIENT = 0;
+	REPLICA = 1;
+};
+
 //sniffer_join 
 message SnifferJoinRequest
 {
 	string name = 1;
 	string address = 2;
-	repeated uint32 prevTV = 3;
+	repeated uint32 TV = 3;
 }
 
 message SnifferJoinResponse
@@ -40,7 +46,7 @@ message SnifferJoinResponse
 message SnifferInfoRequest
 {
 	string name = 1;
-	repeated uint32 prevTV = 2;
+	//repeated uint32 prevTV = 2;
 }
 
 message SnifferInfoResponse
@@ -72,7 +78,7 @@ message ReportResponse
 message IndividualInfectionProbabilityRequest
 {
 	uint64 citizenId = 1;
-	repeated uint32 prevTV = 2;
+	//repeated uint32 prevTV = 2;
 }
 
 message IndividualInfectionProbabilityResponse
@@ -86,7 +92,7 @@ message IndividualInfectionProbabilityResponse
 message AggregateInfectionProbabilityRequest
 {
 	Statistic statistic = 1;
-	repeated uint32 prevTV = 2;
+	//repeated uint32 prevTV = 2;
 }
 
 message AggregateInfectionProbabilityResponse
@@ -101,7 +107,7 @@ message AggregateInfectionProbabilityResponse
 //ctrl_ping
 message PingRequest
 {
-	repeated uint32 prevTV = 1;
+	//repeated uint32 prevTV = 1;
 }
 
 message PingResponse

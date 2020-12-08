@@ -13,13 +13,11 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	
 	private DgsSystem dgsSystem = new DgsSystem();
 	private Boolean _debug = false;
-	private Integer _port;
 	private DgsUpdateManager _replicaManager;
 
-	public DgsServerImpl(Integer port) {
+	public DgsServerImpl(String zooHost, String zooPort, String repId) {
 		super();
-		_port = port;
-		_replicaManager = new DgsUpdateManager( Integer.valueOf(_port) - 8080 );
+		_replicaManager = new DgsUpdateManager( zooHost, zooPort, repId );
 	}
 	
 	private void debug(String msg) {
@@ -121,6 +119,8 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 			//sends response
 			SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setAddress(result).
 					addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
+			debug("SIR: going to send TV");
+			debug("TV = "+_replicaManager.getCurrentTV().getTvAsList());
 			responseObserver.onNext(response);
 			responseObserver.onCompleted();
 		}

@@ -70,7 +70,16 @@ public class DgsServerApp {
 		final String host = args[3];
 		final String port = args[4]; // going to be substituted dynamically
 
-		_repId = Integer.valueOf(repId);
+		try {
+			_repId = Integer.valueOf(repId);
+		} catch (NumberFormatException nfe) {
+			// The TimestampVetorial does NOT support non integer values
+			// (because otherwise we dont know the index of the array)
+			// so we need to end the execution
+			System.out.println("ERROR: Non integer values for ReplicaID are NOT supported!\n"+
+			 "Your ReplicaID = "+repId);
+			System.exit(-1);
+		}
 
 		// create signal handler
 		Signal.handle(new Signal("INT"), 
@@ -97,7 +106,7 @@ public class DgsServerApp {
 			zkNaming.rebind(path, host, port);
 
 			//final BindableService impl = new DgsServerImpl();
-			final BindableService impl = new DgsServerImpl( Integer.valueOf(port) );
+			final BindableService impl = new DgsServerImpl( zooHost, zooPort, repId );
 
 			// Create a new server to listen on port
 			Server server = ServerBuilder.forPort( Integer.valueOf(port) ).addService(impl).build();
