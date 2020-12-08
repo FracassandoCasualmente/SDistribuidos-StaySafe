@@ -21,12 +21,6 @@ enum Statistic
 	PERCENTILES = 1;
 };
 
-// request's sender type
-enum SenderType {
-	CLIENT = 0;
-	REPLICA = 1;
-};
-
 //sniffer_join 
 message SnifferJoinRequest
 {
@@ -64,7 +58,7 @@ message ReportRequest
 	uint64 citizenId = 3;
 	google.protobuf.Timestamp enterTime = 4;
 	google.protobuf.Timestamp leaveTime = 5;
-	repeated uint32 prevTV = 6;
+	repeated uint32 TV = 6;
 }
 
 message ReportResponse
@@ -120,7 +114,7 @@ message PingResponse
 //ctrl_clear
 message ClearRequest
 {
-	repeated uint32 prevTV = 1;
+	repeated uint32 TV = 1;
 }
 
 message ClearResponse
@@ -133,7 +127,7 @@ message ClearResponse
 //ctrl_init
 message InitRequest
 {
-	repeated uint32 prevTV = 1;
+	repeated uint32 TV = 1;
 }
 
 message InitResponse
