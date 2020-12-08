@@ -5,3 +5,6 @@ target
 *.log
 
 
+.project
+.settings
+tmp/*.txt
