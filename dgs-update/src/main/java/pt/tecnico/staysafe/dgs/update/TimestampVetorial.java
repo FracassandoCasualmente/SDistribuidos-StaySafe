@@ -22,8 +22,7 @@ public class TimestampVetorial {
 
 	public TimestampVetorial(Integer[] array) {
 		_array = array;
-		for(int i=0;i<array.length;i++) _array[i] = 0;
-
+		for(int i=0;i<array.length;i++) _array[i] = array[i];
 	}
 
 	// returns
