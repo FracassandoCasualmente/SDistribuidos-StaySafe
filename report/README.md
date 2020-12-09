@@ -1,0 +1,35 @@
+ # StaySafe
+
+Distributed Systems 2020-2021, 1st semester project
+
+
+## Authors
+
+**Group G15**
+
+### Team members
+ 
+
+| Number | Name              | User                             | Email                               |
+| -------|-------------------|----------------------------------| ------------------------------------|
+| 93601  | Miguel Santos     | <https://github.com/FracassandoCasualmente>   | <mailto:miguel.conrado.santos@tecnico.ulisboa.pt>   |
+| 93586  | João Rodrigues       | <https://github.com/joaorodrigues-ist>     | <mailto:joao.pedro.freixo.rodrigues@tecnico.ulisboa.pt>     |
+
+### Relatório
+
+### Escolha do protocolo
+
+O objetivo do projeto realizado consiste na construção de uma nova arquitetura para o sistema StaySafe, de forma a permitir vários servidores e oferecer tolerância a faltas no acesso aos dados. Para que isto seja possível, e considerando o domínio do problema, é necessária a implementação de um protocolo que ofereça as seguintes propriedades: 
+coerência apenas nas leituras do mesmo cliente
+propagação automática e periódica de atualizações entre réplicas
+tolerância a faltas silenciosas, sendo estas temporárias e não definitivas
+existência de pelo menos uma réplica ativa para atender os clientes
+endereços de réplicas dinâmicos ao longo do tempo. 
+Seguindo o teorema CAP, o protocolo a implementar deverá oferecer coerência fraca, alta disponibilidade e tolerância a partições. Estamos a falar, portanto, de um protocolo de replicação fracamente coerente otimista, tendo em conta que é oferecida uma coerência mínima para resolver o problema da coerência nas leituras do mesmo cliente. O protocolo gossip foi o eleito para o projeto, mas com algumas simplificações da parte do grupo, por existirem propriedades desnecessárias à implementação (a anomalia da violação de causalidade entre operações não é verificada). A versão adaptada consiste então no seguinte: tal como no protocolo gossip, os clientes enviam os pedidos de leitura ou modificação a uma réplica escolhida, e estas propagam as modificações às outras réplicas periodicamente, tendo sempre a garantia de que mesmo que um cliente aceda a réplicas diferentes, lê sempre valores coerentes entre si. Para que isto seja possível, cada cliente mantém uma estrutura que irá servir de cache, onde guarda os pedidos e respostas de leitura, de forma a que possa apresentar sempre ao cliente a resposta mais recente, caso o servidor envie uma resposta de leitura desatualizada; e um timestamp vetorial designado de prevTV que reflete a última versão de uma réplica acedida pelo cliente. Cada mensagem enviada pelo cliente ao servidor, contém apenas um request, tendo em conta que, como não é necessário garantir a causalidade entre operações, é irrelevante para uma réplica a ser contactada por um dado cliente num determinado instante, estar atualizada relativamente às outras réplicas presentes no sistema. A réplica responde ao cliente com o par (response,new), sendo new o timestamp vetorial que reflete o seu estado atual. O cliente atualiza o seu prevTV com o valor de new para cada entrada i, se prev[i] < new[i]. Cada réplica mantém uma estrutura que guarda as modificações realizadas, assim como o timestamp vetorial correspondente a cada uma, de forma a que seja possível fornecer às restantes réplicas todas as operações por esta realizadas de forma a que todo o sistema possa ser atualizado. Quando é recebido um pedido de leitura, a réplica executa o pedido e retorna ao cliente o seu estado atual (sob a forma de timestamp vetorial). Quando é recebido um pedido de modificação, a réplica executa a modificação e de seguida guarda-a na sua estrutura, retornando ao cliente o seu timestamp vetorial com a entrada i incrementada em uma unidade, sendo i o seu número de réplica. No que diz respeito à propagação das modificações, cada réplica i contacta outra réplica j e envia todas as modificações que tem na sua estrutura. A réplica j filtra as modificações recebidas de forma a executar e guardar apenas as que ainda não fez.
+
+### Modelo de faltas
+
+De forma a garantir que as réplicas só possam falhar silenciosamente, as faltas a tolerar pelo sistema serão faltas silenciosas dos processos e as faltas silenciosas na comunicação. Como não serão toleradas faltas bizantinas, todas as faltas que sejam arbitrárias dos processos e arbitrárias do canal de comunicação, não serão toleradas. Resumidamente, as únicas faltas que realmente terão de ser toleradas serão as faltas silenciosas dos processos, visto que ao utilizar-se o protocolo de transporte TCP para a comunicação, já é garantida a fiabilidade e entrega das mensagens, assim como a sua respectiva ordem de chegada, e portanto não é necessário considerar as faltas silenciosas na comunicação.
+No domínio do problema do projeto, considera-se que existem sempre pelo menos f + 1 réplicas ativas, sendo f o número de faltas. Isto porque, existe sempre pelo menos uma réplica ativa e só é considerado um tipo de falta. Apesar desta informação, considerou-se sempre a existência de 3 réplicas em todo o sistema.
+
+

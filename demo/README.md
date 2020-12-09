@@ -52,6 +52,14 @@ mvn clean install -DskipTests
 	* Type `sniffer_join tecnico,tagus` and then `sniffer_join tecnico,alameda` and and error will show up because the sniffer name is already in use with a different address
 
 
+# PART 2
+	* Open terminal in root directory and run `mvn clean install -DskipTests`
+	* Start ZooKeeper Server, maybe also do deleteall /grpc/staysafe/dgs
+	* Open a terminal in dgs-server and do `./run3.sh` to run 3 servers (to kill them you'll need to do `./crash-servers.sh`)
+	* In alternative, run `./execute 1` and then `./execute 2` and `./execute 3` in different terminals or use the regular command
+
+	* Run the clients you want in their module with `execute.sh` or `execute.sh %{repId}%` where repId is the replica
+
 
 
 
