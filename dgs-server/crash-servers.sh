@@ -9,3 +9,6 @@ do
 done
 # time to print signal handling msgs
 sleep 0.2
+
+# remove servers pids
+rm tmp/*txt 2>/dev/null

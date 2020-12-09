@@ -1,15 +1,18 @@
 package pt.tecnico.staysafe.dgs;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
 import pt.tecnico.staysafe.dgs.grpc.DgsServiceGrpc;
 import pt.tecnico.staysafe.dgs.grpc.*;
 
 import pt.tecnico.staysafe.dgs.update.DgsDebugger;
 import pt.tecnico.staysafe.dgs.update.TimestampVetorial;
-import pt.tecnico.staysafe.dgs.update.Update;
 
 import pt.ulisboa.tecnico.sdis.zk.ZKNaming;
 import pt.ulisboa.tecnico.sdis.zk.ZKNamingException;
@@ -19,40 +22,51 @@ import pt.ulisboa.tecnico.sdis.zk.ZKRecord;
 public class DgsUpdateManager {
 	private TimestampVetorial _currentTV;
 	private String _replicaId;
-	private LinkedList<Update> _executedUpdates;
+	private ArrayList<Update> _executedUpdates;
 	
 	public DgsUpdateManager(String zooHost, String zooPort, String replicaId)
 	{
 		_currentTV = new TimestampVetorial();
 		_replicaId = replicaId;
-		_executedUpdates = new LinkedList<>();
+		_executedUpdates = new ArrayList<>();
 		PropagationThread thread = 
 		  new PropagationThread(zooHost, zooPort);
 		thread.start();
 	}
 	
-	// updates the current TV, adds the update to the list and returns the new TV to client
-	public synchronized TimestampVetorial update(com.google.protobuf.GeneratedMessageV3 request) {
+	//  --receives a request to add to the update list--
+	// receives timestamp that came with the request
+	// if the timestamp is null, it's a request from a client and we regist
+	// the update with the server's current timestamp
+	// otherwise, it's a request from a replica and we give it the timestamp
+	// that the request came with
+	public synchronized TimestampVetorial update(com.google.protobuf.GeneratedMessageV3 request, List<Integer> receivedTVList) {
 		debug("My timestamp is "+_currentTV.toString());
 		debug("update: received "+request.getClass().getSimpleName());
-		
-		if (request.getClass().getSimpleName().equals("SnifferJoinRequest")) {
-			debug("Received a sj request");
-			SnifferJoinRequest sjr = (SnifferJoinRequest) request;
-			if (sjr.getName() == null) {
-				debug("The sniffer name is null...");
-			}
-			else {
-				debug("The sniffer name is "+sjr.getName());
-			}
-		}
-		else {
-			debug("request name : "+(request.getClass().getSimpleName()));
-		}
+
+		// increment timestamp
 		_currentTV.setPos(Integer.valueOf(_replicaId), _currentTV.getPos(Integer.valueOf(_replicaId)) + 1);
 		// get mutex for list of updates
 		synchronized (_executedUpdates) {
-			_executedUpdates.add(new Update(_currentTV,request));
+			// add update to list
+			if (receivedTVList == null || receivedTVList.isEmpty()) {
+				debug("update(): Received a request from client, the TV is "+receivedTVList);
+				// update from client, give it our current TV
+				_executedUpdates.add(new Update(_currentTV, request));
+			}
+			else {
+				// update from replica, give it the TV it had and max ours
+				debug("Received propagation, TS is "+receivedTVList);
+				TimestampVetorial receivedTV = new TimestampVetorial(receivedTVList);
+				
+				_executedUpdates.add(
+					new Update( receivedTV, request));
+				
+				// update our timestamp in the position of the other replicas
+				_currentTV.update(receivedTV);
+				//note: valueTS[i] = max (valueTS[i], otherTS[i])
+			}
+			
 		}
 		debug("Update added: " + _currentTV.toString());
 		return _currentTV;
@@ -65,7 +79,32 @@ public class DgsUpdateManager {
 	}
 
 	private void debug(String s) {
-		DgsServerApp.debug(s);
+		DgsServerApp.debug("(UpdateManager) "+s);
+	}
+
+	// receives timestamp in List<> format, may be null
+	// returns true if the timestamp is not null and is present in
+	// our update list
+	public Boolean wasExecuted(List<Integer> tsList) {
+		if (tsList == null || tsList.isEmpty()){
+			return false;
+		}
+		TimestampVetorial tv = new TimestampVetorial(tsList);
+		// search in the list to see if we already executed him
+		for (Update up : _executedUpdates) {
+			try {
+				if ( up.getTS().equals(tv) ) {
+					// found it, it was executed before
+					return true;
+				}
+			} catch (IOException ioe) {
+				// timestamps have different size, cant parse this
+				debug("updateManager.wasExecuted() : "+ioe.getMessage());
+				ioe.printStackTrace();
+			}
+		}
+		// didnt find it in the list, it wasnt executed before
+		return false;
 	}
 
 	class PropagationThread extends Thread {
@@ -73,11 +112,16 @@ public class DgsUpdateManager {
 
 		private ManagedChannel channel;
 		private DgsServiceGrpc.DgsServiceBlockingStub stub;
+
+		private Integer[] _seenVersions = new Integer[3];
 	
 		private final Long PROPAGATION_DELAY_SECS = 30L;
 		private final String PATH = "/grpc/staysafe/dgs";
 
 		PropagationThread(String zooHost, String zooPort) {
+			for (int i =0; i< 3; i++) {
+				_seenVersions[i] = 0;
+			}
 			_zkNaming = new ZKNaming(zooHost, zooPort);
 		}
 	
@@ -100,16 +144,19 @@ public class DgsUpdateManager {
 							connect(rec); // connect to new replica
 							// get mutex for update list
 							synchronized (_executedUpdates) {
+
+								String receivingRepId = rec.getPath().split("/")[PATH.split("/").length];
 								try {
 									// send all updates to this replica
-									for (Update up : _executedUpdates) {
-										
+									for (Update up : _executedUpdates.subList(getLastIndexSeenBy(receivingRepId), _executedUpdates.size()) ) {
+
+										debug("Sending "+up.getRequest().getClass().getSimpleName().split("Request")[0]+
+										 " to replica "+receivingRepId);
+
 										// select to which method we are going to send this
-										// TODO: WE NEED TO ADD THE TIMESTAMP IN UPDATE(), INSIDE EACH OF THIS CASES
 										switch(up.getRequest().getClass().getSimpleName().split("Request")[0]) {
+
 											case "SnifferJoin":
-												debug("Going to send a snifferJoin");
-												
 												stub.snifferJoin((SnifferJoinRequest)up.getRequest());
 												break;
 											case "Report":
@@ -126,10 +173,13 @@ public class DgsUpdateManager {
 												Error("Unexpected type of update: "+
 												up.getRequest().getClass().getSimpleName());
 										}
+										increaseLastIndexSeenBy(receivingRepId);
 									}
 									
 								} catch (Exception e) {
 									// some error ocurred, try next replica
+									debug("Exception while sending request to replica "+receivingRepId+
+									 "message: "+e.getMessage());
 									continue;
 								}
 							}
@@ -143,6 +193,16 @@ public class DgsUpdateManager {
 			} catch (InterruptedException ie) {
 				// interrupted by main program, time to close
 			}
+		}
+
+		// returns the last index in update list seen
+		// by the replica that is receiving it
+		private Integer getLastIndexSeenBy(String repId) {
+			return _seenVersions[Integer.valueOf(repId)-1];
+		}
+
+		private void increaseLastIndexSeenBy(String repId) {
+			_seenVersions[Integer.valueOf(repId)-1]++; 
 		}
 	
 		private final void connect(ZKRecord record) {

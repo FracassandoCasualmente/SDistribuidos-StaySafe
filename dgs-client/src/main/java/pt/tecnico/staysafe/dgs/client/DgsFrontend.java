@@ -73,10 +73,18 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 		debug("My Timestamp is "+_prevTV);
 		debug("The server timestamp is "+serverCurrTV);
 		try {
-			if ( !serverCurrTV.happensBefore(_prevTV) ) {
+			// if my TS happens after or concurrently with the server's
+			// than the server response might be old
+			if ( !_prevTV.happensBefore(serverCurrTV) ) {
 				throw new OutdatedReadException();
 			}
+		} catch (OutdatedReadException ore) {
+			// OutdatedRead extends IO so I need to put this catch here
+			// to avoid confusion of exceptions
+			throw new OutdatedReadException();
+
 		} catch ( IOException ioe ) {
+			// Exception from happensBefore(), impossible to parse this timestamp
 			System.out.println(ioe.getMessage());
 			ioe.printStackTrace();
 			throw new RuntimeException();

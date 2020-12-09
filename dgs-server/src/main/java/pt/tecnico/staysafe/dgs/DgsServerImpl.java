@@ -3,16 +3,20 @@ package pt.tecnico.staysafe.dgs;
 import pt.tecnico.staysafe.dgs.exception.*;
 import pt.tecnico.staysafe.dgs.grpc.*;
 import pt.tecnico.staysafe.dgs.update.DgsDebugger;
+
+
 import io.grpc.stub.StreamObserver;
 import static io.grpc.Status.INVALID_ARGUMENT;
 import com.google.protobuf.Timestamp;
+
+import java.util.List;
 import java.util.Date;
 
 
 public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	
 	private DgsSystem dgsSystem = new DgsSystem();
-	private Boolean _debug = false;
+	private Boolean _debug = true;
 	private DgsUpdateManager _replicaManager;
 
 	public DgsServerImpl(String zooHost, String zooPort, String repId) {
@@ -22,7 +26,7 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	
 	private void debug(String msg) {
 		if (_debug) {
-			DgsServerApp.debug(msg);
+			DgsServerApp.debug("(ServerImpl) : "+msg);
 		}
 	}
 
@@ -43,16 +47,28 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	@Override
 	public void ctrlClear(ClearRequest request, StreamObserver<ClearResponse> responseObserver)
 	{
+		// empty response
+		ClearResponse response = null;
+		// see if the update was already executed
+		if ( _replicaManager.wasExecuted(request.getTVList()) ) {
+			// it was executed before, I will just say OK to other replica
+			responseObserver.onNext(response);
+			responseObserver.onCompleted();
+			return;
+		}
+		// it wasnt executed yet, lets execute the request now
+
 		String output = "";
 		synchronized (this) {
 			output = dgsSystem.clear();
 		}
 		
 		// inserting into executed updates log
-		_replicaManager.update(request);
+		_replicaManager.update(request, request.getTVList());
 		
-		ClearResponse response = ClearResponse.newBuilder().setResult(output).
-				addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
+		response = ClearResponse.newBuilder().setResult(output).
+				addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).
+				build();
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
 	}
@@ -62,15 +78,28 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	public void ctrlInit(InitRequest request, StreamObserver<InitResponse> responseObserver)
 	{
 		try {
+			
+			// empty response
+			InitResponse response = null;
+			// see if the update was already executed
+			if ( _replicaManager.wasExecuted(request.getTVList()) ) {
+				// it was executed before, I will just say OK to other replica
+				responseObserver.onNext(response);
+				responseObserver.onCompleted();
+				return;
+			}
+			// it wasnt executed yet, lets execute the request now
+
 			synchronized (this) {
 				dgsSystem.init();
 			}
 			
 			// inserting into executed updates log
-			_replicaManager.update(request);
+			_replicaManager.update(request, request.getTVList());
 			
-			InitResponse response = InitResponse.newBuilder().
-					addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
+			response = InitResponse.newBuilder().
+					addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).
+					build();
 			responseObserver.onNext(response);
 			responseObserver.onCompleted();
 		} catch(InternalServerErrorException isee){
@@ -86,6 +115,21 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	public void snifferJoin(SnifferJoinRequest request, StreamObserver<SnifferJoinResponse> responseObserver) {
 		
 		try {
+			// empty response
+			SnifferJoinResponse response = null;
+
+			// see if the update was already executed
+			debug("sj: was executed? mine="+_replicaManager.getCurrentTV()+
+				" otherTV = "+request.getTVList());
+			debug("wasExecuted = "+_replicaManager.wasExecuted(request.getTVList()));
+			if ( _replicaManager.wasExecuted(request.getTVList()) ) {
+				// it was executed before, I will just say OK to other replica
+				responseObserver.onNext(response);
+				responseObserver.onCompleted();
+				return;
+			}
+			// it wasnt executed yet, lets execute the request now
+
 			//joining sniffer and getting respective response
 			String result = "";
 			synchronized (this) {
@@ -93,9 +137,9 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 			}
 			
 			// inserting into executed updates log
-			_replicaManager.update(request);
+			_replicaManager.update(request, request.getTVList());
 			
-			SnifferJoinResponse response = SnifferJoinResponse.newBuilder().setResult(result).
+			response = SnifferJoinResponse.newBuilder().setResult(result).
 					addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
 			responseObserver.onNext(response);
 			responseObserver.onCompleted();
@@ -135,6 +179,17 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 	@Override
 	public void report(ReportRequest request, StreamObserver<ReportResponse> responseObserver)
 	{
+		// empty response
+		ReportResponse response = null;
+		// see if the update was already executed
+		if ( _replicaManager.wasExecuted(request.getTVList()) ) {
+			// it was executed before, I will just say OK to other replica
+			responseObserver.onNext(response);
+			responseObserver.onCompleted();
+			return;
+		}
+		// it wasnt executed yet, lets execute the request now
+		
 		// build insertionTime
 		Date insertionDate = java.util.Calendar.getInstance().getTime();
 		Timestamp insertionTimestamp = Timestamp.newBuilder().
@@ -149,10 +204,11 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 				String result = dgsSystem.addReport(newObs);
 								
 				// inserting into executed updates log
-				_replicaManager.update(request);
+				_replicaManager.update(request, request.getTVList());
 				
-				ReportResponse response = ReportResponse.newBuilder().setResult(result).
-						addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
+				response = ReportResponse.newBuilder().setResult(result).
+						addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).
+						build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 			} catch (SnifferDoesNotExistException e) {

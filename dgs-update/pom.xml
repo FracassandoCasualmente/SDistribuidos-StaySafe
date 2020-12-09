@@ -15,7 +15,7 @@
 
 	<properties>
 
-		<mainclass>pt.tecnico.staysafe.dgs.update.Update</mainclass>
+		<mainclass>pt.tecnico.staysafe.dgs.update.TimestampVetorial</mainclass>
 		
 	</properties>
 

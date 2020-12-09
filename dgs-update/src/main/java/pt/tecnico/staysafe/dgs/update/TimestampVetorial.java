@@ -3,6 +3,7 @@ package pt.tecnico.staysafe.dgs.update;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class TimestampVetorial {
@@ -23,6 +24,12 @@ public class TimestampVetorial {
 	public TimestampVetorial(Integer[] array) {
 		_array = array;
 		for(int i=0;i<array.length;i++) _array[i] = array[i];
+	}
+
+	public TimestampVetorial(List<Integer> listTV) {
+		Integer [] aux = new Integer[listTV.size()];
+		aux = listTV.toArray(aux);
+		_array = aux;
 	}
 
 	// returns
@@ -76,7 +83,8 @@ public class TimestampVetorial {
 
 	public Boolean equals(TimestampVetorial otherTV) throws IOException {
 		if (this._array.length != otherTV._array.length) {
-			throw new IOException("Different length in vectorial timestamps!");
+			throw new IOException("Different length in vectorial timestamps!\n"+
+			 "myTV= "+this+"\n"+"otherTV= "+otherTV);
 		}
 
 		Integer[] myArr = this._array;

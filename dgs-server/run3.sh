@@ -11,8 +11,8 @@ color=$color_yellow
 
 pidList=""
 
-# remove last servers pids
-rm tmp/*txt 2>/dev/null
+# crash the previous servers
+./crash-servers.sh
 
 for repId in $(seq 1 3);
 do
