@@ -33,6 +33,8 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 	// The last version of the server that we saw
 	private TimestampVetorial _prevTV = new TimestampVetorial();
 
+	private AggregateInfectionProbabilityResponse _lastMeanDev;
+
 	// constructor compatible with IT tests
 	public DgsFrontend( String host, String port) {
 		this(host, port, null);
@@ -40,7 +42,7 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 
 	public DgsFrontend(String zooHost, String zooPort, String repId ) {
 		_serverRecords = null;
-
+		_lastMeanDev = null;
 		try {
 			// start zookeeper modifications
 			zkNaming = new ZKNaming(zooHost,zooPort);
@@ -416,6 +418,8 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 		// updates our TV with the current server TV
 		// or throw exception if the server is delayed
 		read(aipr.getCurrentTVList());
+		_lastMeanDev = aipr;
+		
 		return aipr;
 	}
 	

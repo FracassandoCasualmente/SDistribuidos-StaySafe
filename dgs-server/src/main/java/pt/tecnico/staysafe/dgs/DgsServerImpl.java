@@ -118,10 +118,12 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 			// empty response
 			SnifferJoinResponse response = null;
 
-			// see if the update was already executed
-			debug("sj: was executed? mine="+_replicaManager.getCurrentTV()+
+			// debug things
+			/*debug("sj: was executed? mine="+_replicaManager.getCurrentTV()+
 				" otherTV = "+request.getTVList());
-			debug("wasExecuted = "+_replicaManager.wasExecuted(request.getTVList()));
+			debug("wasExecuted = "+_replicaManager.wasExecuted(request.getTVList()));*/
+
+			// see if the update was already executed
 			if ( _replicaManager.wasExecuted(request.getTVList()) ) {
 				// it was executed before, I will just say OK to other replica
 				responseObserver.onNext(response);
@@ -163,8 +165,8 @@ public class DgsServerImpl extends DgsServiceGrpc.DgsServiceImplBase{
 			//sends response
 			SnifferInfoResponse response = SnifferInfoResponse.newBuilder().setAddress(result).
 					addAllCurrentTV(_replicaManager.getCurrentTV().getTvAsList()).build();
-			debug("SIR: going to send TV");
-			debug("TV = "+_replicaManager.getCurrentTV().getTvAsList());
+			//debug("SIR: going to send TV");
+			//debug("TV = "+_replicaManager.getCurrentTV().getTvAsList());
 			responseObserver.onNext(response);
 			responseObserver.onCompleted();
 		}

@@ -58,7 +58,7 @@ public class DgsServerApp {
 		if (args.length != 5) {
 			System.err.println("Argument(s) are wrong! We need 5!");
 			System.err.printf("Usage: java %s port%n", DgsServerApp.class.getName());
-			System.err.println("./dgs-server zkHost zkPort path replica_id server_host server_port");
+			System.err.println("./dgs-server zkHost zkPort replica_id server_host server_port");
 			return;
 		}
 		// ./dgs-server zkHost zkPort path replica_id server_host server_port
@@ -110,7 +110,7 @@ public class DgsServerApp {
 
 			// Create a new server to listen on port
 			Server server = ServerBuilder.forPort( Integer.valueOf(port) ).addService(impl).build();
-			debug("created a server");
+			
 			// Start the server
 			server.start();
 

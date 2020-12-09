@@ -41,7 +41,7 @@ public class DgsUpdateManager {
 	// otherwise, it's a request from a replica and we give it the timestamp
 	// that the request came with
 	public synchronized TimestampVetorial update(com.google.protobuf.GeneratedMessageV3 request, List<Integer> receivedTVList) {
-		debug("My timestamp is "+_currentTV.toString());
+		debug("Starting update process, my timestamp is "+_currentTV.toString());
 		debug("update: received "+request.getClass().getSimpleName());
 
 		// increment timestamp
@@ -50,13 +50,13 @@ public class DgsUpdateManager {
 		synchronized (_executedUpdates) {
 			// add update to list
 			if (receivedTVList == null || receivedTVList.isEmpty()) {
-				debug("update(): Received a request from client, the TV is "+receivedTVList);
+				debug("update(): Received a request from client");
 				// update from client, give it our current TV
 				_executedUpdates.add(new Update(_currentTV, request));
 			}
 			else {
 				// update from replica, give it the TV it had and max ours
-				debug("Received propagation, TS is "+receivedTVList);
+				debug("Received propagation, TS received is "+receivedTVList);
 				TimestampVetorial receivedTV = new TimestampVetorial(receivedTVList);
 				
 				_executedUpdates.add(

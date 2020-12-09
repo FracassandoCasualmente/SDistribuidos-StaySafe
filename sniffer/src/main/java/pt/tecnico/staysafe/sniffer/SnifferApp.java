@@ -49,7 +49,7 @@ public class SnifferApp {
 		// check arguments relative to connection
 		if (args.length < 4) {
 			System.out.println("Argument(s) missing!");
-			System.out.printf("Usage: java %s host port%n", SnifferApp.class.getName());
+			System.out.println("Usage: sniffer zooHost zooPort name address [%RepId%] ");
 			return;
 		}
 		
