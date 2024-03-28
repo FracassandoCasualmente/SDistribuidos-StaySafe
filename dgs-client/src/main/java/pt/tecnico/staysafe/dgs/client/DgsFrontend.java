@@ -33,6 +33,7 @@ public class DgsFrontend implements AutoCloseable, DgsDebugger{
 	// The last version of the server that we saw
 	private TimestampVetorial _prevTV = new TimestampVetorial();
 
+
 	private AggregateInfectionProbabilityResponse _lastMeanDev;
 
 	// constructor compatible with IT tests
